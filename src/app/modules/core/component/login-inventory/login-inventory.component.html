@@ -1,0 +1,43 @@
+<div class="login-wrapper ">
+    <main class="main ">
+        <div class="container">
+            <section class="wrapper">
+                <div class="heading">
+                    <h1 class="text text-large">Sign In</h1>
+                    <p class="text text-normal">New user? <span><button type="submit" (click)="RouteRagistration()" class="text text-links">Create an account</button></span>
+                    </p>
+                </div>
+                <form name="signin" class="form" [formGroup]="loginForm">
+                    <div class="input-control ">
+                        <!-- <label for="pass" class="label mb-3 ">Password</label>
+                      <input id="password" type="Password" class=" form-control input " data-type="password " formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f['Password'].errors } "> -->
+                        <label for="EmailId" class="input-label" hidden>Email</label>
+                        <input type="email" name="EmailId" id="EmailId" class="input-field  form-control" formControlName="EmailId" placeholder="Email">
+                    </div>
+                    <div class="input-control ">
+                        <label for="password" class="input-label" hidden>Password</label>
+                        <input type="password" name="password" id="password" class="input-field form-control" formControlName="Password" placeholder="Password">
+                    </div>
+                    <div class="input-control">
+                        <a href="#" class="text text-links">Forgot Password</a>
+                        <button type="submit" class="input-submit" (click)="onLogin()" value="Sign In">Sign In</button>
+                    </div>
+                </form>
+                <div class="striped">
+                    <span class="striped-line"></span>
+                    <span class="striped-text">Or</span>
+                    <span class="striped-line"></span>
+                </div>
+                <div class="method">
+                    <div class="method-control ">
+                        <button type="submit" class="method-action " (click)="loginWithGoogle()">
+                          <img src="../../../../../assets/assets/images/images/Google.png" alt="" class="google-logo ">
+                          <span class="fw-bold"> Sign in with Google</span>
+                      </button>
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+</div>
