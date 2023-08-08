@@ -1,7 +1,15 @@
+import { Role } from './../model/role.model';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { RoleService } from '../service/role.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-role',
@@ -16,37 +24,79 @@ export class AddRoleComponent {
   public roleData!: any;
   private id: number;
   private isAddMode: boolean;
+  private RoleList: any;
+  public editData: any;
+  public submitted = false;
+
   constructor(
     private fb: FormBuilder,
     private roleService: RoleService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private toastr: ToastrService,
+    private location: Location
   ) {
     this.RoleForm = this.buildUsersForm();
-
     this.id = this.route.snapshot.params['id'];
     this.isAddMode = !this.id;
   }
 
   //On init get department list and ckeck if its addMode
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.isAddMode = !this.id;
-
-    if (!this.isAddMode) {
-      this.roleService
-        .getById(this.id)
-        .subscribe((x) => this.RoleForm.patchValue(x));
-    }
+    this.getRoleList();
   }
+
+  //get form controlfrom Reactive Form
+  get f(): { [key: string]: AbstractControl } {
+    return this.RoleForm.controls;
+  }
+
+  public getRoleList(): void {
+    this.roleService.getProduct().subscribe({
+      next: (data: any) => {
+        const dataCategary = data.Data;
+        //condition for check the id if get id then patch value
+        if (this.id) {
+          dataCategary.map((x: any) => {
+            debugger;
+            if (x.Id == this.id) {
+              this.editData = x;
+              this.RoleForm.patchValue({
+                Id: x.Id,
+                Name: x.Name,
+                Description: x.Description,
+                IsActive: false,
+                // Update other form controls as needed
+              });
+            }
+          });
+        }
+      },
+      error: (e) => console.error(e),
+    });
+  }
+
+  //
 
   //Reactive Form
   private buildUsersForm(): FormGroup {
     return this.fb.group({
+      Id: [null],
       Name: [null, Validators.required],
       Description: [null, Validators.required],
-      IsActive: ['false', Validators.required],
+      IsActive: [false, Validators.required],
     });
+  }
+
+  //on Form submit
+  public onSubmit(): void {
+    //flag for form valid
+    this.submitted = true;
+    if (this.isAddMode && this.RoleForm.valid) {
+      this.addRole();
+    } else {
+      this.updateRole();
+    }
   }
 
   //Post data to db
@@ -54,38 +104,25 @@ export class AddRoleComponent {
     this.roleData = {
       Name: this.RoleForm.value.Name,
       Description: this.RoleForm.value.Description,
-      IsActive: 'false',
     };
-
-    console.log(this.roleData, 'dataaaaaaaa');
-    this.roleService.AddRole(this.roleData).subscribe({
-      next: () => {
-        alert('Role added sucessfully !!!');
+    this.roleService
+      .AddRole(this.roleData)
+      .then((res: any) => {
+        this.toastr.success('Add Role sucessfully !!!');
         this.navigateToList();
-      },
-      error: (e: any) => console.log(e),
-    });
-  }
-
-  //on Form submit
-  //on Form submit
-  public onSubmit(): void {
-    console.log('hello there');
-    if (this.isAddMode) {
-      this.addRole();
-    } else {
-      this.updateUser();
-    }
+      })
+      .catch((error) => {});
   }
 
   //Put data to db
-  public updateUser(): void {
-    this.roleService.updateRole(this.id, this.RoleForm.value).subscribe({
-      next: () => {
+  public updateRole(): void {
+    this.roleService
+      .updateRole(this.RoleForm.value)
+      .then((res: any) => {
         this.navigateToList();
-      },
-      error: (e: any) => console.log(e),
-    });
+        this.toastr.success('Role Updated sucessfully !!!');
+      })
+      .catch((error: any) => {});
   }
 
   public navigateToList(): void {
@@ -98,6 +135,6 @@ export class AddRoleComponent {
   }
 
   onCancel() {
-    this.cancel.emit();
+    this.location.back();
   }
 }

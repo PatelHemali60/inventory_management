@@ -6,15 +6,20 @@
     <form [formGroup]="RoleForm" class="overflow-hidden  bg-white mt-4 mx-auto">
 
         <div class="p-5 mt-2">
-
-            <div class="row text-center ">
+            <div class="row  ">
                 <div class="col-12">
                     <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">Name</label>
-                    <input class="form-control inputBorder text-muted" type="text" id="Name" placeholder="Name" aria-label="Name" formControlName="Name">
+                    <input class="form-control inputBorder text-muted" type="text" id="Name" placeholder="Name" aria-label="Name" formControlName="Name" [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }">
+                    <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['Name'].errors['required']">Name is required</div>
+                    </div>
                 </div>
                 <div class="col-12 mt-4">
                     <label for="Description" class="d-flex justify-content-start mb-2 fw-bold">Description</label>
-                    <input class="form-control inputBorder text-muted" type="text" id="Description" placeholder="Description" aria-label="default input example" formControlName="Description">
+                    <input class="form-control inputBorder text-muted" type="text" id="Description" placeholder="Description" aria-label="default input example" formControlName="Description" [ngClass]="{ 'is-invalid': submitted && f['Description'].errors }">
+                    <div *ngIf="submitted && f['Description'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['Description'].errors['required']">Description is required</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -23,9 +28,9 @@
             <div class="col-12 ">
                 <div class="d-flex justify-content-center ">
                     <button type="submit" class=" btnSubmit rounded " (click)="onSubmit()">
-                    <span class="fontCommon text-white ">Submit</span></button>
-                    <button type="submit" class=" btnCancle ms-4 rounded ">
-                  <span class="fontCommon " (click)="onCancel()">Cancle</span></button>
+                    <span class=" fontCommon text-white ">Submit</span></button>
+                    <button type="submit " class=" btnCancle ms-4 rounded ">
+                  <span class="fontCommon " (click)="onCancel() ">Cancle</span></button>
                 </div>
             </div>
         </div>

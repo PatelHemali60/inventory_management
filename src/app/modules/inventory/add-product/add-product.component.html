@@ -1,0 +1,151 @@
+<div class="main-wrapper">
+    <div class="formWrapper  d-flex flex-column  p-2 p-sm-4 overflow-hidden">
+        <div class="d-flex justify-content-between row ">
+            <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon fw-lighter">Add Product</span></span>
+        </div>
+        <!--  form division start -->
+        <form [formGroup]="product_Form" class="overflow-auto h-100">
+            <div class="bg-white p-4 mt-2">
+                <div class="row text-center ">
+                    <div class=" col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="product" class="d-flex justify-content-start mb-2 fw-bold ">Product Name</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="product" formControlName="productname">
+
+          <option *ngFor="let dept of departments;" [value]="dept.id">
+            {{ dept.name }}
+        </option>
+        </select>
+                    </div>
+                    <!-- departments -->
+                    <div class=" col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="category" class="d-flex justify-content-start mb-2 fw-bold">Category</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="category" formControlName="category">
+              <option selected>Choose Category</option>
+              <option *ngFor="let dept of categoryList;" [value]="dept.Cid">
+               {{ dept.Categoryname }}
+             </option>
+            </select>
+                    </div>
+                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="Subcategory" class="d-flex justify-content-start mb-2 fw-bold">Sub Category</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="Subcategory" formControlName="Subcategory">
+          <option selected> Choose Sub Category</option>
+          <option *ngFor="let dept of subCategorylist;" [value]="dept.Sid">
+            {{ dept.subCategoryname }}
+          </option>
+        </select>
+                    </div>
+                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="Brand" class="d-flex justify-content-start mb-2 fw-bold">Brand</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="Brand" formControlName="Brand">
+          <option selected>Choose Brand</option>
+          <option *ngFor="let dept of brand;" [value]="dept.bid">
+            {{ dept.brandname}}
+          </option>
+        </select>
+                    </div>
+                </div>
+
+                <!-- demo dropdown -->
+
+                <!-- 2nd row design -->
+                <div class="row mt-4">
+                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="Unit" class="d-flex justify-content-start mb-2 fw-bold">Unit</label>
+                        <select class=" inputBorder fontCommon text-muted form-control" aria-label="Default select example" id="Unit" id="Unit" formControlName="Unit">
+                  <option *ngFor="let dept of Unit;" [value]="dept.uid">
+                    {{ dept.Unit }}
+                  </option>
+                </select>
+                    </div>
+                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="Sku" class="d-flex justify-content-start mb-2 fw-bold">Sku</label>
+                        <input class="form-control inputBorder text-muted" type="text" id="Sku" placeholder="Default input" aria-label="default input example" formControlName="Sku">
+                    </div>
+                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="MinimumQTY" class="d-flex justify-content-start mb-2 fw-bold">Minimum QTY</label>
+                        <input class="form-control inputBorder text-muted" type="text" id="MinimumQTY" placeholder="Default input" aria-label="default input example" formControlName="MinimumQTY">
+                    </div>
+                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="MinimumQTY" class="d-flex justify-content-start mb-2 fw-bold">Qunitity</label>
+                        <input class="form-control inputBorder text-muted" type="text" id="MinimumQTY" placeholder="Default input" aria-label="default input example" formControlName="Qty">
+                    </div>
+                </div>
+                <!-- 3rd row design-->
+                <div class="row mt-4">
+                    <div class="col-12 ">
+                        <label for="Description" class=" form-label d-flex justify-content-start mb-2 fw-bold">Description</label>
+                        <textarea class="form-control inputBorder text-muted fontCommon" id="Description" rows="3" placeholder="..." aria-label="default input example" formControlName="Description"></textarea>
+                    </div>
+                </div>
+
+                <!-- 4th row design-->
+                <div class="row mt-4">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="tax" class="d-flex justify-content-start mb-2 fw-bold">Tax</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="tax" formControlName="Tax">
+                    <option *ngFor="let dept of tax;" [value]="dept.tid">
+                      {{ dept.taxname }}
+                    </option>
+        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="Discount" class="d-flex justify-content-start mb-2 fw-bold">Discount Type</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="Discount" formControlName="Discount" ngModel>
+                    <option *ngFor="let dept of discount;" [value]="dept.Did">
+                      {{ dept.Discountname }}
+                    </option>
+        </select>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
+                        <label for="Price" class="d-flex justify-content-start mb-2 fw-bold">Price</label>
+                        <input class="form-control inputBorder text-muted " type="text" id="Price" placeholder="Price" aria-label="default input example" formControlName="Price">
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Status" class="d-flex justify-content-start mb-2 fw-bold">Status</label>
+                        <select class="form-control inputBorder text-muted " aria-label="Default select example" id="Status" formControlName="Status">
+                    <option *ngFor="let dept of status;" [value]="dept.id">
+                      {{ dept.Sname }}
+                    </option>
+                 </select>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class=" ">
+                        <input class="form-control inputBorder uplodImg" type="text" id="image" placeholder="" aria-label="default input example">
+                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                    </div>
+                    <div class="col-12">
+                        <label for="image" class="d-flex justify-content-start mb-2 fw-bold">Add Product Image</label>
+                        <div class="art-deco  inputBorder rounded ">
+                            <!-- drag and drop zone-->
+                            <div class="container p-5 d-flex flex-column align-items-center justify-content-center ">
+                                <input type="file " name=" " id=" " (change)="readFile($event.target) " class="m-2 " multiple>
+                                <span class="fontCommon fs-5 commonColor "><i class="fa fa-cloud-upload " aria-hidden="true "></i></span>
+                                <span class="fontCommon text-muted ">Drag or Drop File to upload</span>
+
+                                <input type="file" class="form-control fontCommon fs-5 commonColor " accept="image/*" (change)="handleInputChange($event)" />
+                                <img src="base64Image" alt="defalut">
+                                <button type="button " class="btn btn-dark mt-3 " (click)="uploadFile() ">Upload</button>
+                                <!-- <p *ngIf="file ">{{file.name}} File is Ready to Upload</p>-->
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- button design -->
+                <div class="row mt-5 mb-4 ">
+                    <div class="col-12 ">
+                        <div class="d-flex justify-content-center ">
+                            <button type="submit" class=" btnSubmit rounded " (click)="onSubmit()">
+                  <span class="fontCommon text-white ">Submit</span></button>
+                            <button type="submit" class=" btnCancle ms-4 rounded ">
+                      <span class="fontCommon " (click)="onCancel()">Cancle</span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>

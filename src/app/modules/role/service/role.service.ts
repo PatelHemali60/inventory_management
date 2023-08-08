@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/enviorment/enviorment';
@@ -8,25 +8,32 @@ import { environment } from 'src/enviorment/enviorment';
 })
 export class RoleService {
   public apiLink!: any;
-
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
   constructor(private http: HttpClient) {
     this.apiLink = environment.baseURL;
   }
 
   //get data by id in form
   getById(id: number) {
-    return this.http.get<any>(`${this.apiLink}/product/${id}`);
+    return this.http.get<any>(`${this.apiLink}/Role/GetAllRole/${id}`);
   }
 
   //get role
   getProduct(): Observable<any> {
-    debugger;
     return this.http.get<any>(`${this.apiLink}/Role/GetAllRole`);
   }
 
   //ragistration api
-  public AddRole(user: any): Observable<any> {
-    return this.http.post<any>(`${this.apiLink}/Role/AddNewRole`, user);
+  public AddRole(Role: any): Promise<any> {
+    var headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
+    return this.http
+      .post<any>(`${this.apiLink}/Role/AddNewRole`, JSON.stringify(Role), {
+        headers: headers,
+      })
+      .toPromise();
   }
 
   //delete product
@@ -35,7 +42,15 @@ export class RoleService {
   }
 
   //update product detail
-  updateRole(id: number, data: any): Observable<any> {
-    return this.http.put<any>(`${this.apiLink}/product/${id}`, data);
+  updateRole(data: any): Promise<any> {
+    var headers = new HttpHeaders().set(
+      'Content-Type',
+      'application/json; charset=utf-8'
+    );
+    return this.http
+      .post<any>(`${this.apiLink}/Role/UpdateRole`, JSON.stringify(data), {
+        headers: headers,
+      })
+      .toPromise();
   }
 }

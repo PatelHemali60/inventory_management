@@ -3,7 +3,7 @@
         <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-10 col-xl-10">Role List</span>
         <div class=" col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2  mb-3">
             <button class="btn btn-primary btn-sm "> <a class="text-white link" routerLink="form" routerLinkActive="router-link-active" >
-      <span class="fontCommon">+</span><span class="fontCommon ms-2">Add Role</span></a> </button>
+            <span class="fontCommon">+</span><span class="fontCommon ms-2 ">Add Role</span></a> </button>
         </div>
     </div>
     <div class="bg-white p-3  overflow-auto">
@@ -52,12 +52,12 @@
                                     <label for="html"></label>
                                 </div>
                             </td>
-                            <td class="pt-6">
+                            <td class="">
                                 <span>{{product.Name}}</span>
                             </td>
-                            <td> {{product.Description}}</td>
+                            <td class=""> {{product.Description}}</td>
                             <td class="d-flex iconSize ms-5 ">
-                                <span class="me-3 mt-0"><i class="fa fa-eye " aria-hidden="true "></i></span>
+                                <span class="me-3 mt-0"><a routerLink="view/{{product.Id}}"><i class="fa fa-eye " aria-hidden="true "></i></a></span>
                                 <span class="me-3 mt-0"> <a routerLink="edit/{{product.Id}}"><i class="fa fa-edit " style="color: black;"></i></a></span>
                                 <span class="mt-0"> <a (click)="deleteProduct(product.Id)"><i class="fa fa-trash text-danger " aria-hidden="true "></i></a></span>
                             </td>

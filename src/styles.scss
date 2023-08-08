@@ -4,6 +4,9 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "./assets/assets/css/index";
+//========== toastee css ===========//
+@import 'ngx-toastr/toastr';
+//===================== design started ======================//
 * {
     padding: 0;
     margin: 0;
@@ -17,7 +20,7 @@ html {
     font-family: 'DM Sans', sans-serif !important;
 }
 
-im .h-100 {
+.h-100 {
     height: 100%;
 }
 
@@ -28,6 +31,10 @@ im .h-100 {
 
 .commonColor {
     color: #7b58d0 !important;
+}
+
+.color {
+    color: #6e40db !important;
 }
 
 .arrowColor {
@@ -227,6 +234,9 @@ justify-content: space-around;
 }
 
 .sidebar .sub-menu li:hover {
+    transition: all ease .5;
+    font-weight: 600;
+    color: #7B58D0;
     background-color: #7B58D0;
 }
 
