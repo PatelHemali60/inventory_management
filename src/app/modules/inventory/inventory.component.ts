@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductService } from './service/product.service';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-inventory',
@@ -56,9 +57,25 @@ export class InventoryComponent {
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    // debugger
     this.productService.deleteProduct(id).subscribe({
-      next: () => this.GetallProductList(),
+      next: () => {
+        Swal.fire({
+          title: 'Are you sure want to Delete this ?',
+          text: 'This process is irreversible.',
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
+        }).then((result) => {
+          if (result.value) {
+            Swal.fire('Removed!', 'Product removed successfully.', 'success');
+          } else if (result.dismiss === Swal.DismissReason.cancel) {
+            Swal.fire('Cancelled', 'Product still in our database.)', 'error');
+          }
+        });
+
+        this.GetallProductList();
+      },
       error: (e) => console.error(e),
     });
   }

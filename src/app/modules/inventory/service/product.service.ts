@@ -21,16 +21,24 @@ export class ProductService {
     return this.http.get<any>(`${this.apiLink}/Product/GetAllProduct`);
   }
 
+  //api for get subcategory based on category
+  // http://localhost:13884/api/SubCategory/GetSubCategoryByCategory/3
+
+  //get role
+  public getsubCategory(id: number): Observable<any> {
+    return this.http.get<any>(
+      `${this.apiLink}/SubCategory/GetSubCategoryByCategory/${id}`
+    );
+  }
+
   //ragistration api
   public AddProduct(Role: any): Promise<any> {
-    var headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      responseType: 'json',
-    });
+    // var headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   responseType: 'json',
+    // });
     return this.http
-      .post<any>(`${this.apiLink}/Brand/AddNewBrand`, Role, {
-        headers: headers,
-      })
+      .post<any>(`${this.apiLink}/Product/AddNewProduct`, Role)
       .toPromise();
   }
 
@@ -41,17 +49,19 @@ export class ProductService {
     );
   }
 
-  // http://localhost:13884/api/Brand/UpdateBrand'
+  GetProductbyId(id: number): Observable<number> {
+    return this.http.get<number>(`${this.apiLink}/Product/GetProduct/${id}`);
+  }
+
   //update product detail
   updateProduct(data: any): Observable<any> {
-    var headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      responseType: 'json',
-    });
+    // var headers = new HttpHeaders({
+    //   'Content-Type': 'application/json',
+    //   responseType: 'json',
+    // });
     return this.http.post<any>(
-      `http://localhost:13884/api/Brand/UpdateBrand`,
-      data,
-      { headers: headers }
+      `http://localhost:13884/api/Product/UpdateProduct`,
+      data
     );
   }
 }

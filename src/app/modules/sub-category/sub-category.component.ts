@@ -45,7 +45,6 @@ export class SubCategoryComponent {
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    debugger;
     this.service.deletesubCategory(id).subscribe({
       next: () => this.getCategoryList(),
       error: (e: any) => console.error(e),

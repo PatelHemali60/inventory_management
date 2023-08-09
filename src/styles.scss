@@ -1088,6 +1088,8 @@ margin-right: 15px !important;
 }
 
 .iconSize {
+    display: flex;
+    align-items: center;
     font-size: 18px;
     color: #2a292d;
 }
@@ -1246,7 +1248,8 @@ thead,
 tr {
     border-color: inherit;
     border-style: none !important;
-    padding: 25px !important;
+    padding: 22px !important;
+    vertical-align: baseline;
     /* margin-top: 20px; */
 }
 

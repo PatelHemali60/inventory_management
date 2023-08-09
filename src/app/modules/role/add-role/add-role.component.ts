@@ -58,7 +58,6 @@ export class AddRoleComponent {
         //condition for check the id if get id then patch value
         if (this.id) {
           dataCategary.map((x: any) => {
-            debugger;
             if (x.Id == this.id) {
               this.editData = x;
               this.RoleForm.patchValue({

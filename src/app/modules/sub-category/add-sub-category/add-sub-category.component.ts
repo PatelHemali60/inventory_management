@@ -36,7 +36,6 @@ export class AddSubCategoryComponent {
     this.subCategoryForm = this.buildUsersForm();
 
     this.id = this.route.snapshot.params['id'];
-    console.log(this.id, 'id');
     this.isAddMode = !this.id;
   }
 
@@ -100,8 +99,6 @@ export class AddSubCategoryComponent {
     this.subCategoryService.getCategory().subscribe({
       next: (data: any) => {
         this.categoryList = data.Data;
-
-        console.log(this.categoryList, 'category list');
       },
       error: (e) => console.error(e),
     });

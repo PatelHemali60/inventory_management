@@ -40,7 +40,7 @@ export class RoleComponent {
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    // debugger
+
     this.service.deleteRole(id).subscribe({
       next: () => {
         Swal.fire({

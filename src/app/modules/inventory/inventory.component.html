@@ -61,11 +61,11 @@
                                     <label for="html"></label>
                                 </div>
                             </td>
-                            <td class="pt-6">
-                                <img [src]="product.ImageUrl" alt="image" class="tableImg image1 me-1 ">
-                                <span> {{product.Name }}</span>
+                            <td class="pt-6 d-flex flex-column align-items-center">
+                                <span><img src="../../../assets/assets/images/images/Rectangle 2056.png" alt="image" class="tableImg image1 me-1 "></span>
+                                <span class="text-wrap"> {{product.Name }}</span>
                             </td>
-                            <td> {{product.SKU}}</td>
+                            <td class="mt-5"> {{product.SKU}}</td>
                             <!-- <img src="../../../assets/images/images/Rectangle 2056.png " class="tableImg me-1 " alt=" "> Mackbook Pro</td> -->
                             <td> {{product.CategoryId}} </td>
                             <td>{{product.BrandId }} </td>
@@ -73,9 +73,9 @@
                             <td>{{product.Unit}}</td>
                             <td>{{product.Quantity}}</td>
                             <td class="d-flex iconSize ">
-                                <span class="me-3 mt-0"><i class="fa fa-eye " aria-hidden="true "></i></span>
-                                <span class="me-3 mt-0"> <a routerLink="edit/{{product.Id}}"><i class="fa fa-edit " style="color: black;"></i></a></span>
-                                <span class="mt-0"> <a (click)="deleteProduct(product.Id)"><i class="fa fa-trash text-danger " aria-hidden="true "></i></a></span>
+                                <span class="me-3 mt-0"><a routerLink="view/{{product.Id}}"><i class="fa fa-eye " aria-hidden="true "></i></a></span>
+                                <div class="me-3 mt-0"> <a routerLink="edit/{{product.Id}}"><i class="fa fa-edit " style="color: black;"></i></a></div>
+                                <div class="mt-0"> <a (click)="deleteProduct(product.Id)"><i class="fa fa-trash text-danger " aria-hidden="true "></i></a></div>
                             </td>
                         </tr>
 
@@ -85,12 +85,12 @@
                     <div class="d-flex ">
                         <span class=" mt-2 ms-2 fontCommon ">Show Per Page :</span>
                         <span class="ms-1 ">
-           <select class="form-select inputBorder text-muted " aria-label="Default select example ">
-          <option selected>5</option>
-          <option value="1 ">10</option>
-          <option value="2 ">15</option>
-          <option value="3 ">20</option>
-         </select>
+                <select class="form-select inputBorder text-muted " aria-label="Default select example ">
+                 <option selected>5</option>
+                 <option value="1 ">10</option>
+                 <option value="2 ">15</option>
+                 <option value="3 ">20</option>
+                 </select>
       </span>
                     </div>
                     <span class=" d-flex justify-content-center align-item-center ">

@@ -1,135 +1,159 @@
 <div class="main-wrapper">
     <div class="formWrapper  d-flex flex-column  p-2 p-sm-4 overflow-hidden">
         <div class="d-flex justify-content-between row ">
-            <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon fw-lighter">Add Product</span></span>
+            <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color">Add Product</span></span>
         </div>
         <!--  form division start -->
-        <form [formGroup]="product_Form" class="overflow-auto h-100">
+        <form [formGroup]="Product_Form" class="overflow-auto h-100">
             <div class="bg-white p-4 mt-2">
                 <div class="row text-center ">
                     <div class=" col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="product" class="d-flex justify-content-start mb-2 fw-bold ">Product Name</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="product" formControlName="productname">
-
-          <option *ngFor="let dept of departments;" [value]="dept.id">
-            {{ dept.name }}
-        </option>
-        </select>
+                        <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">Product Name</label>
+                        <input class="form-control inputBorder text-muted" type="text" id="Name" placeholder="Name" aria-label="Name" formControlName="Name" [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }">
+                        <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1">
+                            <div *ngIf="f['Name'].errors['required']">Name is required</div>
+                        </div>
                     </div>
                     <!-- departments -->
                     <div class=" col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="category" class="d-flex justify-content-start mb-2 fw-bold">Category</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="category" formControlName="category">
-              <option selected>Choose Category</option>
-              <option *ngFor="let dept of categoryList;" [value]="dept.Cid">
-               {{ dept.Categoryname }}
-             </option>
-            </select>
+                        <label for="CategoryId" class="d-flex justify-content-start mb-2 fw-bold">Category</label>
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="CategoryId" formControlName="CategoryId" (change)="onItemSelected($event)">
+                        <option selected>Choose Category</option>
+                         <option *ngFor="let category of categoryList; " [value]="category.Id">
+                          {{category.Name}}
+                          </option>
+                       </select>
+                        <!-- <select (change)="showEntity($event.target.value) ">
+                        <option value="2 ">2</option>
+                        <option value="4 ">4</option>
+                        <option value="5 ">5</option>
+                      </select> -->
+
                     </div>
-                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="Subcategory" class="d-flex justify-content-start mb-2 fw-bold">Sub Category</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="Subcategory" formControlName="Subcategory">
-          <option selected> Choose Sub Category</option>
-          <option *ngFor="let dept of subCategorylist;" [value]="dept.Sid">
-            {{ dept.subCategoryname }}
-          </option>
-        </select>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="SubCategoryId " class="d-flex justify-content-start mb-2 fw-bold ">Sub Category</label>
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="SubCategoryId" formControlName="SubCategoryId">
+                     <option selected> Choose Sub Category</option>
+                      <option *ngFor="let subCategory of subCategorylist; " [value]=subCategory.Id >
+                              {{ subCategory.Name }}
+                       </option>
+                      </select>
+
                     </div>
-                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="Brand" class="d-flex justify-content-start mb-2 fw-bold">Brand</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="Brand" formControlName="Brand">
-          <option selected>Choose Brand</option>
-          <option *ngFor="let dept of brand;" [value]="dept.bid">
-            {{ dept.brandname}}
-          </option>
-        </select>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Brand " class="d-flex justify-content-start mb-2 fw-bold ">Brand</label>
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="BrandId " formControlName="BrandId">
+                          <option selected>Choose Brand</option>
+                          <option *ngFor="let brand of brand; " [value]=brand.Id>
+                          {{ brand.Name}}
+                          </option>
+                          </select>
                     </div>
                 </div>
-
                 <!-- demo dropdown -->
-
                 <!-- 2nd row design -->
-                <div class="row mt-4">
-                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="Unit" class="d-flex justify-content-start mb-2 fw-bold">Unit</label>
-                        <select class=" inputBorder fontCommon text-muted form-control" aria-label="Default select example" id="Unit" id="Unit" formControlName="Unit">
-                  <option *ngFor="let dept of Unit;" [value]="dept.uid">
-                    {{ dept.Unit }}
-                  </option>
-                </select>
+                <div class="row mt-4 ">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Unit " class="d-flex justify-content-start mb-2 fw-bold ">Unit</label>
+                        <input class="form-control inputBorder text-muted " type="number" id="Unit" placeholder="Unit " aria-label="Name " formControlName="Unit" [ngClass]="{ 'is-invalid': submitted && f[ 'Unit'].errors } ">
+                        <div *ngIf="submitted && f[ 'Unit'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'Unit'].errors[ 'required'] ">Unit is required</div>
+                        </div>
                     </div>
-                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="Sku" class="d-flex justify-content-start mb-2 fw-bold">Sku</label>
-                        <input class="form-control inputBorder text-muted" type="text" id="Sku" placeholder="Default input" aria-label="default input example" formControlName="Sku">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Sku " class="d-flex justify-content-start mb-2 fw-bold ">SKU</label>
+                        <input class="form-control inputBorder text-muted " type="number" id="SKU " placeholder="Sku " aria-label="default input example " formControlName="SKU" [ngClass]="{ 'is-invalid': submitted && f[ 'SKU'].errors } ">
+                        <div *ngIf="submitted && f[ 'SKU'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'SKU'].errors[ 'required'] ">SKU is required</div>
+                        </div>
                     </div>
-                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="MinimumQTY" class="d-flex justify-content-start mb-2 fw-bold">Minimum QTY</label>
-                        <input class="form-control inputBorder text-muted" type="text" id="MinimumQTY" placeholder="Default input" aria-label="default input example" formControlName="MinimumQTY">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="MinimumQty " class="d-flex justify-content-start mb-2 fw-bold ">Minimum Qunitity</label>
+                        <input class="form-control inputBorder text-muted " type="number" id="MinimumQty" placeholder="Minimum Qunitity " aria-label="default input example " formControlName="MinimumQty" [ngClass]="{ 'is-invalid': submitted && f[
+                            'MinimumQty'].errors } ">
+                        <div *ngIf="submitted && f[ 'MinimumQty'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'MinimumQty'].errors[ 'required'] ">MinimumQty is required</div>
+                        </div>
                     </div>
-                    <div class="col-12  col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="MinimumQTY" class="d-flex justify-content-start mb-2 fw-bold">Qunitity</label>
-                        <input class="form-control inputBorder text-muted" type="text" id="MinimumQTY" placeholder="Default input" aria-label="default input example" formControlName="Qty">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Quantity " class="d-flex justify-content-start mb-2 fw-bold ">Qunitity</label>
+                        <input class="form-control inputBorder text-muted " type="number" id="Qunitity " placeholder="Qunitity " aria-label="default input example " formControlName="Quantity" [ngClass]="{ 'is-invalid': submitted && f[ 'Quantity'].errors
+                            } ">
+                        <div *ngIf="submitted && f[ 'Quantity'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'Quantity'].errors[ 'required'] ">Quantity is required</div>
+                        </div>
                     </div>
                 </div>
                 <!-- 3rd row design-->
-                <div class="row mt-4">
+                <div class="row mt-4 ">
                     <div class="col-12 ">
-                        <label for="Description" class=" form-label d-flex justify-content-start mb-2 fw-bold">Description</label>
-                        <textarea class="form-control inputBorder text-muted fontCommon" id="Description" rows="3" placeholder="..." aria-label="default input example" formControlName="Description"></textarea>
+                        <label for="Description " class=" form-label d-flex justify-content-start mb-2 fw-bold ">Description</label>
+                        <textarea class="form-control inputBorder text-muted fontCommon " id="Description " rows="3 " placeholder="... " aria-label="default input example " formControlName="Description" [ngClass]="{ 'is-invalid': submitted && f[
+                            'Description'].errors } "></textarea>
+                        <div *ngIf="submitted && f[ 'Description'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'Description'].errors[ 'required'] ">Description is required</div>
+                        </div>
                     </div>
                 </div>
-
+                <!-- tax list -->
                 <!-- 4th row design-->
-                <div class="row mt-4">
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="tax" class="d-flex justify-content-start mb-2 fw-bold">Tax</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="tax" formControlName="Tax">
-                    <option *ngFor="let dept of tax;" [value]="dept.tid">
-                      {{ dept.taxname }}
-                    </option>
-        </select>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="Discount" class="d-flex justify-content-start mb-2 fw-bold">Discount Type</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="Discount" formControlName="Discount" ngModel>
-                    <option *ngFor="let dept of discount;" [value]="dept.Did">
-                      {{ dept.Discountname }}
-                    </option>
-        </select>
-                    </div>
-                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
-                        <label for="Price" class="d-flex justify-content-start mb-2 fw-bold">Price</label>
-                        <input class="form-control inputBorder text-muted " type="text" id="Price" placeholder="Price" aria-label="default input example" formControlName="Price">
+                <div class="row mt-4 ">
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="tax " class="d-flex justify-content-start mb-2 fw-bold ">Tax</label>
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="tax" formControlName="Tax">
+                            <!-- <option value="customs-tax">Customs Tax</option>
+                            <option value="entralexcise-duty">Excise Duty</option>
+                            <option value="income-tax">Income Tax</option>
+                            <option value="service-tax">Service Tax</option> -->
+                            <option *ngFor="let dept of Tax; " [value]=dept.value>
+                              {{ dept.label }}
+                            </option>
+                          </select>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
-                        <label for="Status" class="d-flex justify-content-start mb-2 fw-bold">Status</label>
-                        <select class="form-control inputBorder text-muted " aria-label="Default select example" id="Status" formControlName="Status">
-                    <option *ngFor="let dept of status;" [value]="dept.id">
-                      {{ dept.Sname }}
-                    </option>
-                 </select>
+                        <label for="Discount " class="d-flex justify-content-start mb-2 fw-bold ">Discount Type</label>
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="Discount " formControlName="DiscountTypeId" [ngClass]="{ 'is-invalid': submitted && f[ 'DiscountTypeId'].errors } ">
+                           <option *ngFor="let discount of discount; " [value]=discount.Id>
+                             {{ discount.Name }}
+                           </option>
+                       </select>
+                        <div *ngIf="submitted && f[ 'DiscountTypeId'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'DiscountTypeId'].errors[ 'required'] ">Discount is required</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Price " class="d-flex justify-content-start mb-2 fw-bold ">Price</label>
+                        <input class="form-control inputBorder text-muted " type="number" id="Price " placeholder="Price " aria-label="default input example " formControlName="Price" [ngClass]="{ 'is-invalid': submitted && f[ 'Price'].errors } ">
+                        <div *ngIf="submitted && f[ 'Price'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f[ 'Price'].errors[ 'required'] ">Price is required</div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
+                        <label for="Status " class="d-flex justify-content-start mb-2 fw-bold ">Status</label>
+                        <select class="form-control inputBorder text-muted " aria-label="Default select example " id="Status " formControlName="Status" [ngClass]="{ 'is-invalid': submitted && f[ 'Status'].errors } ">
+                            <option value=" " disabled selected>Select a tax</option>
+                            <option value="yes ">Yes</option>
+                            <option value="no ">No</option>
+                          </select>
+                        <div *ngIf="submitted && f['Status'].errors " class="invalid-feedback ml-2 ms-1 ">
+                            <div *ngIf="f['Status'].errors['required'] ">Status is required</div>
+                        </div>
                     </div>
                 </div>
-                <div class="row mt-4">
-                    <div class=" ">
-                        <input class="form-control inputBorder uplodImg" type="text" id="image" placeholder="" aria-label="default input example">
-                        <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                    </div>
-                    <div class="col-12">
-                        <label for="image" class="d-flex justify-content-start mb-2 fw-bold">Add Product Image</label>
-                        <div class="art-deco  inputBorder rounded ">
-                            <!-- drag and drop zone-->
-                            <div class="container p-5 d-flex flex-column align-items-center justify-content-center ">
-                                <input type="file " name=" " id=" " (change)="readFile($event.target) " class="m-2 " multiple>
-                                <span class="fontCommon fs-5 commonColor "><i class="fa fa-cloud-upload " aria-hidden="true "></i></span>
-                                <span class="fontCommon text-muted ">Drag or Drop File to upload</span>
-
-                                <input type="file" class="form-control fontCommon fs-5 commonColor " accept="image/*" (change)="handleInputChange($event)" />
-                                <img src="base64Image" alt="defalut">
-                                <button type="button " class="btn btn-dark mt-3 " (click)="uploadFile() ">Upload</button>
-                                <!-- <p *ngIf="file ">{{file.name}} File is Ready to Upload</p>-->
+                <div class="row mt-4 ">
+                    <div class="col-12 ">
+                        <label for="image " class="d-flex justify-content-start mb-2 fw-bold ">Add Product Image</label>
+                        <div class="art-deco inputBorder rounded ">
+                            <!-- drag and drop zone -->
+                            <div class="d-flex flex-column align-items-center justify-content-center ">
+                                <!-- <input type="file " name=" " id=" " (change)="readFile($event.target) " class="m-2 " multiple> -->
+                                <!-- <span class="fontCommon fs-5 commonColor "><i class="fa fa-cloud-upload " aria-hidden="true "></i></span>
+                        <span class="fontCommon text-muted ">Drag or Drop File to upload</span> -->
+                                <input type="file" class="form-control fontCommon fs-6 commonColor " accept="image/*" (change)="handleInputChange($event) " />
+                                <!-- <img src="base64Image " alt="defalut "> -->
+                                <!-- <button type="button " class="btn btn-dark mt-3 " (click)="uploadFile() ">Upload</button> -->
+                                <!-- <p *ngIf="file ">{{file.name}} File is Ready to Upload</p> -->
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -137,10 +161,10 @@
                 <div class="row mt-5 mb-4 ">
                     <div class="col-12 ">
                         <div class="d-flex justify-content-center ">
-                            <button type="submit" class=" btnSubmit rounded " (click)="onSubmit()">
+                            <button type="submit " class=" btnSubmit rounded " (click)="onSubmit() ">
                   <span class="fontCommon text-white ">Submit</span></button>
-                            <button type="submit" class=" btnCancle ms-4 rounded ">
-                      <span class="fontCommon " (click)="onCancel()">Cancle</span></button>
+                            <button type="submit " class=" btnCancle ms-4 rounded ">
+                      <span class="fontCommon " (click)="onCancel() ">Cancle</span></button>
                         </div>
                     </div>
                 </div>

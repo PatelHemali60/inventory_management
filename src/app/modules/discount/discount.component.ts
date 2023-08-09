@@ -40,7 +40,6 @@ export class DiscountComponent implements OnInit {
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    // debugger
     this.service.deleteDiscount(id).subscribe({
       next: () => {
         Swal.fire({

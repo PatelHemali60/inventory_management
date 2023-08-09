@@ -1,0 +1,65 @@
+<div class="formWrapper  d-flex flex-column p-1 p-sm-4 overflow-hidden">
+    <div class="d-flex justify-content-between row mt-3">
+        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color">Add User</span></span>
+    </div>
+    <!-- form division start -->
+    <form [formGroup]="UserForm" class="overflow-hidden  bg-white mt-4 mx-auto">
+        <div class="p-5 mt-2">
+            <div class="row  ">
+                <!-- First Name -->
+                <div class="col-6">
+                    <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">FirstName</label>
+                    <input class="form-control inputBorder text-muted" type="text" id="FirstName" placeholder="FirstName" aria-label="FirstName" formControlName="FirstName" [ngClass]="{ 'is-invalid': submitted && f['FirstName'].errors }">
+                    <div *ngIf="submitted && f['FirstName'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['FirstName'].errors['required']">FirstName is required</div>
+                    </div>
+                </div>
+                <!-- Last Name -->
+                <div class="col-6">
+                    <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">LastName</label>
+                    <input class="form-control inputBorder text-muted" type="text" id="LastName" placeholder="LastName" aria-label="LastName" formControlName="LastName" [ngClass]="{ 'is-invalid': submitted && f['LastName'].errors }">
+                    <div *ngIf="submitted && f['LastName'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['LastName'].errors['required']">LastName is required</div>
+                    </div>
+                </div>
+                <!-- Emailid -->
+                <div class="col-6 mt-3">
+                    <label for="EmailId" class="d-flex justify-content-start mb-2 fw-bold">Email</label>
+                    <input class="form-control inputBorder text-muted" type="text" id="EmailId" placeholder="EmailId" aria-label="EmailId" formControlName="EmailId" [ngClass]="{ 'is-invalid': submitted && f['EmailId'].errors }">
+                    <div *ngIf="submitted && f['EmailId'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['EmailId'].errors['required']">Email is required</div>
+                    </div>
+                    <!-- <div *ngIf="f['EmailId'].errors['Email']">Email must be a valid email address</div> -->
+                </div>
+                <!-- Password -->
+                <div class="col-6 mt-3">
+                    <label for="Password" class="d-flex justify-content-start mb-2 fw-bold">Password</label>
+                    <input class="form-control inputBorder text-muted" type="password" id="Description" placeholder="Description" aria-label="default input example" formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f['Password'].errors }">
+                    <div *ngIf="submitted && f['Password'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['Password'].errors['required']">Password is required</div>
+                    </div>
+                </div>
+                <!-- Role id -->
+                <div class="col-6 mt-3">
+                    <label for="RoleId " class="d-flex justify-content-start mb-2 fw-bold ">Role</label>
+                    <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="SubCategoryId" formControlName="RoleId">
+                    <option *ngFor="let role of Role; " [value]=role.Id >
+                        {{ role.Name }}
+                 </option>
+                </select>
+                </div>
+            </div>
+        </div>
+        <!-- button design -->
+        <div class="row mt-2 mb-4 ">
+            <div class="col-12 ">
+                <div class="d-flex justify-content-center ">
+                    <button type="submit" class=" btnSubmit rounded " (click)="onSubmit()">
+                  <span class=" fontCommon text-white ">Submit</span></button>
+                    <button type="submit " class=" btnCancle ms-4 rounded ">
+                <span class="fontCommon " (click)="onCancel() ">Cancle</span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

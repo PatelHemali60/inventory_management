@@ -1,1 +1,103 @@
-<p>user works!</p>
+<div class="tableWrapper  d-flex flex-column  pe-4 ps-4 pt-4 pb-2">
+    <div class="d-flex justify-content-between row ">
+        <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-10 col-xl-10 color">User List</span>
+        <div class=" col-12 col-sm-12 col-md-2 col-lg-2 col-xl-2  mb-3">
+            <button class="btn btn-primary btn-sm "> <a class="text-white link" routerLink="form" routerLinkActive="router-link-active" >
+          <span class="fontCommon">+</span><span class="fontCommon ms-2 ">Add User</span></a> </button>
+        </div>
+    </div>
+    <div class="bg-white p-2 overflow-auto">
+        <div class="d-flex  justify-content-between row">
+            <div class="d-flex col-3 col-sm-12 col-md-12 col-lg-10 col-xl-10 col-xxl-10 ">
+                <div class="filterIcon bgPurple text-white me-2"><i class="fa fa-filter" style="height:10px;width:10px;" aria-hidden="true"></i></div>
+                <div class="ms-4">
+                    <form class="nosubmit ">
+                        <!-- <input type="text" [(ngModel)]="term"> -->
+                        <!-- <input class="nosubmit" type="text" [(ngModel)]="searchText" placeholder="Enter search text" [ngModelOptions]="{standalone:true}"> -->
+
+                        <!-- <input type="text" [(ngModel)]="searchText" (input)="handleChange($event)" placeholder="Search by name"> -->
+                        <!-- <input class="nosubmit" type="text" [(ngModel)]="searchText" placeholder="Search..." [ngModelOptions]="{standalone:true}"> -->
+                    </form>
+                    <!-- <input style="margin-left: 5px" type="text" placeholder="Type to search..." [(ngModel)]="searchText" (input)="handleChange($event.target.value)" /> -->
+                </div>
+            </div>
+            <div class="d-flex col-3 col-sm-12 col-md-12 col-lg-2 mt-sm-2 mt-md-2">
+                <div class="IconCommon "><i class="fa fa-file-pdf-o text-danger" aria-hidden="true"></i></div>
+                <div class="IconCommon  ms-2"><i class="fa fa-print" aria-hidden="true"></i>
+                </div>
+            </div>
+        </div>
+        <div class="mt-3 pb-2 pt-1 table-responsive-cms overflow-auto tableHeight">
+            <!-- *ngIf="myUsers | userFilter:searchText as result" -->
+            <div class="pagination-with-table" *ngIf="User">
+                <table class="table pb-3 position-relative ">
+                    <thead class="theadBg border-0">
+                        <tr class="text-center">
+                            <th>
+                                <div class="form-group">
+                                    <input type="checkbox" id="html">
+                                    <label for="html"></label>
+                                </div>
+                            </th>
+                            <th scope="col fontCommon lineHeight">FirstName</th>
+                            <th scope="col fontCommon lineHeight">LastName</th>
+                            <th scope="col fontCommon lineHeight">EmailId</th>
+                            <th scope="col fontCommon lineHeight">Password</th>
+                            <th scope="col fontCommon lineHeight">RoleId</th>
+                            <th scope="col fontCommon lineHeight">RoleName</th>
+                            <th scope="col fontCommon lineHeight">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- <tr *ngFor="let product of result  let i = index"> -->
+                        <!-- <!--  <tr *ngFor="let user of result  let i = index">  -->
+                        <!-- <li *ngFor="let item of Products | filter : searchText : 'categoryName'"></li> -->
+                        <tr *ngFor="let user of User let i = index" class="dottedBorder fontColor text-center ">
+                            <td scope="row">
+                                <div class="form-group">
+                                    <input type="checkbox" id="html ">
+                                    <label for="html"></label>
+                                </div>
+                            </td>
+                            <td> {{user.FirstName}}</td>
+                            <td> {{user.LastName}}</td>
+                            <td class="">{{user.EmailId}} </td>
+                            <td class="">{{user.Password}}</td>
+                            <td>{{user.RoleId}}</td>
+                            <td>{{user.RoleName}}</td>
+                            <td class="d-flex iconSize ">
+                                <span class="me-3 mt-0"><a routerLink="view/{{user.Id}}"><i class="fa fa-eye " aria-hidden="true "></i></a></span>
+                                <div class="me-3 mt-0"> <a routerLink="edit/{{user.Id}}"><i class="fa fa-edit " style="color: black;"></i></a></div>
+                                <div class="mt-0"> <a (click)="deleteUser(user.Id)"><i class="fa fa-trash text-danger " aria-hidden="true "></i></a></div>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-between m-2 ">
+                    <div class="d-flex ">
+                        <span class=" mt-2 ms-2 fontCommon ">Show Per Page :</span>
+                        <span class="ms-1 ">
+              <select class="form-select inputBorder text-muted " aria-label="Default select example ">
+               <option selected>5</option>
+               <option value="1 ">10</option>
+               <option value="2 ">15</option>
+               <option value="3 ">20</option>
+               </select>
+    </span>
+                    </div>
+                    <span class=" d-flex justify-content-center align-item-center ">
+    <span class="mt-2 ">1-10 of 11 items</span>
+                    <small class="btnPaginantion ms-2 me-2 border ">Previous</small>
+                    <small class="btnPaginantion me-2 border "> 1</small>
+                    <small class="btnPaginantion bg-secondary text-white border "> 2</small>
+                    <small class="btnPaginantion bgPurple ms-2 me-2 text-white border ">Next</small>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <!-- paginantion design -->
+
+        <!-- paginantion design -->
+    </div>
+</div>
