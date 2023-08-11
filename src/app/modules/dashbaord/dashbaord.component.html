@@ -221,7 +221,13 @@
             <div class="h-100 w-100 sellingCategories">
                 <p class="fontCommon fw-bold mt-1">Order Summary</p>
                 <div class="bg-white rounded ps-4 pb-3 pt-3 pe-4">
-                    <canvas id="chart" style="width:100%;max-width:600px; height:390px;"></canvas>
+                    <!-- <canvas baseChart width="500" height="200" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" [plugins]="lineChartPlugins"> -->
+                    <!-- </canvas> -->
+                    <canvas baseChart id="line-chart" style="width:100%;max-width:600px; height:390px;" [datasets]="lineChartData" [style.colors]="lineChartColors" [labels]="lineChartLabels" [options]="lineChartOptions" [style.colors]="lineChartColors" [legend]="lineChartLegend"
+                        [type]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+                    <!-- <div id="Linechart" class="margin-auto" style="width:100%;max-width:600px; height:390px;">
+                    </div> -->
+                    <!-- <canvas id="chart " style="width:100%;max-width:600px; height:390px; "></canvas> -->
                 </div>
             </div>
         </div>

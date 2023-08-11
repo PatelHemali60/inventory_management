@@ -91,7 +91,7 @@ export class AddUserComponent {
       EmailId: [null, [Validators.required, Validators.email]],
       Password: [null, Validators.required],
       IsActive: [false, Validators.required],
-      RoleId: [null, Validators.required],
+      RoleId: [10, Validators.required],
       RoleName: [null, Validators.required],
     });
   }
@@ -99,8 +99,9 @@ export class AddUserComponent {
   //on Form submit
   public onSubmit(): void {
     //flag for form valid
+    debugger;
     this.submitted = true;
-    if (this.isAddMode) {
+    if (this.isAddMode && this.UserForm.valid) {
       this.addUSer();
     } else {
       this.updateUser();
