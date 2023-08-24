@@ -1,0 +1,15 @@
+<div class="product_card">
+    <ng-content select=" .card_images "></ng-content>
+    <!-- <img src="../../../assets/assets/images/images/mobile-1.jpg " alt="tshirt photo " class="product_image "> -->
+    <div class="text-start d-flex flex-column mt-2">
+        <span class="fs-4 text-break fw-bold">{{Product.Product_name}}</span>
+        <span class="fontCommon text-muted">{{Product.description}}</span>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="submit" class="btn btn-card bg-btn-card  p-xl-0
+             btn-block "><i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>
+            Buy Now</button>
+            <button type="submit" class="btn-card btn-Cart p-0 ms-2 rounded">
+                <span class="btn-font ">Add to cart</span></button>
+        </div>
+    </div>
+</div>

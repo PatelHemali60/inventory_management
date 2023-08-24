@@ -1,0 +1,193 @@
+* {
+    --sale-color: #e8f1fd;
+    --percentage-color: #28c76f;
+    --days-color: #989daa;
+    --background-color: #fbfbfb;
+    --gray-color: #f8f8f8;
+    --white-color: #ffffff;
+    --btn-color: #5d6679;
+    --border-color: #cccccc;
+}
+
+.text-color {
+    color: #7b58d0;
+}
+
+.card-img {
+    height: 30px;
+    width: 30px;
+    margin: 20px;
+}
+
+.main {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: var(--gray-color);
+}
+
+.overview-section {
+    border-radius: 10px;
+    /* width: 48%; */
+    background-color: var(--white-color);
+}
+
+.first-section {
+    display: flex;
+    justify-content: space-around;
+}
+
+.sales {
+    padding: 10px;
+    display: flex;
+    justify-content: space-around
+}
+
+.sale {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: var(--background-color);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+    width: 45%;
+}
+
+.annual-sale-data p {
+    margin-bottom: 0;
+}
+
+.annual-sale-data .amount {
+    font-weight: 500;
+}
+
+.annual-sale-data .perce {
+    color: var(--percentage-color);
+}
+
+.annual-sale-data span {
+    color: var(--days-color);
+}
+
+.annual-sale-data .text {
+    color: var(--days-color);
+}
+
+.heading {
+    padding: 15px 0px 0px 15px;
+    margin-bottom: 15px;
+}
+
+.chart {
+    background-color: var(--white-color);
+}
+
+.chart-header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: relative;
+}
+
+.chart-detail {
+    display: flex;
+    align-items: center;
+}
+
+.chart-detail p {
+    margin: 0 5px;
+}
+
+.weekly {
+    position: absolute;
+    right: 60px;
+}
+
+.weekly button {
+    background-color: var(--white-color);
+    color: var(--btn-color);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    display: flex;
+    font-weight: 500;
+    font-size: 17px;
+    align-items: center;
+    padding: 8px 20px;
+}
+
+.third-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--gray-color);
+}
+
+.piechart {
+    border-radius: 10px;
+    background-color: var(--gray-color);
+}
+
+.barchart {
+    border-radius: 10px;
+    background-color: var(--gray-color);
+}
+
+.fourth-section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: var(--gray-color);
+}
+
+.text {
+    text-wrap: nowrap;
+}
+
+@media screen and (min-width:992px) and (max-width:1400px) {
+    .sale {
+        display: flex;
+        flex-direction: column;
+        /* width: auto; */
+    }
+    .annual-sale-data {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+@media screen and (max-width:992px) {
+    .sale {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        /* width: auto; */
+    }
+}
+
+@media screen and (max-width:442px) {
+    .sale {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+::ng-deep .canvasjs-chart-legend ul li {
+    margin-bottom: 10px !important;
+    /* Add space between legend items (change the value as needed) */
+}
+
+::ng-deep #chartContainer .canvasjs-chart-canvas .canvasjs-grid-line.vertical {
+    display: none !important;
+}
+
+::ng-deep .canvasjs-chart-container .canvasjs-chart-canvas:hover .canvasjs-cursor-line-vertical {
+    display: none;
+}
+
+
+/* ::ng-deep .canvasjs-chart-canvas{
+position:absolute !important;
+} */

@@ -24,6 +24,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'product',
+        loadChildren: () =>
+          import('./modules/product/product.module').then(
+            (m) => m.ProductModule
+          ),
+      },
+      {
         path: 'roleMaster',
         loadChildren: () =>
           import('./modules/role/role.module').then((m) => m.RoleModule),

@@ -39,7 +39,7 @@ export class RagiatrationInventoryComponent {
     this.LastName = new FormControl('', [Validators.required]);
     this.EmailId = new FormControl('', [Validators.required]);
     this.Password = new FormControl('', [Validators.required]);
-    this.RoleId = new FormControl('1', [Validators.required]);
+    this.RoleId = new FormControl('16', [Validators.required]);
 
     this.RagistrationForm = new FormGroup({
       FirstName: this.FirstName,

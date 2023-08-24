@@ -1,0 +1,15 @@
+<div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
+    <div class="text-center ">
+        <div class="card_icon annualSale " [style.background-color]="backgroundColor">
+            <ng-content select=".card_images"></ng-content>
+        </div>
+    </div>
+    <div class="d-flex flex-column  m-1">
+        <!-- Annual sale -->
+        <span class="cardHeading text-muted">{{card.Profit}}</span>
+        <!-- $1250,0k -->
+        <span class="rate mt-1 mb-2"> {{card.price}}</span>
+        <span class="cardHeading"><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ps-1">6%</span>
+        <span>Last 7 days</span></span>
+    </div>
+</div>

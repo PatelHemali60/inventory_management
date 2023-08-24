@@ -5,26 +5,23 @@
                 <div class="salesOverview d-flex flex-column w-100 rounded ">
                     <p class="fontCommon fw-bold pb-2">Sales Overview</p>
                     <div class="cardSection row ps-2 pe-2 pb-2 pt-2 g-3">
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
-                                <div class="text-center ">
-                                    <div class="card_icon annualSale">
-                                        <img src="../../../assets/assets/images/images/Sales (1).png" alt="" class="card-img">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column  m-1">
-                                    <span class="cardHeading text-muted">Annual sale</span>
-                                    <span class="rate mt-1 mb-2">$1250,0k</span>
-                                    <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ps-1">6%</span>
-                                    <span>Last 7 days</span></span>
-                                </div>
-                            </div>
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card1" [backgroundColor]="card1_bg1">
+                                <ng-container class="card_images ">
+                                    <img src="../../../assets/assets/images/images/Sales (1).png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
                         </div>
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card2" [backgroundColor]="card1_bg2">
+                                <ng-container class="card_images">
+                                    <img src="../../../assets/assets/images/images/Sales (2).png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
+                            <!-- <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
                                 <div class="text-center ">
                                     <div class="card_icon annualprofit">
-                                        <img src="../../../assets/assets/images/images/Sales (2).png" alt="" class="card-img">
+
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column  m-1">
@@ -33,13 +30,18 @@
                                     <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
                                     <span>Last 7 days</span></span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card3" [backgroundColor]="card1_bg3">
+                                <ng-container class="card_images">
+                                    <img src="../../../assets/assets/images/images/Sales (3).png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
+                            <!-- <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
                                 <div class="text-center ">
                                     <div class="card_icon dailysale">
-                                        <img src="../../../assets/assets/images/images/Sales (3).png" alt="" class="card-img">
+
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column  m-1">
@@ -48,22 +50,14 @@
                                     <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
                                     <span>Last 7 days</span></span>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
-                                <div class="text-center ">
-                                    <div class="card_icon dailyProfit">
-                                        <img src="../../../assets/assets/images/images copy/sales4.png" alt="" class="card-img">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column  m-1">
-                                    <span class="cardHeading text-muted">Daily Profit</span>
-                                    <span class="rate mt-1 mb-2">$1250.0k</span>
-                                    <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
-                                    <span>Last 7 days</span></span>
-                                </div>
-                            </div>
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card4" [backgroundColor]="card1_bg4">
+                                <ng-container class="card_images">
+                                    <img src="../../../assets/assets/images/images copy/sales4.png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
                         </div>
                     </div>
                 </div>
@@ -73,117 +67,56 @@
                     <p class="fontCommon fw-bold pt-2 pb-2">Purchase Overview</p>
 
                     <div class=" cardSection row p-2 g-3">
-                        <div class=" col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center justify-content-center flex-row">
-                                <div class="text-center ">
-                                    <div class="card_icon dailysale">
-                                        <img src=".../../../assets/assets/images/images copy/Sales (3).png" alt="" class="card-img">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column  m-1">
-                                    <span class="cardHeading text-muted">purchase</span>
-                                    <span class="rate mt-1 mb-2">5000</span>
-                                    <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
-                                    <span>Last 7 days</span></span>
-                                </div>
-                            </div>
+                        <div class=" col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card5" [backgroundColor]="card1_bg3">
+                                <ng-container class="card_images">
+                                    <img src=".../../../assets/assets/images/images copy/Sales (3).png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
                         </div>
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
-                                <div class="text-center ">
-                                    <div class="card_icon cancleOrder">
-                                        <img src="../../../assets/assets/images/images copy/sales7.png" alt="" class="card-img">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column m-1">
-                                    <span class="cardHeading text-muted">Cancle Order </span>
-                                    <span class="rate mt-1 mb-2">50</span>
-                                    <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
-                                    <span>Last 7 days</span></span>
-                                </div>
-                            </div>
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card6" [backgroundColor]="card1_bg6">
+                                <ng-container class="card_images">
+                                    <img src="../../../assets/assets/images/images copy/sales7.png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
                         </div>
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
-                                <div class="text-center ">
-                                    <div class="card_icon purchamount">
-                                        <img src="../../../assets/assets/images/images/sales6.png" alt="" class="card-img">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column  m-1">
-                                    <span class="cardHeading text-muted">Purchase</span>
-                                    <span class="rate mt-1 mb-2">$85000</span>
-                                    <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
-                                    <span>Last 7 days</span></span>
-                                </div>
-                            </div>
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card6" [backgroundColor]="card1_bg7">
+                                <ng-container class="card_images">
+                                    <img src="../../../assets/assets/images/images/sales6.png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
                         </div>
-                        <div class="col-6 col-md-12 col-lg-6">
-                            <div class="cardCoommon rounded bgCommon p-3 d-sm-flex d-sm-flex-column justify-content-sm-center flex-row">
-                                <div class="text-center ">
-                                    <div class="card_icon return">
-                                        <img src="../../../assets/assets/images/images/sales 8.png" alt="" class="card-img">
-                                    </div>
-                                </div>
-                                <div class="d-flex flex-column  m-1">
-                                    <span class="cardHeading textmuted">Returns</span>
-                                    <span class="rate mt-1 mb-2">100</span>
-                                    <span class="cardHeading "><i class="fa fa-arrow-up arrowColor" aria-hidden="true"></i><span class="arrowColor ms-1">6%</span>
-                                    <span>Last 7 days</span></span>
-                                </div>
-                            </div>
+                        <div class="col-6 col-md-6 col-lg-6">
+                            <app-card [card]="card6" [backgroundColor]="card1_bg8">
+                                <ng-container class="card_images">
+                                    <img src="../../../assets/assets/images/images/sales 8.png" alt="" class="card-img">
+                                </ng-container>
+                            </app-card>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
         <!-- bar-chart section design -->
-        <div class="chartSection rounded ps-3 pb-3 pe-3 pt-2 mb-3">
+        <div class="chartSection rounded ps-3 pb-3 pe-3 pt-2 mb-2">
             <p class="fontCommon fw-bold mt-3">Sales Satstic</p>
-            <div class="chart p-5">
-                <div class="chart-header mb-3">
-                    <div class="chart-detail">
-                        <p class="text-color">$5421,11</p>
-                        <span class="text-color"><img src="../../../assets/images/" alt srcset></span>
-                        <p>56% more than last Year</p>
-                    </div>
-                    <div class="weekly">
-                        <button class=""><i class="fa fa-calendar"></i><span class="mx-2">Weekly</span></button>
-                    </div>
-                </div>
-                <div id="linechart" style="height: 320px; width: 100%; margin:auto;"></div>
-            </div>
-            <!-- <div class=" h-100 w-100 bg-white">
-            <div id="columnchart_material" style="width:100%;max-width:100%;height:280px;"></div>
-        </div> -->
+            <app-sales-satstic></app-sales-satstic>
         </div>
         <!-- chart section -->
         <div class="stockSection flex-row  d-lg-flex  d-xl-flex ps-3 pb-2 pe-4 pt-4 mb-4">
             <!-- pie chart -->
             <div class="rounded  w-100 me-3  ">
                 <p class="fontCommon fw-bold mt-3">Stock</p>
-                <div class="bg-white rounded ps-3 pb-3 pt-3 pe-4">
-                    <div class="p-3 border-bottom d-flex flex-column">
-                        <span class="fontCommon">Amount</span>
-                        <span class="fs-5 fw-bold">5.987,34</span>
-                    </div>
-                    <div class="chart">
-                        <div id="pieChart" style="width:100%;max-width:800px;height:300px;">
-                        </div>
-                    </div>
-                    <!-- <canvas id="myChart" style="width:100%;max-width:800px;height:300px;"></canvas> -->
-                </div>
+                <app-stock></app-stock>
             </div>
             <!-- bar chart chart -->
             <!-- removing height for adjust in responsive -->
             <div class="rounded w-100 position-relative">
                 <p class="fontCommon fw-bold mt-3">Top Selling items</p>
                 <div class="bg-white p-2">
-                    <div class="chart">
-                        <div id="barchart" class="margin-auto" style="width:100%;max-width:600px; height:400px;">
-                        </div>
-                    </div>
+                    <app-topsellingitems></app-topsellingitems>
                     <!-- <canvas id="myChart1" style="width:100%;max-width:600px; height:400px;"></canvas> -->
                 </div>
             </div>

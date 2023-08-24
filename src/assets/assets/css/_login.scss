@@ -32,6 +32,8 @@ html {
 .login-wrapper {
     height: 100vh;
     width: 100%;
+    overflow: auto;
+    padding: 15px;
     /* For browsers that do not support gradients */
     background-image: linear-gradient(to right, #7B58D0, #5a9bf6);
 }
@@ -71,14 +73,21 @@ img {
     object-fit: cover;
 }
 
+// position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     margin-top: -50px;
+//     margin-left: -50px;
+//     width: 100px;
+//     height: 100px;
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
-    max-width: 80rem;
-    min-height: 100vh;
+    // max-width: 80rem;
+    // min-height: 100vh;
     width: 100%;
-    padding: 0 2rem;
+    padding: 2rem;
     margin: 0 auto;
 }
 

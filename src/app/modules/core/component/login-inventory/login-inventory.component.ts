@@ -24,6 +24,7 @@ export class LoginInventoryComponent implements OnInit {
   public submitted = false;
   public loading = false;
   public IsThirdPartyLogin: any = true;
+  public Role: any;
   @Output() onSigninSuccess = new EventEmitter();
   @Input() clientId!: string;
 
@@ -62,12 +63,19 @@ export class LoginInventoryComponent implements OnInit {
       Password: this.loginForm.value.Password,
       IsThirdPartyLogin: false,
     };
-    this.authService.Login(data).subscribe({
-      next: () => {
-        this.toastr.success('Add User sucessfully !!!');
+
+    this.authService.Login(data).subscribe((res: any) => {
+      // console.log(res.Data.RoleId, 'reponse');
+      localStorage.setItem('roleID', res.Data.RoleId);
+      let roleId = 16;
+      let ID = res.Data.RoleId;
+      this.toastr.success('Add User sucessfully !!!');
+      localStorage.setItem('currentUser', ID);
+      if (roleId == ID) {
+        this.router.navigate(['/home/product']);
+      } else {
         this.router.navigate(['/home/dashboard']);
-      },
-      error: (e) => console.log(e),
+      }
     });
   }
 

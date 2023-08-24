@@ -3,6 +3,7 @@
 
 /* You can add global styles to this file, and also import other style files */
 
+@import '~@angular/cdk/overlay-prebuilt.css';
 @import "./assets/assets/css/index";
 //========== toastee css ===========//
 @import 'ngx-toastr/toastr';
@@ -225,8 +226,9 @@ justify-content: space-around;
     position: relative;
     list-style: none;
     transition: all .4s ease;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 5px;
+    // margin-top: 10px;
+    // margin-bottom: 10px;
 }
 
 .sidebar .nav-links li:hover {
@@ -255,7 +257,6 @@ justify-content: space-around;
     min-width: 78px;
     text-align: center;
     line-height: 50px;
-    color: #5d6679;
     font-size: 16px;
     line-height: 24px;
     cursor: pointer;
@@ -277,6 +278,7 @@ justify-content: space-around;
 
 .sidebar .nav-links li a {
     text-decoration: none;
+    padding: 10px 20px;
 }
 
 .sidebar .nav-links li a .link_name {
@@ -419,7 +421,7 @@ width: calc(100% - 78px);
 
 /* circle with icon */
 
-.simpleCircle [class*="fa fa-"] {
+.simpleCircle {
     background: #7B58D0;
     border-radius: 50%;
     color: #fff;
@@ -461,46 +463,38 @@ img {
 
 /* card common color */
 
-.annualSale {
-    color: #e6f2f2;
-    background-color: #e5f6fd;
-}
-
-.annualprofit {
-    color: #ffbc37;
-    background-color: #fff4de;
-}
-
-.dailysale {
-    color: #e32800;
-    background-color: #fff1ee;
-}
-
-.dailyProfit {
-    color: #03d6d6;
-    background-color: #e6f2f2;
-}
-
-.noPurchase {
-    color: #56bfe6;
-    background-color: #e5f6fd;
-}
-
-.cancleOrder {
-    color: #fe1d35;
-    background-color: #fce9eb;
-}
-
-.purchamount {
-    color: #ff6f2c !important;
-    background-color: #fff2ec !important;
-}
-
-.return {
-    color: #ff008b;
-    background-color: #f8edf3;
-}
-
+// .annualSale {
+//     color: #e6f2f2;
+//     background-color: #e5f6fd;
+// }
+// .annualprofit {
+//     color: #ffbc37;
+//     background-color: #fff4de;
+// }
+// .dailysale {
+//     color: #e32800;
+//     background-color: #fff1ee;
+// }
+// .dailyProfit {
+//     color: #03d6d6;
+//     background-color: #e6f2f2;
+// }
+// .noPurchase {
+//     color: #56bfe6;
+//     background-color: #e6f2f2;
+// }
+// .cancleOrder {
+//     color: #fe1d35;
+//     background-color: #fce9eb;
+// }
+// .purchamount {
+//     color: #ff6f2c !important;
+//     background-color: #fff2ec !important;
+// }
+// .return {
+//     color: #ff008b;
+//     background-color: #f8edf3;
+// }
 .cardHeading {
     font-size: 14px;
     font-weight: 400;
@@ -583,121 +577,6 @@ width: 100% !important; */
 /*--------------------------------------- sidebar design---------------------------------- */
 
 
-/*
-.s-layout {
-display: flex;
-width: 100%;
-min-height: 100vh;
-}
-
-.s-layout__content {
-display: flex;
-justify-content: center;
-align-items: center;
-flex: 1;
-}
-
-/* Sidebar
-
-.s-sidebar__trigger {
-z-index: 2;
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 4em;
-background: #ffff;
-
-.logo-details {}
-}
-
-.s-sidebar__trigger > i {
-display: inline-block;
-margin: 1.5em 0 0 1.5em;
-}
-
-.s-sidebar__nav {
-position: fixed;
-top: 0;
-left: -15em;
-overflow: hidden;
-transition: all .3s ease-in;
-width: 15em;
-height: 100%;
-background: #243e56;
-color: rgba(255, 255, 255, 0.7);
-}
-
-.s-sidebar__nav:focus,
-.s-sidebar__nav:hover,
-.s-sidebar__trigger:focus+.s-sidebar__nav,
-.s-sidebar__trigger:hover+.s-sidebar__nav {
-left: 0;
-} */
-
-
-/* Mobile First */
-
-
-/* @media (min-width: 672px) {
-.s-layout__content {
-margin-left: 4em;
-}
-/* Sidebar
-.s-sidebar__trigger {
-width: 4em;
-}
-
-.s-sidebar__nav {
-width: 4em;
-left: 0;
-}
-
-.s-sidebar__nav:focus,
-.s-sidebar__nav:hover,
-.s-sidebar__trigger:focus+.s-sidebar__nav,
-.s-sidebar__trigger:hover+.s-sidebar__nav {
-width: 15em;
-}
-}
-@media (min-width: 425px) {
-.s-layout__content {
-margin-left: 15em;
-}
-
-.s-sidebar__trigger {
-display: none;
-background-color: #ffff;
-}
-
-.s-sidebar__nav {
-width: 15em;
-}
-
-.s-sidebar__nav ul {
-top: 1.3em;
-}
-
-.sidebar .logo-details {
-height: 60px;
-width: 100%;
-display: flex;
-align-items: center;
-}
-} */
-
-.s-layout {
-    display: flex;
-}
-
-.s-layout__content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 1;
-}
-
-
 /* Sidebar */
 
 .s-sidebar__trigger {
@@ -750,6 +629,8 @@ align-items: center;
 /* ---------- SIDEBAR ---------- */
 
 #sidebar {
+    width: auto;
+    // width: 290px;
     /* grid-area: sidebar; */
     height: 100%;
     background-color: #ffffff;
@@ -811,10 +692,11 @@ align-items: center;
 .main-wrapper {
     display: flex;
     flex-wrap: inherit;
+    overflow: hidden;
 }
 
 .customPadding {
-    padding: 15px !important;
+    padding: 10px !important;
 }
 
 
@@ -823,7 +705,7 @@ align-items: center;
 @media screen and (max-width: 375px) {
     .sidebar {
         height: auto;
-        width: 100%;
+        width: auto;
         background: #ffff;
         z-index: 100;
         transition: all .5s ease;
@@ -864,6 +746,7 @@ align-items: center;
         padding: 0 !important;
     }
     .cardCoommon {
+        padding: 12px !important;
         background-color: white;
     }
     #circle1 {
@@ -945,14 +828,18 @@ justify-content: center;
     }
     /* card design responsive */
     .card_icon {
-        width: 50px;
-        height: 50px;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         overflow: hidden;
         line-height: 40px;
         align-items: center;
         /* text-align: center; */
-        margin-left: 15px;
+    }
+    .card-img {
+        height: 30px;
+        width: 30px;
+        margin: 15px !important;
     }
     .sidebar-title>span {
         display: inline;
@@ -1038,23 +925,31 @@ justify-content: center;
 }
 
 @media screen and (max-width: 768px) {
-    .close-icon {
+    #sidebar {
+        display: none;
+    }
+    .inventIcon {
+        font-size: 30px;
+        line-height: 30px;
+    }
+    .logoDetail {
         display: flex;
+        padding: 15px;
+    }
+    .menu-icon {
+        display: inline;
+    }
+    .sidebar-title>span {
+        display: inline;
+    }
+    .logo-details {
+        padding: 15px 30px !important;
+    }
+    .close-icon {
+        display: block !important;
     }
     .main-wrapper {
-        display: flex;
-    }
-    .sidebar .logo-details i {
-        font-size: 25px;
-    }
-    .sidebar .logo-details {
-        color: #7B58D0;
-        height: 50px;
-        min-width: 160px;
-        font-weight: 400;
-        text-align: center;
-        line-height: 50px;
-        padding: 30px 0 0 30px;
+        display: inline-block !important;
     }
     .sidebar-responsive {
         display: inline !important;
@@ -1063,8 +958,14 @@ justify-content: center;
         left: 0;
         top: 0;
     }
-    .close-icon {
-        display: none;
+    .logo-details {
+        padding: 15px 30px !important;
+    }
+    .logo-details i.fa.fa-bars {
+        margin-right: 15px !important;
+    }
+    .table-responsive-cms {
+        overflow: auto;
     }
     /* .logo-details {
 padding: 15px 30px !important;
@@ -1339,4 +1240,22 @@ padding: 60px !important;
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+}
+
+//product page design
+.btn-card {
+    border: none !important;
+    font-size: 0.8rem;
+    padding: 8px 30px !important;
+}
+
+.bg-btn-card {
+    background-color: #7b58d0 !important;
+    color: white;
+}
+
+.btn-Cart {
+    color: #676f81;
+    background-color: #fbfbfb !important;
+    border: 1px solid #e8eaee !important;
 }
