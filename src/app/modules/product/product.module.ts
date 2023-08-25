@@ -14,5 +14,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
     ViewProductdetailComponent,
   ],
   imports: [CommonModule, ProductRoutingModule, OverlayModule],
+  exports: [ProductComponent],
 })
 export class ProductModule {}

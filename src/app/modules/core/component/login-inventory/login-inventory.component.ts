@@ -72,9 +72,9 @@ export class LoginInventoryComponent implements OnInit {
       this.toastr.success('Add User sucessfully !!!');
       localStorage.setItem('currentUser', ID);
       if (roleId == ID) {
-        this.router.navigate(['/home/product']);
+        this.router.navigate(['/product']);
       } else {
-        this.router.navigate(['/home/dashboard']);
+        this.router.navigate(['/dashboard']);
       }
     });
   }

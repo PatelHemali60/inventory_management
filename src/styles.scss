@@ -21,6 +21,11 @@ html {
     font-family: 'DM Sans', sans-serif !important;
 }
 
+a {
+    link-style: none;
+    color: black;
+}
+
 .h-100 {
     height: 100%;
 }
@@ -36,6 +41,10 @@ html {
 
 .color {
     color: #6e40db !important;
+}
+
+.productDiscount-color {
+    color: #388e3c;
 }
 
 .arrowColor {
@@ -212,6 +221,7 @@ justify-content: space-around;
     height: 100vh;
     /* padding: 30px 40px 132px 0; */
     overflow: auto;
+    padding: 0 0 120px 0;
 }
 
 .sidebar.close .nav-links {
@@ -236,10 +246,14 @@ justify-content: space-around;
 }
 
 .sidebar .sub-menu li:hover {
-    transition: all ease .5;
+    transition: all ease .4s;
     font-weight: 600;
-    color: #7B58D0;
+    color: #7B58D0 !important;
     background-color: #7B58D0;
+}
+
+.sidebar .sub-menu li a:hover {
+    color: #7B58D0;
 }
 
 .sidebar .nav-links li .icon-link {
@@ -920,7 +934,7 @@ justify-content: center;
         margin-right: 15px !important;
     }
     .table-responsive-cms {
-        overflow: auto;
+        overflow: scroll;
     }
 }
 
@@ -935,6 +949,7 @@ justify-content: center;
     .logoDetail {
         display: flex;
         padding: 15px;
+        width: 100%;
     }
     .menu-icon {
         display: inline;
@@ -965,7 +980,7 @@ justify-content: center;
         margin-right: 15px !important;
     }
     .table-responsive-cms {
-        overflow: auto;
+        overflow: scroll;
     }
     /* .logo-details {
 padding: 15px 30px !important;
@@ -1246,7 +1261,7 @@ padding: 60px !important;
 .btn-card {
     border: none !important;
     font-size: 0.8rem;
-    padding: 8px 30px !important;
+    padding: 8px 15px !important;
 }
 
 .bg-btn-card {
@@ -1258,4 +1273,18 @@ padding: 60px !important;
     color: #676f81;
     background-color: #fbfbfb !important;
     border: 1px solid #e8eaee !important;
+}
+
+.product_card {
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.font-product {
+    font-size: 0.9rem;
 }

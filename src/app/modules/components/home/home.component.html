@@ -1,8 +1,39 @@
-<div class="main-wrapper d-flex">
+<!-- <div class="main-wrapper d-flex flex-column">
     <!-- sidebar design -->
-    <app-side-nav></app-side-nav>
+<!-- <div *ngIf="!shouldShowSidebar">
+        <app-side-nav></app-side-nav>
+    </div>
+    <div>
+        <app-header></app-header>
+    </div> -
+    <ng-container *ngIf="shouldShowSidebar; else elseBlock">
+        <div>
+            <app-header></app-header>
+        </div>
+    </ng-container>
+    <ng-template #elseBlock>
+        <div>
+            <app-side-nav></app-side-nav>
+        </div>
+    </ng-template>
     <div class="flex-grow-1 overflow-hidden ">
         <router-outlet></router-outlet>
     </div>
+</div> -->
+
+<div class="main-wrapper d-flex flex-column">
+    <ng-container *ngIf="!shouldShowSidebar; else loggedOutBlock">
+        <app-side-nav></app-side-nav>
+        <div class="flex-grow-1 overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-container>
+    <ng-template #loggedOutBlock>
+        <app-header></app-header>
+        <div class="flex-grow-1 overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-template>
+
 
 </div>

@@ -5,14 +5,16 @@ import { RagiatrationInventoryComponent } from './component/ragiatration-invento
 import { ReactiveFormsModule } from '@angular/forms';
 import { SideNavComponent } from './component/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
+import { HeaderComponent } from './component/header/header.component';
 
 @NgModule({
   declarations: [
     LoginInventoryComponent,
     RagiatrationInventoryComponent,
     SideNavComponent,
+    HeaderComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule, RouterModule],
-  exports: [SideNavComponent],
+  exports: [SideNavComponent, HeaderComponent],
 })
 export class CoreModule {}

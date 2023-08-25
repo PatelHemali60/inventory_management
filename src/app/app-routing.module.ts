@@ -7,13 +7,11 @@ import { HomeComponent } from './modules/components/home/home.component';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'login',
+    redirectTo: 'product',
     pathMatch: 'full',
   },
-  { path: 'login', component: LoginInventoryComponent },
-  { path: 'ragistration', component: RagiatrationInventoryComponent },
   {
-    path: 'home',
+    path: '',
     component: HomeComponent,
     children: [
       {
@@ -75,6 +73,8 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'login', component: LoginInventoryComponent },
+  { path: 'ragistration', component: RagiatrationInventoryComponent },
 ];
 
 @NgModule({

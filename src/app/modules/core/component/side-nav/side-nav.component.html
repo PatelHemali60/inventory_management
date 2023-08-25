@@ -1,15 +1,14 @@
 <div class="sidebar">
     <div class="menu-icon" (click)="openSidebar()">
-        <div class="logoDetail ps-3  ">
+        <div class="logoDetail d-flex justify-content-between  ">
             <i class="fa fa-bars ms-2 me-5 fs-5"></i>
-            <span><i class="fa fa-university  commonColor ms-5 mb-1 inventIcon fs-5" aria-hidden="true"></i></span>
-            <span class="text-dark fw-bold fontCommon ms-2 ">INVENT CHAIN</span>
-            <span> <i class="fa fa-ellipsis-v cp   commonColor  ms-sm-5  ps-sm-3  ps-md-5 ps-lg-5  ms-5 mt-1 inventIcon fs-5" aria-hidden="true"></i></span>
+            <div class="d-flex"><i class="fa fa-university  commonColor ms-5 mb-1 inventIcon fs-5" aria-hidden="true"></i> <span class="text-dark fw-bold fontCommon ms-2 ">INVENT CHAIN</span></div>
+            <div> <i class="fa fa-ellipsis-v cp   commonColor  ms-sm-5  ps-sm-3  ps-md-5 ps-lg-5  ms-5 mt-1 inventIcon fs-5" aria-hidden="true"></i></div>
         </div>
     </div>
     <!-- full sidebar design -->
     <aside id="sidebar" [ngClass]="{'sidebar-responsive': sidebarOpen}">
-        <div class="sidebar-title d-flex align-items-center  border-bottom pb-3">
+        <div class="sidebar-title d-flex align-items-center border-bottom pb-3">
             <div class="logo-details d-flex pt-5 pb-4">
                 <span><i class="fa fa-university fs-3" aria-hidden="true"></i></span>
                 <span class="text-dark fw-bold ms-2">INVENT CHAIN</span>
