@@ -703,12 +703,11 @@ width: 100% !important; */
     display: none;
 }
 
-.main-wrapper {
-    display: flex;
-    flex-wrap: inherit;
-    overflow: hidden;
-}
-
+// .main-wrapper {
+//     display: flex;
+//     flex-wrap: inherit;
+//     overflow: hidden;
+// }
 .customPadding {
     padding: 10px !important;
 }
@@ -964,6 +963,7 @@ justify-content: center;
         display: block !important;
     }
     .main-wrapper {
+        // display: flex;
         display: inline-block !important;
     }
     .sidebar-responsive {
@@ -989,6 +989,101 @@ padding: 15px 30px !important;
 .logo-details i.fa.fa-bars {
 margin-right: 15px !important;
 } */
+}
+
+@media screen and (max-width:992px) {
+    #sidebar {
+        display: none;
+    }
+    .inventIcon {
+        font-size: 30px;
+        line-height: 30px;
+    }
+    .logoDetail {
+        display: flex;
+        padding: 15px;
+        width: 100%;
+    }
+    .menu-icon {
+        display: inline;
+    }
+    .sidebar-title>span {
+        display: inline;
+    }
+    .logo-details {
+        padding: 15px 30px !important;
+    }
+    .close-icon {
+        display: block !important;
+    }
+    .main-wrapper {
+        // display: flex;
+        display: inline-block !important;
+    }
+    .sidebar-responsive {
+        display: inline !important;
+        position: absolute;
+        z-index: 12 !important;
+        left: 0;
+        top: 0;
+    }
+    .logo-details {
+        padding: 15px 30px !important;
+    }
+    .logo-details i.fa.fa-bars {
+        margin-right: 15px !important;
+    }
+    .table-responsive-cms {
+        overflow: scroll;
+    }
+}
+
+@media screen and (max-width:1200px) {
+    #sidebar {
+        display: none;
+        // flex-direction: column;
+    }
+    .inventIcon {
+        font-size: 30px;
+        line-height: 30px;
+    }
+    .logoDetail {
+        display: flex;
+        padding: 15px;
+        width: 100%;
+    }
+    .menu-icon {
+        display: inline;
+    }
+    .sidebar-title>span {
+        display: inline;
+    }
+    .logo-details {
+        padding: 15px 30px !important;
+    }
+    .close-icon {
+        display: block !important;
+    }
+    .main-wrapper {
+        // display: flex;
+        display: inline-block !important;
+    }
+    .sidebar-responsive {
+        display: inline !important;
+        position: absolute;
+        z-index: 12 !important;
+        left: 0;
+        top: 0;
+    }
+    .logo-details {
+        padding: 15px 30px !important;
+    }
+    .logo-details i.fa.fa-bars {
+        margin-right: 15px !important;
+    }
+    .table-responsive-cms {
+        overflow: scroll;
+    }
 }
 
 

@@ -16,6 +16,7 @@ export class InventoryComponent {
   public categoryname: any;
   public brandName: any;
   public searchText: string = '';
+  public ImageUrl: any;
 
   public data: any[] = this.Products;
   public excludeColumns: string[] = ['id'];
@@ -50,6 +51,9 @@ export class InventoryComponent {
     this.productService.getallProduct().subscribe({
       next: (data: any) => {
         this.Products = data.Data;
+        console.log(this.Products, 'products');
+        // this.ImageUrl = data.Data.ImageUrl;
+        console.log(this.ImageUrl, 'image');
       },
       error: (e) => console.error(e),
     });

@@ -1,7 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Overlay, OverlayRef } from '@angular/cdk/overlay';
-import { ComponentPortal } from '@angular/cdk/portal';
+
 import { ViewProductdetailComponent } from '../view-productdetail/view-productdetail.component';
 
 @Component({
@@ -15,9 +14,11 @@ export class ProductCardComponent implements OnInit {
 
   public ID: any;
   public LoggedinUser: any;
+  public quantity: number = 1;
+  public currentRoutePath: any;
 
-  constructor(private router: Router, private overlay: Overlay) {
-    this.ID = localStorage.getItem('roleID');
+  constructor(private router: Router) {
+    // this.ID = localStorage.getItem('roleID');
   }
   ngOnInit(): void {}
 
@@ -32,22 +33,47 @@ export class ProductCardComponent implements OnInit {
     }
   }
 
-  public onProductCardClick(ele: any) {
-    const overlayRef = this.overlay.create({
-      positionStrategy: this.overlay
-        .position()
-        .global()
-        .top(`10px`)
-        .centerHorizontally(),
+  // public onProductCardClick(ele: any) {
+  //   console.log(ele.target.value, 'target value');
 
-      hasBackdrop: true,
-    });
+  //   const overlayRef = this.overlay.create({
+  //     positionStrategy: this.overlay
+  //       .position()
+  //       .global()
+  //       .top(`10px`)
+  //       .centerHorizontally(),
 
-    const Formcomponent = new ComponentPortal(ViewProductdetailComponent);
-    const componentRef = overlayRef.attach(Formcomponent);
+  //     hasBackdrop: true,
+  //   });
 
-    overlayRef.backdropClick().subscribe(() => {
-      overlayRef.dispose();
-    });
-  }
+  //   const Formcomponent = new ComponentPortal(ViewProductdetailComponent);
+  //   const componentRef = overlayRef.attach(Formcomponent);
+
+  //   this.currentRoutePath = this.router.routerState.snapshot.url;
+  //   console.log(this.currentRoutePath, 'routeeee');
+
+  //   // overlayRef.backdropClick().subscribe(() => {
+  //   //   overlayRef.dispose();
+  //   // });
+
+  //   let RoleID = localStorage.getItem('roleID');
+
+  //   if (RoleID !== null) {
+  //     const detachTimeout = 3000; // Detach after 5 seconds (adjust as needed)
+  //     setTimeout(() => {
+  //       overlayRef.detach();
+  //       overlayRef.dispose();
+  //     }, detachTimeout);
+  //   } else {
+  //     setTimeout(() => {
+  //       overlayRef.detach();
+  //       overlayRef.dispose();
+  //     }, 1500);
+  //   }
+
+  //   overlayRef.backdropClick().subscribe(() => {
+  //     overlayRef.detach();
+  //     overlayRef.dispose();
+  //   });
+  // }
 }

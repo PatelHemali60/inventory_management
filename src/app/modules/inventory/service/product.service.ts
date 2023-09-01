@@ -18,7 +18,8 @@ export class ProductService {
 
   //get role
   getallProduct(): Observable<any> {
-    return this.http.get<any>(`${this.apiLink}/Product/GetAllProduct`);
+    // http://localhost:13884/api/Product/GetAllProduct/0
+    return this.http.get<any>(`${this.apiLink}/Product/GetAllProduct/0`);
   }
 
   //api for get subcategory based on category
@@ -30,13 +31,15 @@ export class ProductService {
       `${this.apiLink}/SubCategory/GetSubCategoryByCategory/${id}`
     );
   }
-
+  // http://localhost:13884/api/Product/AddNewProduct
   //ragistration api
   public AddProduct(Role: any): Promise<any> {
+    debugger;
     // var headers = new HttpHeaders({
     //   'Content-Type': 'application/json',
     //   responseType: 'json',
     // });
+    //localhost:13884/api/Product/AddNewProduct
     return this.http
       .post<any>(`${this.apiLink}/Product/AddNewProduct`, Role)
       .toPromise();

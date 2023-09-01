@@ -1,0 +1,77 @@
+<div class="formWrapper  d-flex flex-column p-1 p-sm-4 overflow-hidden">
+    <div class="d-flex justify-content-between row mt-3">
+        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon commonColor">Place Order</span></span>
+    </div>
+    <!-- form division start -->
+    <form [formGroup]="orderForm" novalidate class="  bg-white mt-4 overflow-auto mx-auto">
+        <div class="p-5 mt-2">
+            <div class="row text-center ">
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="Name"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="date" labelName="OrderDate"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="UserName"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="ProductName"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="Quantity"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="Price"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="TotalAmount"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="ShipperId"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="OrderDetailId"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="DeliverToName"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="DeliverToMobile"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="Address"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="City"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="State"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="number" labelName="PinCode"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="AddressType"></app-input-control>
+                </div>
+                <div class="col-12  col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="PaymentMode"></app-input-control>
+                </div>
+                <div class="col-12 col-sm-6 col-md-4 mt-2">
+                    <app-input-control inputType="text" labelName="IsPaidAmount"></app-input-control>
+                </div>
+            </div>
+        </div>
+        <!-- button design -->
+        <div class="row mt-2 mb-4 ">
+            <div class="col-12 ">
+                <div class="d-flex justify-content-center ">
+                    <button type="submit" class=" btnSubmit rounded " (click)="onSubmit()">
+              <span class="fontCommon text-white ">Place Order</span></button>
+                    <button type="submit" class=" btnCancle ms-4 rounded" (click)="onCancel()">
+                    <span class="fontCommon " >Cancle</span></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

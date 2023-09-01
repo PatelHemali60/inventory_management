@@ -1,17 +1,13 @@
-<!-- product detail-page -->
 <div class="view-detail-wrapper">
     <div class="card details-card p-0">
         <div class="row flex-column ">
             <div class="col-md-12 col-sm-12 p-4">
-                <img class="details-img" src="../../../assets/assets/images/images/iphone-13-promax.jpg" alt="">
+                <img class="details-img" src="../../../../../assets/assets/images/images/man-thisrt.jpg" alt="">
             </div>
-            <div class="col-md-12 col-sm-12 description-container p-4">
+            <div class="col-md-12 col-sm-12 description-container ps-4 pb-2">
                 <div class="main-description">
                     <span class="product-category fontCommon mb-0">Graphite</span>
                     <p class="fs-4 fw-bold">iPhone 13 Pro-max -256GB</p>
-                    <hr>
-                    <p class="fs-5 ">$1199.00</p>
-                    <div style="clear:both"></div>
                     <hr>
                     <p class="product-title mt-4 mb-1">About this product</p>
                     <p class="product-description text-break mb-4">
@@ -21,15 +17,54 @@
 
                     <div class="d-flex justify-content-around mt-3">
                         <button type="submit" (click)="BuyNow()" class="btn btn-card bg-btn-card  p-xl-0
-                     btn-block "><i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>
-                    Buy Now</button>
+                   btn-block "><i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>
+                  Buy Now</button>
                         <button type="submit" class="btn-card btn-Cart p-0 ms-2 rounded">
-                        <span class="btn-font ">Add to cart</span></button>
+                      <span class="btn-font ">Add to cart</span></button>
                     </div>
                 </div>
-
             </div>
+            <div class="col-12 d-flex ps-4 pt-3">
+                <p class="fw-bold">Product Price :</p>
+                <p class="ms-2 fw-bold ">$1199.00</p>
+            </div>
+            <!-- <div class="col-md-12 col-sm-12 ps-4 pb-4 ">
+              <div class="pb-3">
+                  <span class="fw-bold">Product Qunatity:</span>
+              </div>
+              <div class="d-flex justify-content-evenly">
+                  <div class="form-check-inline-sm">
+                      <button class="btn btn-sm btn-primary " (click)="plus()"><i class="fa fa-plus"></i></button>
+                  </div>
+                  <div class="form-check-inline-sm">
+                      <input type="text" class="form-control" [(ngModel)]="inputnumber">
+                  </div>
+                  <div class="form-check-inline-sm">
+                      <button class="btn btn-sm btn-primary " (click)="minus()"><i class="fa fa-minus"></i></button>
+                  </div>
+              </div>
+          </div> -->
+
+            <!-- <div class="col-12">
+                <div class="input-group number-spinner">
+                    <span class="input-group-btn">
+              <button class="btn btn-default" data-dir="dwn" (click)="decrease_quantity()">
+                <span class="glyphicon glyphicon-minus">-</span>
+                    </button>
+                    </span>
+                    <!-- <input type="text" class="form-control text-center" [(ngModel)]="package.quantity" (change)="countPrice(package)">
+            <span class="input-group-btn">
+              <button class="btn btn-default" data-dir="up" (click)="increase_quantity()" >
+                <span class="glyphicon glyphicon-plus">+</span>
+            </button>
+            </span>
         </div>
-        <!-- End row -->
+    </div> -->
+
+
+            <div class="d-flex col-12 ps-4 pt-1">
+                <p class="fw-bold">Grand Total: {{ grandTotal | currency }}</p>
+            </div>
+            <!-- End row -->
+        </div>
     </div>
-</div>

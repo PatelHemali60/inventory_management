@@ -87,7 +87,6 @@ export class AddBrandComponent {
   //on Form submit
   //on Form submit
   public onSubmit(): void {
-    debugger;
     this.submitted = true;
     if (this.isAddMode && this.brandForm.valid) {
       this.addRole();

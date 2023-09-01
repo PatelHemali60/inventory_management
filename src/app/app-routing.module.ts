@@ -75,6 +75,7 @@ const routes: Routes = [
   },
   { path: 'login', component: LoginInventoryComponent },
   { path: 'ragistration', component: RagiatrationInventoryComponent },
+  { path: 'order', loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) },
 ];
 
 @NgModule({

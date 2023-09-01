@@ -39,6 +39,7 @@ export class AddProductComponent {
   public productData!: any;
   public EditProduct!: any;
   public submitted = false;
+  public selectedFile!: File;
 
   constructor(
     private fb: FormBuilder,
@@ -104,6 +105,9 @@ export class AddProductComponent {
           Price: editData.Price,
           Status: editData.Status,
           ImageUrl: this.base64Image,
+          StripePaymentLink: 'https://buy.stripe.com/test_eVa6sjeYO27b3u07sQ',
+          StripeProductId: 'prod_OX6LjoDFfOUINV',
+          StripePriceProductId: 'price_1Nk29GSHl1utr3vFPoejv0l0',
         };
 
         this.Product_Form.patchValue(this.EditProduct);
@@ -139,8 +143,38 @@ export class AddProductComponent {
       Status: [null, Validators.required],
       ImageUrl: [null, Validators.required],
       IsActive: [false],
+      StripePaymentLink: [],
+      StripeProductId: [],
+      StripePriceProductId: [],
+      file: [null],
     });
   }
+
+  // {
+  //   "Id": 11,
+  //   "Name": "Men Striped Round Neck Cotton Blend Blue, Black T-Shirt",
+  //   "CategoryId": 3,
+  //   "CategoryName": "Fashion",
+  //   "SubCategoryId": 6,
+  //   "SubCategoryName": "Mens Top Wear",
+  //   "BrandId": 4,
+  //   "BrandName": "Zara",
+  //   "Unit": 10,
+  //   "SKU": 20,
+  //   "MinimumQty": 30,
+  //   "Quantity": 30,
+  //   "Description": "Bank OfferFlat ₹500 off on HDFC Bank.",
+  //   "Tax": "string",
+  //   "DiscountTypeId": 1,
+  //   "DiscountTypeName": "Discount 100%",
+  //   "Price": 500,
+  //   "Status": "string",
+  //   "ImageUrl": "https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/r/v/k/m-ausk0165-ausk-original-imaghu9fbhcgf2za.jpeg?q=70",
+  //   "IsActive": true,
+  //   "StripePaymentLink": "https://buy.stripe.com/test_eVa6sjeYO27b3u07sQ",
+  //   "StripeProductId": "prod_OX6LjoDFfOUINV",
+  //   "StripePriceProductId": "price_1Nk29GSHl1utr3vFPoejv0l0"
+  // }
 
   //category list
   private getcategoryList(): void {
@@ -186,46 +220,76 @@ export class AddProductComponent {
   }
 
   //for image
-  public handleInputChange(e: any) {
-    var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-    var pattern = /image-*/;
-    var reader = new FileReader();
-    if (!file.type.match(pattern)) {
-      alert('invalid format');
-      return;
-    }
-    reader.onload = this.handleReaderLoaded.bind(this);
-    reader.readAsDataURL(file);
-  }
-  handleReaderLoaded(e: any) {
-    let reader = e.target;
-    this.base64Image = reader.result;
+  // public handleInputChange(e: any) {
+  //   var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
+  //   var pattern = /image-*/;
+  //   var reader = new FileReader();
+  //   if (!file.type.match(pattern)) {
+  //     alert('invalid format');
+  //     return;
+  //   }
+  //   reader.onload = this.handleReaderLoaded.bind(this);
+  //   reader.readAsDataURL(file);
+  // }
+  // handleReaderLoaded(e: any) {
+  //   let reader = e.target;
+  //   this.base64Image = reader.result;
+  // }
+
+  //convert image for file upload
+  public onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0] as File;
   }
 
   //Post data to db
   public createProduct(): void {
-    this.productData = {
-      Name: this.Product_Form.value.Name,
-      CategoryId: parseInt(this.Product_Form.value.CategoryId),
-      SubCategoryId: parseInt(this.Product_Form.value.SubCategoryId),
-      BrandId: parseInt(this.Product_Form.value.BrandId),
-      Unit: parseInt(this.Product_Form.value.Unit),
-      SKU: parseInt(this.Product_Form.value.SKU),
-      MinimumQty: parseInt(this.Product_Form.value.MinimumQty),
-      Quantity: parseInt(this.Product_Form.value.Quantity),
-      Description: this.Product_Form.value.Description,
-      Tax: this.Product_Form.value.Tax,
-      DiscountTypeId: parseInt(this.Product_Form.value.DiscountTypeId),
-      Price: this.Product_Form.value.Price,
-      Status: this.Product_Form.value.Status,
-      ImageUrl: this.base64Image,
-    };
+    const formData = new FormData();
 
+    // Append form fields to the FormData
+    formData.append('Name', this.Product_Form.value.Name.toString());
+    formData.append('CategoryId', this.Product_Form.value.CategoryId);
+    formData.append('SubCategoryId', this.Product_Form.value.SubCategoryId);
+    formData.append('BrandId', this.Product_Form.value.BrandId);
+    formData.append('Unit', this.Product_Form.value.Unit);
+    formData.append('SKU', this.Product_Form.value.SKU);
+    formData.append('MinimumQty', this.Product_Form.value.MinimumQty);
+    formData.append('Quantity', this.Product_Form.value.Quantity);
+    formData.append(
+      'Description',
+      this.Product_Form.value.Description.toString()
+    );
+    formData.append('Tax', this.Product_Form.value.Tax.toString());
+    formData.append('DiscountTypeId', this.Product_Form.value.DiscountTypeId);
+    formData.append('Price', this.Product_Form.value.Price);
+    formData.append('Status', this.Product_Form.value.Status.toString());
+    formData.append('file', this.selectedFile.toString());
+    // Append the file if it exists
+
+    // this.productData = {
+    //   Name: this.Product_Form.value.Name,
+    //   CategoryId: parseInt(this.Product_Form.value.CategoryId),
+    //   SubCategoryId: parseInt(this.Product_Form.value.SubCategoryId),
+    //   BrandId: parseInt(this.Product_Form.value.BrandId),
+    //   Unit: parseInt(this.Product_Form.value.Unit),
+    //   SKU: parseInt(this.Product_Form.value.SKU),
+    //   MinimumQty: parseInt(this.Product_Form.value.MinimumQty),
+    //   Quantity: parseInt(this.Product_Form.value.Quantity),
+    //   Description: this.Product_Form.value.Description,
+    //   Tax: this.Product_Form.value.Tax,
+    //   DiscountTypeId: parseInt(this.Product_Form.value.DiscountTypeId),
+    //   Price: this.Product_Form.value.Price,
+    //   Status: this.Product_Form.value.Status,
+    //   ImageUrl: null,
+    //   file: this.selectedFile,
+    // };
+
+    // formData.append('productData', JSON.stringify(this.productData));
     this.productService
-      .AddProduct(this.productData)
+      .AddProduct(formData)
       .then((res: any) => {
+        console.log(res, 'reponse data');
         this.toastr.success('Add Product sucessfully !!!');
-        this.router.navigate(['home/Inventory']);
+        this.router.navigate(['/Inventory']);
       })
       .catch((error: any) => {});
   }
@@ -244,7 +308,7 @@ export class AddProductComponent {
     this.productService.updateProduct(this.Product_Form.value).subscribe({
       next: () => {
         this.toastr.success('Upadte Product sucessfully !!!');
-        this.router.navigate(['home/Inventory']);
+        this.router.navigate(['/Inventory']);
       },
       error: (e: any) => console.log(e),
     });
@@ -258,6 +322,7 @@ export class AddProductComponent {
     this.location.back();
   }
 
+  //tax object
   public Tax: any = [
     { value: 'customs-tax', label: 'Customs Tax' },
     { value: 'entralexcise-duty', label: 'Excise Duty' },

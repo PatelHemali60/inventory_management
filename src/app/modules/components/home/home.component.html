@@ -21,19 +21,15 @@
     </div>
 </div> -->
 
-<div class="main-wrapper d-flex flex-column">
-    <ng-container *ngIf="!shouldShowSidebar; else loggedOutBlock">
-        <app-side-nav></app-side-nav>
-        <div class="flex-grow-1 overflow-hidden">
-            <router-outlet></router-outlet>
-        </div>
+<div class="main-section ">
+    <ng-container *ngIf="shouldShowSidebar; else loggedOutBlock">
+        <app-header></app-header>
     </ng-container>
     <ng-template #loggedOutBlock>
-        <app-header></app-header>
-        <div class="flex-grow-1 overflow-hidden">
-            <router-outlet></router-outlet>
-        </div>
+        <app-side-nav></app-side-nav>
     </ng-template>
-
+    <div class="overflow-auto">
+        <router-outlet></router-outlet>
+    </div>
 
 </div>

@@ -118,7 +118,7 @@
                            </option>
                        </select>
                         <div *ngIf="submitted && f[ 'DiscountTypeId'].errors " class="invalid-feedback ml-2 ms-1 ">
-                            <div *ngIf="f[ 'DiscountTypeId'].errors[ 'required'] ">Discount is required</div>
+                            <div *ngIf="f['DiscountTypeId'].errors[ 'required'] ">Discount is required</div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
@@ -131,8 +131,8 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="Status " class="d-flex justify-content-start mb-2 fw-bold ">Status</label>
                         <select class="form-control inputBorder text-muted " aria-label="Default select example " id="Status " formControlName="Status" [ngClass]="{ 'is-invalid': submitted && f[ 'Status'].errors } ">
-                            <option value=" " disabled selected>Select a tax</option>
-                            <option value="yes ">Yes</option>
+                            <!-- <option value=" " disabled selected>Select a tax</option> -->
+                            <option value="yes">Yes</option>
                             <option value="no ">No</option>
                           </select>
                         <div *ngIf="submitted && f['Status'].errors " class="invalid-feedback ml-2 ms-1 ">
@@ -145,11 +145,12 @@
                         <label for="image " class="d-flex justify-content-start mb-2 fw-bold ">Add Product Image</label>
                         <div class="art-deco inputBorder rounded ">
                             <!-- drag and drop zone -->
-                            <div class="d-flex flex-column align-items-center justify-content-center ">
+                            <div class="d-flex flex-column align-items-center justify-content-center p-5 border ">
+                                <input type="file" class="form-control fontCommon fs-6 commonColor " (change)="onFileSelected($event)" />
                                 <!-- <input type="file " name=" " id=" " (change)="readFile($event.target) " class="m-2 " multiple> -->
                                 <!-- <span class="fontCommon fs-5 commonColor "><i class="fa fa-cloud-upload " aria-hidden="true "></i></span>
                         <span class="fontCommon text-muted ">Drag or Drop File to upload</span> -->
-                                <input type="file" class="form-control fontCommon fs-6 commonColor " accept="image/*" (change)="handleInputChange($event) " />
+                                <!-- <input type="file" class="form-control fontCommon fs-6 commonColor " accept="image/*" (change)="handleInputChange($event) " /> -->
                                 <!-- <img src="base64Image " alt="defalut "> -->
                                 <!-- <button type="button " class="btn btn-dark mt-3 " (click)="uploadFile() ">Upload</button> -->
                                 <!-- <p *ngIf="file ">{{file.name}} File is Ready to Upload</p> -->
