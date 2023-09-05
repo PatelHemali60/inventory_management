@@ -89,7 +89,36 @@ export class AddProductComponent {
           });
         }
 
-        //edit patched data in form
+        // const editFormData = new FormData();
+        // // Append the form fields to the FormData
+        // editFormData.append('Name', this.Product_Form.value.Name.toString());
+        // editFormData.append('CategoryId', this.Product_Form.value.CategoryId);
+        // editFormData.append(
+        //   'SubCategoryId',
+        //   this.Product_Form.value.SubCategoryId
+        // );
+        // editFormData.append('BrandId', this.Product_Form.value.BrandId);
+        // editFormData.append('Unit', this.Product_Form.value.Unit);
+        // editFormData.append('SKU', this.Product_Form.value.SKU);
+        // editFormData.append('MinimumQty', this.Product_Form.value.MinimumQty);
+        // editFormData.append('Quantity', this.Product_Form.value.Quantity);
+        // editFormData.append(
+        //   'Description',
+        //   this.Product_Form.value.Description.toString()
+        // );
+        // editFormData.append('Tax', this.Product_Form.value.Tax.toString());
+        // editFormData.append(
+        //   'DiscountTypeId',
+        //   this.Product_Form.value.DiscountTypeId
+        // );
+        // editFormData.append('Price', this.Product_Form.value.Price);
+        // editFormData.append(
+        //   'Status',
+        //   this.Product_Form.value.Status.toString()
+        // );
+        // editFormData.append('file', this.selectedFile);
+
+        // edit patched data in form
         this.EditProduct = {
           Id: editData.Id,
           Name: editData.Name,
@@ -219,32 +248,14 @@ export class AddProductComponent {
     });
   }
 
-  //for image
-  // public handleInputChange(e: any) {
-  //   var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-  //   var pattern = /image-*/;
-  //   var reader = new FileReader();
-  //   if (!file.type.match(pattern)) {
-  //     alert('invalid format');
-  //     return;
-  //   }
-  //   reader.onload = this.handleReaderLoaded.bind(this);
-  //   reader.readAsDataURL(file);
-  // }
-  // handleReaderLoaded(e: any) {
-  //   let reader = e.target;
-  //   this.base64Image = reader.result;
-  // }
-
   //convert image for file upload
   public onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0] as File;
+    this.selectedFile = event.target.files[0];
   }
 
   //Post data to db
   public createProduct(): void {
     const formData = new FormData();
-
     // Append form fields to the FormData
     formData.append('Name', this.Product_Form.value.Name.toString());
     formData.append('CategoryId', this.Product_Form.value.CategoryId);
@@ -262,28 +273,7 @@ export class AddProductComponent {
     formData.append('DiscountTypeId', this.Product_Form.value.DiscountTypeId);
     formData.append('Price', this.Product_Form.value.Price);
     formData.append('Status', this.Product_Form.value.Status.toString());
-    formData.append('file', this.selectedFile.toString());
-    // Append the file if it exists
-
-    // this.productData = {
-    //   Name: this.Product_Form.value.Name,
-    //   CategoryId: parseInt(this.Product_Form.value.CategoryId),
-    //   SubCategoryId: parseInt(this.Product_Form.value.SubCategoryId),
-    //   BrandId: parseInt(this.Product_Form.value.BrandId),
-    //   Unit: parseInt(this.Product_Form.value.Unit),
-    //   SKU: parseInt(this.Product_Form.value.SKU),
-    //   MinimumQty: parseInt(this.Product_Form.value.MinimumQty),
-    //   Quantity: parseInt(this.Product_Form.value.Quantity),
-    //   Description: this.Product_Form.value.Description,
-    //   Tax: this.Product_Form.value.Tax,
-    //   DiscountTypeId: parseInt(this.Product_Form.value.DiscountTypeId),
-    //   Price: this.Product_Form.value.Price,
-    //   Status: this.Product_Form.value.Status,
-    //   ImageUrl: null,
-    //   file: this.selectedFile,
-    // };
-
-    // formData.append('productData', JSON.stringify(this.productData));
+    formData.append('file', this.selectedFile);
     this.productService
       .AddProduct(formData)
       .then((res: any) => {
@@ -293,7 +283,41 @@ export class AddProductComponent {
       })
       .catch((error: any) => {});
   }
-  //on Form submit
+
+  //edit product
+  //update product
+  updateProduct() {
+    const EditformData = new FormData();
+    EditformData.append('Id', this.Product_Form.value.Id);
+    EditformData.append('Name', this.Product_Form.value.Name.toString());
+    EditformData.append('CategoryId', this.Product_Form.value.CategoryId);
+    EditformData.append('SubCategoryId', this.Product_Form.value.SubCategoryId);
+    EditformData.append('BrandId', this.Product_Form.value.BrandId);
+    EditformData.append('Unit', this.Product_Form.value.Unit);
+    EditformData.append('SKU', this.Product_Form.value.SKU);
+    EditformData.append('MinimumQty', this.Product_Form.value.MinimumQty);
+    EditformData.append('Quantity', this.Product_Form.value.Quantity);
+    EditformData.append(
+      'Description',
+      this.Product_Form.value.Description.toString()
+    );
+    EditformData.append('Tax', this.Product_Form.value.Tax.toString());
+    EditformData.append(
+      'DiscountTypeId',
+      this.Product_Form.value.DiscountTypeId
+    );
+    EditformData.append('Price', this.Product_Form.value.Price);
+    EditformData.append('Status', this.Product_Form.value.Status.toString());
+    EditformData.append('file', this.selectedFile);
+    this.productService
+      .updateProduct(EditformData)
+      .then((res: any) => {
+        this.toastr.success('Edit Product sucessfully !!!');
+        this.router.navigate(['/Inventory']);
+      })
+      .catch((error: any) => {});
+  }
+
   //on Form submit
   public onSubmit(): void {
     this.submitted = true;
@@ -302,16 +326,6 @@ export class AddProductComponent {
     } else {
       this.updateProduct();
     }
-  }
-  //Put data to db
-  public updateProduct(): void {
-    this.productService.updateProduct(this.Product_Form.value).subscribe({
-      next: () => {
-        this.toastr.success('Upadte Product sucessfully !!!');
-        this.router.navigate(['/Inventory']);
-      },
-      error: (e: any) => console.log(e),
-    });
   }
 
   //Rest to form controls

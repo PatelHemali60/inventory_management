@@ -22,13 +22,13 @@
 </div> -->
 
 <div class="main-section ">
-    <ng-container *ngIf="shouldShowSidebar; else loggedOutBlock">
+    <ng-container *ngIf="shouldShowSidebar; else loggedOutBlock" class="flex-column">
         <app-header></app-header>
     </ng-container>
     <ng-template #loggedOutBlock>
         <app-side-nav></app-side-nav>
     </ng-template>
-    <div class="overflow-auto">
+    <div class="flex-grow-1 overflow-auto">
         <router-outlet></router-outlet>
     </div>
 

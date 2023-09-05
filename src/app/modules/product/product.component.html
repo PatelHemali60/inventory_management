@@ -1,11 +1,15 @@
-<div class="d-flex justify-content-center bgCommon Product-wrapper">
+<div class=" justify-content-center bgCommon Product-wrapper">
     <main class="grid ">
         <div *ngFor="let item of Products">
+            <!-- <ng-image-slider [images]="imageObject" #nav> -->
             <app-product-card [Product]="item" (click)="onProductCardClick(item)">
                 <ng-container class="card_images">
                     <img src="../../../assets/assets/images/images/man-thisrt.jpg" alt="" class="product_image">
                 </ng-container>
             </app-product-card>
+            <!-- </ng-image-slider> -->
+            <!-- <button (click)="prevImageClick()">Prev</button>
+            <button (click)="nextImageClick()">Next</button> -->
         </div>
         <!-- <div>
             <img src="../../../assets/assets/images/images/mobile-1.jpg" alt="tshirt photo" class="product_image">
@@ -71,5 +75,28 @@
                 <img src="../../../assets/assets/images/images/mobile-1.jpg " alt=" " class="product_image ">
             </ng-container>
         </app-product-card> -->
+
+
     </main>
+
+    <!-- <swiper [config]="config">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">Slide 1</div>
+            <div class="swiper-slide">Slide 2</div>
+            <div class="swiper-slide">Slide 3</div>
+            <div class="swiper-slide">Slide 4</div>
+            <div class="swiper-slide">Slide 5</div>
+            <div class="swiper-slide">Slide 6</div>
+            <div class="swiper-slide">Slide 7</div>
+            <div class="swiper-slide">Slide 8</div>
+            <div class="swiper-slide">Slide 9</div>
+            <div class="swiper-slide">Slide 10</div>
+        </div>
+        <!-- Add Pagination
+        <div class="swiper-pagination"></div>
+        <!-- Add Arrows
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </swiper> -->
+
 </div>

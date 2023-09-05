@@ -13,7 +13,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
 import { HomeComponent } from './modules/components/home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+// import { NgxUsefulSwiperModule } from 'ngx-useful-swiper';
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [AppComponent, HomeComponent],
   imports: [
@@ -28,6 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
       positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
+    // NgxUsefulSwiperModule,
+    NgImageSliderModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   providers: [],

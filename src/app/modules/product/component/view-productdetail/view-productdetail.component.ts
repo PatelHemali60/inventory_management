@@ -1,17 +1,29 @@
 import { Overlay } from '@angular/cdk/overlay';
-import { Component, Input } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  Injector,
+  Input,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { Router } from '@angular/router';
+import { ITEM_DATA } from '../../product.component';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-view-productdetail',
   templateUrl: './view-productdetail.component.html',
   styleUrls: ['./view-productdetail.component.scss'],
 })
-export class ViewProductdetailComponent {
+export class ViewProductdetailComponent implements OnInit {
+  // @ViewChild('imgElement') imgElement!: ElementRef;
+
+  // @Input() item: any;
   @Input() product: any;
-
   public inputnumber: number = 0;
-
+  public ProductImage: any;
   public ID: any;
   public LoggedinUser: any;
   public Product: any;
@@ -20,6 +32,8 @@ export class ViewProductdetailComponent {
   inputNumber = 1; // Initial product quantity
   grandTotal = this.calculateGrandTotal();
   Price!: number;
+  dataUrl!: string;
+
   packagesArray = [
     {
       tickettype: 'general',
@@ -28,10 +42,24 @@ export class ViewProductdetailComponent {
       quantity: 0,
     },
   ];
-  item: any;
+  // item: any;
 
-  constructor(private router: Router, private overlay: Overlay) {}
+  constructor(
+    private router: Router,
+    private overlay: Overlay,
+    private sanitizer: DomSanitizer,
+    @Inject('item') public item: any
+  ) {
+    this.ProductImage = this.sanitizer.bypassSecurityTrustResourceUrl(
+      item.ImageUrl
+    );
+    // console.log(item.ImageUrl, 'itemmm');
+    // this.ProductImage = this.sanitizer.bypassSecurityTrustUrl(item.ImageUrl);
+    // console.log(this.ProductImage, 'image');
+    // Replace 'item.ImageUrl' with the actual local file path
+  }
 
+  ngOnInit(): void {}
   public BuyNow() {
     let RoleID = localStorage.getItem('roleID');
     if (RoleID == null) {
@@ -40,6 +68,7 @@ export class ViewProductdetailComponent {
       this.router.navigate(['/login']);
     } else {
       this.LoggedinUser = false;
+
       this.router.navigate(['/order']);
     }
   }

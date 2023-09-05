@@ -34,12 +34,6 @@ export class ProductService {
   // http://localhost:13884/api/Product/AddNewProduct
   //ragistration api
   public AddProduct(Role: any): Promise<any> {
-    debugger;
-    // var headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   responseType: 'json',
-    // });
-    //localhost:13884/api/Product/AddNewProduct
     return this.http
       .post<any>(`${this.apiLink}/Product/AddNewProduct`, Role)
       .toPromise();
@@ -57,14 +51,10 @@ export class ProductService {
   }
 
   //update product detail
-  updateProduct(data: any): Observable<any> {
-    // var headers = new HttpHeaders({
-    //   'Content-Type': 'application/json',
-    //   responseType: 'json',
-    // });
-    return this.http.post<any>(
-      `http://localhost:13884/api/Product/UpdateProduct`,
-      data
-    );
+  updateProduct(data: any): Promise<any> {
+    debugger;
+    return this.http
+      .post<any>(`${this.apiLink}/Product/UpdateProduct`, data)
+      .toPromise();
   }
 }

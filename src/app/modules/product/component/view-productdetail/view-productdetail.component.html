@@ -1,18 +1,19 @@
 <div class="view-detail-wrapper">
     <div class="card details-card p-0">
+        <!-- <div *ngFor="let product of item"> -->
         <div class="row flex-column ">
+            <!-- <div>{{ item | json }}</div> -->
             <div class="col-md-12 col-sm-12 p-4">
-                <img class="details-img" src="../../../../../assets/assets/images/images/man-thisrt.jpg" alt="">
+                <img class="details-img" [src]="ProductImage" alt="product_image">
             </div>
             <div class="col-md-12 col-sm-12 description-container ps-4 pb-2">
                 <div class="main-description">
-                    <span class="product-category fontCommon mb-0">Graphite</span>
-                    <p class="fs-4 fw-bold">iPhone 13 Pro-max -256GB</p>
+                    <span class="product-category fontCommon mb-0">{{item.CategoryName}}</span>
+                    <p class="fs-4 fw-bold">{{item.Name}}</p>
                     <hr>
                     <p class="product-title mt-4 mb-1">About this product</p>
                     <p class="product-description text-break mb-4">
-                        The iPhone 13 Pro Max is Apple's biggest iPhone, but it doens't have any advantages over the iPhone 13 Pro in terms of features, unlike in previous generations. It's heavy and unwieldy, but the big display is great for games and the increased battery
-                        capacity allows for nearly two full days of regular use.
+                        {{item.Description}}
                     </p>
 
                     <div class="d-flex justify-content-around mt-3">
@@ -26,8 +27,9 @@
             </div>
             <div class="col-12 d-flex ps-4 pt-3">
                 <p class="fw-bold">Product Price :</p>
-                <p class="ms-2 fw-bold ">$1199.00</p>
+                <p class="ms-2 fw-bold "><i class="fa fa-rupee"></i> &nbsp;{{item.Price}}</p>
             </div>
+
             <!-- <div class="col-md-12 col-sm-12 ps-4 pb-4 ">
               <div class="pb-3">
                   <span class="fw-bold">Product Qunatity:</span>
@@ -63,7 +65,7 @@
 
 
             <div class="d-flex col-12 ps-4 pt-1">
-                <p class="fw-bold">Grand Total: {{ grandTotal | currency }}</p>
+                <p class="fw-bold">Grand Total: <i class="fa fa-rupee"></i> &nbsp;{{ item.Price }}</p>
             </div>
             <!-- End row -->
         </div>

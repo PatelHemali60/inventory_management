@@ -7,14 +7,20 @@ import { ProductCardComponent } from './component/product-card/product-card.comp
 import { ViewProductdetailComponent } from './component/view-productdetail/view-productdetail.component';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { FormsModule } from '@angular/forms';
-
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [
     ProductComponent,
     ProductCardComponent,
     ViewProductdetailComponent,
   ],
-  imports: [CommonModule, ProductRoutingModule, OverlayModule, FormsModule],
+  imports: [
+    CommonModule,
+    ProductRoutingModule,
+    OverlayModule,
+    FormsModule,
+    NgImageSliderModule,
+  ],
   exports: [ProductComponent],
 })
 export class ProductModule {}
