@@ -1,0 +1,100 @@
+/* Label */
+
+.ac-container {
+    border: 1px solid #ccc;
+    border-top: none;
+}
+
+.ac-container .ac-label {
+    font-size: 1rem;
+    padding: 10px;
+    font-weight: 500;
+    display: block;
+    cursor: pointer;
+    color: white;
+    background: #7b58d0;
+    border-top: 1px solid #ccc;
+}
+
+.ac-container {
+    width: 100%;
+    margin: 10px auto;
+}
+
+.ac-container .ac-label:hover {
+    background: #f3f1f6;
+    color: #7b58d0;
+    font-weight: 700;
+}
+
+.ac-container .hidden {
+    display: none;
+}
+
+
+/* Contents */
+
+.ac-container .ac-content {
+    overflow: hidden;
+    height: 0;
+    transition: 0.6s;
+    -webkit-transition: all .5s;
+    -moz-transition: all .5s;
+    transition: all .5s;
+}
+
+// .ac-container .ac-content p {
+//     padding: 20px;
+//     font-size: 12px;
+//     color: #666;
+//     line-height: 1.5;
+// }
+.ac-container input:checked~.ac-content {
+    height: 100%;
+    border-top: 1px solid #ccc;
+}
+
+//yoder design
+// .title {
+//     background: -webkit-gradient(linear, left top, right bottom, color-stop(0, #5195A8), color-stop(100, #70EAFF));
+//     background: -moz-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
+//     background: -ms-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
+//     background: -o-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
+//     background: linear-gradient(to bottom right, #5195A8 0%, #70EAFF 100%);
+//     border-radius: 5px 5px 0 0;
+//     padding: 20px;
+//     color: #f6f6f6;
+// }
+// .table-content {
+//     display: block;
+// }
+// input[type="text"],
+// input[type="tel"],
+// input[type="email"],
+// select {
+//     width: 70%;
+//     height: 30px;
+//     padding: 5px 10px;
+//     margin-bottom: 10px;
+//     border: 1px solid #dadada;
+//     color: #888;
+// }
+// select {
+//     width: 72%;
+//     height: 45px;
+//     padding: 5px 10px;
+//     margin-bottom: 10px;
+// }
+
+/* === btn common */
+
+.btn-primary {
+    background-color: #7b58d0 !important;
+    border: none !important;
+    padding: 10px 10px !important;
+}
+
+button:hover {
+    cursor: pointer;
+    background: #428a7d;
+}

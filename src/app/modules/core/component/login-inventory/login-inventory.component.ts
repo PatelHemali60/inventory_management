@@ -65,7 +65,8 @@ export class LoginInventoryComponent implements OnInit {
     };
 
     this.authService.Login(data).subscribe((res: any) => {
-      // console.log(res.Data.RoleId, 'reponse');
+      // console.log(res.Data, 'reponse');
+      localStorage.setItem('userId', res.Data.Id);
       localStorage.setItem('roleID', res.Data.RoleId);
       let roleId = 16;
       let ID = res.Data.RoleId;

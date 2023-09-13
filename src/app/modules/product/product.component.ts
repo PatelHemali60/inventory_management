@@ -26,20 +26,6 @@ export class ProductComponent implements OnInit {
   //export data using injection token
 
   public imageObject!: any;
-  //   {
-  //     image: '../../../assets/assets/images/images/Google.png',
-  //     thumbImage: '../../../assets/assets/images/images/mobile-1.jpg',
-  //     alt: 'google',
-  //     title: 'title of image',
-  //   },
-  //   {
-  //     image: '../../../assets/assets/images/images/man-thisrt.jpg', // Support base64 image
-  //     thumbImage: '../../../assets/assets/images/images/man-thisrt.jpg', // Support base64 image
-  //     title: 'Man`s t-shirt', //Optional: You can use this key if want to show image with title
-  //     alt: 'Image alt', //Optional: You can use this key if want to show image with alt
-  //     order: 1, //Optional: if you pass this key then slider images will be arrange according @input: slideOrderType
-  //   },
-  // ];
   public Products!: any;
   public currentRoutePath: any;
   public injector: any;
@@ -68,8 +54,6 @@ export class ProductComponent implements OnInit {
   }
 
   public onProductCardClick(item: any) {
-    // console.log(item, 'target value');
-
     const overlayRef = this.overlay.create({
       positionStrategy: this.overlay
         .position()
@@ -79,8 +63,6 @@ export class ProductComponent implements OnInit {
 
       hasBackdrop: true,
     });
-
-    // const overlayRef: OverlayRef = this.overlay.create(overlayConfig);
 
     // Create a factory for the ViewProductdetailComponent
     const factory = this.componentFactoryResolver.resolveComponentFactory(
@@ -103,7 +85,6 @@ export class ProductComponent implements OnInit {
     });
 
     this.currentRoutePath = this.router.routerState.snapshot.url;
-
     // overlayRef.backdropClick().subscribe(() => {
     //   overlayRef.dispose();
     // });
@@ -111,11 +92,11 @@ export class ProductComponent implements OnInit {
     let RoleID = localStorage.getItem('roleID');
     if (RoleID !== null) {
       // RoleID is not null, open the CDK overlay here
-      const detachTimeout = 10000; // Detach after 5 seconds (adjust as needed)
+      const detachTimeout = 3000; // Detach after 5 seconds (adjust as needed)
       setTimeout(() => {
         overlayRef.detach();
         overlayRef.dispose();
-      }, detachTimeout);
+      }, 4000);
     } else {
       setTimeout(() => {
         overlayRef.detach();

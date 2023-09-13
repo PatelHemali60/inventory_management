@@ -4,10 +4,12 @@
         <div class="row flex-column ">
             <!-- <div>{{ item | json }}</div> -->
             <div class="col-md-12 col-sm-12 p-4">
-                <img class="details-img" [src]="ProductImage" alt="product_image">
+                <!-- <img class="details-img" [src]="ProductImage" alt="product_image"> -->
+                <img src="../../../../../assets/assets/images/images/man-thisrt.jpg" class="details-img" alt="">
             </div>
             <div class="col-md-12 col-sm-12 description-container ps-4 pb-2">
                 <div class="main-description">
+                    <!-- <p>{{item.productId}}</p> -->
                     <span class="product-category fontCommon mb-0">{{item.CategoryName}}</span>
                     <p class="fs-4 fw-bold">{{item.Name}}</p>
                     <hr>
@@ -15,57 +17,33 @@
                     <p class="product-description text-break mb-4">
                         {{item.Description}}
                     </p>
-
-                    <div class="d-flex justify-content-around mt-3">
+                    <!-- product Quntity -->
+                    <div class="Product-Quntity h-100 w-100">
+                        <div class="input-group w-auto justify-content-start ">
+                            <button class="button-minus border rounded-circle bgCommon-color text-white  icon-shape icon-sm mx-1 " data-field="quantity" (click)="decrement()">-</button>
+                            <input class="ms-2 me-2 border countervalue_size" [(ngModel)]="Quntity" />
+                            <button class="button-plus border rounded-circle  bgCommon-color icon-shape icon-sm lh-0" (click)="increment()">+</button>
+                            <!-- <button type="submit" value="-" class="button-minus border rounded-circle bgCommon-color text-white  icon-shape icon-sm mx-1 " data-field="quantity" (click)="decrement()">-</button>
+                            <!-- <input type="number" step="1" max="10" value="1" name="quantity" class="quantity-field border-0 text-center w-25"> <span>{{counter}}</span>
+                            <button type="submit" value="+" class="button-plus border rounded-circle  bgCommon-color icon-shape icon-sm lh-0" data-field="quantity" (click)="increment()">+</button> -->
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end  mt-3">
                         <button type="submit" (click)="BuyNow()" class="btn btn-card bg-btn-card  p-xl-0
-                   btn-block "><i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>
+                   btn-block me-4 "><i class="fa fa-shopping-cart me-2" aria-hidden="true"></i>
                   Buy Now</button>
-                        <button type="submit" class="btn-card btn-Cart p-0 ms-2 rounded">
+                        <button type="submit" class="btn-card btn-Cart p-0 ms-2 rounded" (click)="AddtoCart()">
                       <span class="btn-font ">Add to cart</span></button>
                     </div>
                 </div>
             </div>
-            <div class="col-12 d-flex ps-4 pt-3">
+            <div class="col-12 d-flex ps-4 pt-2">
                 <p class="fw-bold">Product Price :</p>
                 <p class="ms-2 fw-bold "><i class="fa fa-rupee"></i> &nbsp;{{item.Price}}</p>
             </div>
 
-            <!-- <div class="col-md-12 col-sm-12 ps-4 pb-4 ">
-              <div class="pb-3">
-                  <span class="fw-bold">Product Qunatity:</span>
-              </div>
-              <div class="d-flex justify-content-evenly">
-                  <div class="form-check-inline-sm">
-                      <button class="btn btn-sm btn-primary " (click)="plus()"><i class="fa fa-plus"></i></button>
-                  </div>
-                  <div class="form-check-inline-sm">
-                      <input type="text" class="form-control" [(ngModel)]="inputnumber">
-                  </div>
-                  <div class="form-check-inline-sm">
-                      <button class="btn btn-sm btn-primary " (click)="minus()"><i class="fa fa-minus"></i></button>
-                  </div>
-              </div>
-          </div> -->
-
-            <!-- <div class="col-12">
-                <div class="input-group number-spinner">
-                    <span class="input-group-btn">
-              <button class="btn btn-default" data-dir="dwn" (click)="decrease_quantity()">
-                <span class="glyphicon glyphicon-minus">-</span>
-                    </button>
-                    </span>
-                    <!-- <input type="text" class="form-control text-center" [(ngModel)]="package.quantity" (change)="countPrice(package)">
-            <span class="input-group-btn">
-              <button class="btn btn-default" data-dir="up" (click)="increase_quantity()" >
-                <span class="glyphicon glyphicon-plus">+</span>
-            </button>
-            </span>
-        </div>
-    </div> -->
-
-
             <div class="d-flex col-12 ps-4 pt-1">
-                <p class="fw-bold">Grand Total: <i class="fa fa-rupee"></i> &nbsp;{{ item.Price }}</p>
+                <p class="fw-bold">Grand Total: <i class="fa fa-rupee"></i> &nbsp;{{grandTotal}}</p>
             </div>
             <!-- End row -->
         </div>

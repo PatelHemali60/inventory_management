@@ -23,11 +23,13 @@ export class ProductService {
     return this.http.get<any>(`${this.apiLink}/Product/GetAllProduct/${0}`);
   }
 
-  // public productlist(){
-  // return this.
-  // }
+  //ragistration api
 
-  // createUser(user: User): Observable<User> {
-  //   return this.http.post<User>(`${this.apiLink}/users`, user);
-  // }
+  // return this.http.get<any>(`${this.apiLink}/UserCart/AddOrUpdateCart`)      .toPromise();
+
+  AddtoCart(item: any): Promise<any> {
+    return this.http
+      .post<any>(`${this.apiLink}/UserCart/AddOrUpdateCart`, item)
+      .toPromise();
+  }
 }

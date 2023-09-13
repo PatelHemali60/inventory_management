@@ -1,77 +1,259 @@
-<div class="formWrapper  d-flex flex-column p-1 p-sm-4 overflow-hidden">
-    <div class="d-flex justify-content-between row mt-3">
-        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon commonColor">Place Order</span></span>
+<div class="formWrapper  d-flex flex-column p-4 p-sm-3 p-md-3  ">
+    <div class="d-flex justify-content-between  m-2">
+        <span class="fw-bold fs-5 ">inventory > <span class="fontCommon commonColor">Place Order</span></span>
     </div>
-    <!-- form division start -->
-    <form [formGroup]="orderForm" novalidate class="  bg-white mt-4 overflow-auto mx-auto">
-        <div class="p-5 mt-2">
-            <div class="row text-center ">
-                <!-- <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="Name"></app-input-control>
-                </div> -->
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="date" labelName="OrderDate"></app-input-control>
+    <div class="row overflow-hidden bg-white  h-100 w-100 m-1">
+        <!-- form division start -->
+        <div class="col-7 mt-2 overflow-auto h-100 ">
+            <form [formGroup]="orderForm" novalidate>
+                <div class="mt-1 w-100 ">
+                    <section class="ac-container">
+                        <div>
+                            <input id="ac-1" name="accordion-1" type="radio" class="hidden" checked>
+                            <label for="ac-1" class="ac-label">User Detail</label>
+                            <div class="ac-content">
+                                <div class="p-1 row">
+                                    <div class="col-12 col-sm-9">
+                                        <label for="UserId " class="d-flex justify-content-start mb-2 fw-bold ">UserId</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="UserId" placeholder="User Name " aria-label="Name " formControlName="UserId" [ngClass]="{ 'is-invalid': submitted && f['UserId'].errors } ">
+                                        <div *ngIf="submitted && f['UserId'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['UserId'].errors[ 'required'] ">UserId is required</div>
+                                        </div>
+                                    </div>
+                                    <!-- <app-input-control inputType="text" labelName="UserName"></app-input-control> -->
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="ac-2" name="accordion-1" type="radio" class="hidden">
+                            <label for="ac-2" class="ac-label">Delivery Detail</label>
+                            <div class="ac-content">
+                                <div class="p-1 row">
+                                    <div class="col-12 col-sm-9">
+                                        <label for="DeliverToName " class="d-flex justify-content-start mb-2 fw-bold ">DeliverToName</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="DeliverToName" placeholder="DeliverToName " aria-label="Name " formControlName="DeliverToName" [ngClass]="{ 'is-invalid': submitted && f['DeliverToName'].errors } ">
+                                        <div *ngIf="submitted && f['DeliverToName'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['DeliverToName'].errors[ 'required'] ">DeliverToName is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-1 row">
+                                    <div class="col-12 col-sm-9">
+                                        <label for="DeliverToMobile " class="d-flex justify-content-start mb-2 fw-bold ">DeliverToMobile</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="DeliverToMobile" placeholder="DeliverToMobile " aria-label="Name " formControlName="DeliverToMobile" [ngClass]="{ 'is-invalid': submitted && f['DeliverToMobile'].errors } ">
+                                        <div *ngIf="submitted && f['DeliverToMobile'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['DeliverToMobile'].errors[ 'required'] ">DeliverToName is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="ac-3" name="accordion-1" type="radio" class="hidden">
+                            <label for="ac-3" class="ac-label">DeliveryAddress Detail</label>
+                            <div class="ac-content">
+                                <div class="ps-2 pt-2 pe-3 row">
+                                    <div class="col-12 col-sm-9">
+                                        <label for="Address " class="d-flex justify-content-start mb-2 fw-bold ">Address</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="Address" placeholder="Address " aria-label="Name " formControlName="Address" [ngClass]="{ 'is-invalid': submitted && f['Address'].errors } ">
+                                        <div *ngIf="submitted && f['Address'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['Address'].errors['required'] ">Address is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 d-flex">
+                                    <div class="col-5">
+                                        <label for="City" class="d-flex justify-content-start mb-2 fw-bold ">City</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="City" placeholder="City " aria-label="City " formControlName="City" [ngClass]="{ 'is-invalid': submitted && f['City'].errors } ">
+                                        <div *ngIf="submitted && f['City'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['City'].errors['required'] ">city is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 ms-3">
+                                        <label for="State" class="d-flex justify-content-start mb-2 fw-bold ">State</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="State" placeholder="State " aria-label="State " formControlName="State" [ngClass]="{ 'is-invalid': submitted && f['State'].errors } ">
+                                        <div *ngIf="submitted && f['State'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['State'].errors['required'] ">State is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 d-flex ">
+                                    <div class="col-5">
+                                        <label for="PinCode" class="d-flex justify-content-start mb-2 fw-bold ">PinCode</label>
+                                        <input class="form-control inputBorder text-muted " type="number" id="State" placeholder="State " aria-label="PinCode" formControlName="PinCode" [ngClass]="{ 'is-invalid': submitted && f['PinCode'].errors } ">
+                                        <div *ngIf="submitted && f['PinCode'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['PinCode'].errors['required'] ">PinCode is required</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-5 ms-3">
+                                        <label for="AddressType" class="d-flex justify-content-start mb-2 fw-bold ">AddressType</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="AddressType" placeholder="AddressType " aria-label="AddressType " formControlName="AddressType" [ngClass]="{ 'is-invalid': submitted && f['AddressType'].errors } ">
+                                        <div *ngIf="submitted && f['AddressType'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['AddressType'].errors['required'] ">AddressType is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="ac-4" name="accordion-1" type="radio" class="hidden">
+                            <label for="ac-4" class="ac-label">Payment Mode</label>
+                            <div class="ac-content">
+                                <div class="p-4 d-flex">
+                                    <span class="form-check">
+                                        <input class="form-check-input" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="COD" checked>
+                                        <label class="form-check-label fw-bold fontCommon" for="exampleRadios1">
+                                      COD ( CashOn Delivery)
+                                    </label>
+                                    </span>
+                                    <span class="form-check">
+                                      <input class="form-check-input ms-3" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="GooglePay" checked>
+                                      <label class="form-check-label fw-bold fontCommon ms-2" for="exampleRadios1">
+                                      Google Pay
+                                  </label>
+                                  </span>
+                                    <span class="form-check">
+                                    <input class="form-check-input ms-3" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="CardPayment" checked>
+                                    <label class="form-check-label fw-bold fontCommon ms-2" for="exampleRadios1">
+                                 Card Payment
+                                </label>
+                                </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <input id="ac-5" name="accordion-1" type="radio" class="hidden">
+                            <label for="ac-5" class="ac-label">Place-Order Detail</label>
+                            <div class="ac-content">
+                                <div class="ps-2 pe-2 row">
+                                    <div class="col-8 ms-3">
+                                        <label for="ProductName" class="d-flex justify-content-start mb-2 fw-bold ">Product Name</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="ProductName" placeholder="ProductName " aria-label="ProductName " formControlName="ProductName" [ngClass]="{ 'is-invalid': submitted && f['ProductName'].errors } ">
+                                        <div *ngIf="submitted && f['ProductName'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                            <div *ngIf="f['ProductName'].errors['required'] ">ProductName is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="p-2 d-flex flex-column overflow-hidden border m-3">
+                                    <label for="placeOrderItems" class="d-flex justify-content-start mb-2 fw-bold ">PlaceOrderItem</label>
+                                    <div>
+                                        <div formArrayName="PlaceOrderItem" *ngFor="let skill of OrderItems.controls, let i = index">
+                                            <div [formGroupName]="i" class="row">
+                                                <!-- <div *ngFor="let item of orderForm.get('PlaceOrderItem')?.value | keyvalue; let i = index"> -->
+                                                <!-- <div *ngFor="let item of orderForm.get('PlaceOrderItem')?.value; let i = index" [formGroupName]="i"> -->
+                                                <!-- PlaceOrderItem fields -->
+                                                <div class="col-5 ms-3">
+                                                    <label for="ProductId" class="d-flex justify-content-start mb-2 fw-bold ">Product Id</label>
+                                                    <input class="form-control inputBorder text-muted " type="text" id="ProductId" placeholder="ProductId " aria-label="ProductId " formControlName="ProductId">
+                                                </div>
+                                                <div class="col-5 ms-3">
+                                                    <label for="Quntity" class="d-flex justify-content-start mb-2 fw-bold ">Quntity</label>
+                                                    <input class="form-control inputBorder text-muted " type="number" id="Quantity" placeholder="Quantity" aria-label="Quantity" formControlName="Quantity">
+                                                </div>
+                                                <div class="col-5 ms-3">
+                                                    <label for="Price" class="d-flex justify-content-start mb-2 fw-bold ">Price</label>
+                                                    <input class="form-control inputBorder text-muted " type="text" id="Price" placeholder="Price" aria-label="Price" formControlName="Price">
+                                                </div>
+                                                <div class="col-5 ms-3">
+                                                    <label for="Amount" class="d-flex justify-content-start mb-2 fw-bold ">Amount</label>
+                                                    <input class="form-control inputBorder text-muted " type="number" id="Amount" placeholder="Amount" formControlName="Amount">
+                                                    <button type="button" class="btn btn-danger float-end ml-1 mt-3" (click)="deleteSkills(i)"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 float-end ms-3">
+                                                <button type="button" class="btn btn-primary btn-sm mt-2" (click)="addSkills()">Add Product</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div>
+                                            <div class="row">
+                                                <div class="col-5 ms-3">
+                                                    <label for="ProductId" class="d-flex justify-content-start mb-2 fw-bold ">Product Id</label>
+                                                    <input class="form-control inputBorder text-muted " type="text" id="ProductId" placeholder="ProductId " aria-label="ProductId " formControlName="ProductId" (change)="onProductChange($event)">
+                                                    <!-- <div *ngIf="submitted && f['ProductId'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                                        <div *ngIf="f['ProductId'].errors['required'] ">ProductName is required</div>
+                                                    </div> -
+                                                </div>
+                                                <div class="col-5 ms-3">
+                                                    <label for="Quntity" class="d-flex justify-content-start mb-2 fw-bold ">Quntity</label>
+                                                    <input class="form-control inputBorder text-muted " type="number" id="Quantity" placeholder="Quantity" aria-label="Quantity" formControlName="Quantity" (change)="onQuntityChange($event)">
+                                                    <!-- <div *ngIf="submitted && f['Quntity'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                                        <div *ngIf="f['Quntity'].errors['required'] ">Quntity is required</div>
+                                                    </div> -
+                                                </div>
+                                                <div class="col-5 ms-3">
+                                                    <label for="Price" class="d-flex justify-content-start mb-2 fw-bold ">Price</label>
+                                                    <input class="form-control inputBorder text-muted " type="text" id="Price" placeholder="Price" aria-label="Price" formControlName="Price" (change)="onPriceChange($event)">
+                                                    <!-- <div *ngIf="submitted && f['Price'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                                        <div *ngIf="f['Price'].errors['required'] ">Price is required</div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-5 ms-3">
+                                                    <label for="Amount" class="d-flex justify-content-start mb-2 fw-bold ">Amount</label>
+                                                    <input class="form-control inputBorder text-muted " type="number" id="Amount" placeholder="Amount" formControlName="Amount" (change)="onAmountChange($event)">
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="ps-2 pe-2 pb-2 m-1 row">
+                                    <div class="col-5 ms-3">
+                                        <label for="TotalAmount" class="d-flex justify-content-start mb-2 fw-bold ">TotalAmount</label>
+                                        <input class="form-control inputBorder text-muted " type="text" id="TotalAmount" placeholder="TotalAmount" aria-label="TotalAmount" formControlName="TotalAmount">
+                                        <!-- <div *ngIf="submitted && f['ProductId'].errors " class="invalid-feedback ml-2 ms-1 ">
+                                        <div *ngIf="f['ProductId'].errors['required'] ">ProductName is required</div>
+                                    </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3 float-end">
+                            <button type="submit" class=" btnSubmit rounded" (click)="onSubmit()">
+                            <span class="fontCommon text-white">Place Order</span></button>
+                            <button type="submit" class="btnCancle ms-2 rounded" (click)="onCancel()">
+                              <span class="fontCommon " >Cancle</span></button>
+                        </div>
+                    </section>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="UserName"></app-input-control>
+            </form>
+        </div>
+        <div class="col-5">
+            <div class="Yorder border mt-3">
+                <div class="bgCommon-color p-2 text-white">
+                    <span class="fw-bold fontCommon fs-5">Price Details</span>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="ProductName"></app-input-control>
+                <div class="table-content d-flex flex-column justify-content-center p-2 overflow-auto h-100 w-100">
+                    <div class="d-flex ps-2 pt-2 pe-2 ">
+                        <span class="fontCommon fw-bold">Product Qty(2) :</span>
+                        <p class="text-muted">$88.00</p>
+                    </div>
+                    <div class="d-flex ps-2  pt-2">
+                        <span class="fontCommon fw-bold">Subtotal :</span>
+                        <p class="text-muted">$88.00</p>
+                    </div>
+                    <div class="d-flex ps-2 pt-2 ">
+                        <span class="fontCommon fw-bold">Shipping :</span>
+                        <p class="productDiscount-color ms-2">Free shipping</p>
+                    </div>
+
+                    <div class="ps-2  pb-1">
+                        <input type="radio" name="dbt" value="dbt" checked><span class="fontCommon fw-bold ms-2">Direct Bank Transfer</span>
+                        <p class="text-muted p-0">
+                            Make your payment directly into our bank account. Please use your Order ID as the payment reference. Your order will not be shipped until the funds have cleared in our account.
+                        </p>
+                    </div>
+                    <div class="pt-1 ps-2 pb-2">
+                        <span class=" ms-2"> <input type="radio" name="dbt" value="cd"><span class="fontCommon fw-bold ms-2">Cash on Delivery</span></span>
+                        <div>
+                            <span class="ms-2"> <input type="radio" name="dbt" value="cd" class=""><span class="fontCommon fw-bold ms-2"> Paypal</span></span>
+                        </div>
+                        <img src="https://www.logolynx.com/images/logolynx/c3/c36093ca9fb6c250f74d319550acac4d.jpeg" alt="" width="50">
+                    </div>
+                    <button type="submit" class="btn-primary rounded">
+                    <span class="fontCommon text-white">Place Order</span></button>
                 </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="Quantity"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="Price"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="TotalAmount"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="ShipperId"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="OrderDetailId"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="DeliverToName"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="DeliverToMobile"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="Address"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="City"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="State"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="number" labelName="PinCode"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="AddressType"></app-input-control>
-                </div>
-                <div class="col-12  col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="PaymentMode"></app-input-control>
-                </div>
-                <div class="col-12 col-sm-6 col-md-4 mt-2">
-                    <app-input-control inputType="text" labelName="IsPaidAmount"></app-input-control>
-                </div>
+                <!-- <button type="btn btn-primary">Place Order</button> -->
             </div>
         </div>
-        <!-- button design -->
-        <div class="row mt-2 mb-4 ">
-            <div class="col-12 ">
-                <div class="d-flex justify-content-center ">
-                    <button type="submit" class=" btnSubmit rounded " (click)="onSubmit()">
-              <span class="fontCommon text-white ">Place Order</span></button>
-                    <button type="submit" class=" btnCancle ms-4 rounded" (click)="onCancel()">
-                    <span class="fontCommon " >Cancle</span></button>
-                </div>
-            </div>
-        </div>
-    </form>
+    </div>
 </div>

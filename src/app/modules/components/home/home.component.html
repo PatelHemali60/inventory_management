@@ -21,15 +21,15 @@
     </div>
 </div> -->
 
-<div class="main-section ">
-    <ng-container *ngIf="shouldShowSidebar; else loggedOutBlock" class="flex-column">
+<!-- <div class="home-wrapper"> -->
+<div class="h-100 w-100 " [ngClass]="shouldShowSidebar ? 'd-flex flex-column' : 'd-flex'">
+    <ng-container *ngIf="shouldShowSidebar; else sidenavBlock">
         <app-header></app-header>
     </ng-container>
-    <ng-template #loggedOutBlock>
+    <ng-template #sidenavBlock>
         <app-side-nav></app-side-nav>
     </ng-template>
-    <div class="flex-grow-1 overflow-auto">
+    <div class="main-section" [ngClass]="shouldShowSidebar ? 'main-section' : 'height'">
         <router-outlet></router-outlet>
     </div>
-
 </div>

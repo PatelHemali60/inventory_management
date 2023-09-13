@@ -42,6 +42,10 @@ a {
     color: #7b58d0 !important;
 }
 
+.bgCommon-color {
+    background-color: #7b58d0;
+}
+
 .color {
     color: #6e40db !important;
 }
@@ -731,6 +735,7 @@ width: 100% !important; */
     }
     .main-wrapper {
         display: flex;
+        width: 100%;
     }
     .inventIcon {
         font-size: 30px;
@@ -1376,7 +1381,7 @@ padding: 60px !important;
 .product_card {
     border: 1px solid #ccc;
     box-shadow: 2px 2px 6px 0px rgba(0, 0, 0, 0.3);
-    padding: 15px;
+    padding: 15px 10px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -1385,4 +1390,45 @@ padding: 60px !important;
 
 .font-product {
     font-size: 0.9rem;
+}
+
+//============= css for add-tocart design for increment and decrement quntity ===========//
+.Cart_image {
+    height: 140px;
+    width: 140px;
+    object-fit: contain;
+    border-radius: 0 !important;
+}
+
+icon-shape {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    vertical-align: middle;
+    padding: 20px;
+    font-size: 1.1rem;
+}
+
+.icon-sm {
+    width: 2rem;
+    height: 2rem;
+}
+
+.Items-font {
+    font-size: 0.8rem;
+}
+
+.cart-button {
+    border: none !important;
+    padding: 5px 10px !important;
+    background-color: #7b58d0 !important;
+    font-size: 14px;
+    color: white;
+}
+
+.height {
+    height: 550px;
+    overflow-x: hidden;
+    overflow-y: auto;
 }

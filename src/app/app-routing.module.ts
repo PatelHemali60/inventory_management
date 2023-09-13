@@ -71,11 +71,22 @@ const routes: Routes = [
             (m) => m.InventoryModule
           ),
       },
+      {
+        path: 'order',
+        loadChildren: () =>
+          import('./modules/order/order.module').then((m) => m.OrderModule),
+      },
+      {
+        path: 'AddtoCart',
+        loadChildren: () =>
+          import('./modules/addto-cart/addto-cart.module').then(
+            (m) => m.AddtoCartModule
+          ),
+      },
     ],
   },
   { path: 'login', component: LoginInventoryComponent },
   { path: 'ragistration', component: RagiatrationInventoryComponent },
-  { path: 'order', loadChildren: () => import('./modules/order/order.module').then(m => m.OrderModule) },
 ];
 
 @NgModule({

@@ -27,6 +27,14 @@ export class AddBrandComponent {
   editData: any;
   public submitted = false;
 
+  inputValue!: any; // Initialize with an empty string
+
+  public onDynamicInputValueChange(value: string) {
+
+    this.inputValue = value;
+    console.log('Input value changed to:', value);
+  }
+
   constructor(
     private fb: FormBuilder,
     private brandService: BrandService,
@@ -122,7 +130,7 @@ export class AddBrandComponent {
   }
 
   public navigateToList(): void {
-    this.router.navigate(['home/BrandMaster']);
+    this.router.navigate(['BrandMaster']);
   }
 
   //Rest to form controls

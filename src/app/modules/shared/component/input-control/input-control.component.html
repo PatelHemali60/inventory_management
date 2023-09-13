@@ -18,9 +18,19 @@
     <input [id]="inputId" [type]="type" [formControl]="control" class="form-control" />
 </div> -->
 
+<!-- user-form.component.html -->
 
 
-<div class="mb-3">
-    <label [for]="labelName" class="d-flex justify-content-start mb-2 fw-bold">{{labelName}}</label>
-    <input [id]="labelName " [type]="inputType" class="form-control " id="exampleInputPassword1 ">
+<!-- <div class="mb-3">
+    <!-- <label class="d-flex justify-content-start mb-2 fw-bold" [for]="labelName">{{ labelName }}</label>
+    <input [id]="labelName " [type]="inputType" [formControlName]="controlName" /> >
+<label class="d-flex justify-content-start mb-2 fw-bold">{{labelName}}</label>
+<input [type]="inputType" class="form-control " id="exampleInputPassword1 ">
+</div> -->
+
+
+<div class="mb-3 p-5">
+    <h5>dynamic input</h5>
+    <label class="d-flex justify-content-start mb-2 fw-bold">{{ labelName }}</label>
+    <input [type]="inputType" class="form-control" [id]="inputId" [(ngModel)]="inputValue" />
 </div>

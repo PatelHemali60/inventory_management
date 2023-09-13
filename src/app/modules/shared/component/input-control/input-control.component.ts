@@ -7,6 +7,8 @@ import {
   Injector,
   forwardRef,
   Self,
+  EventEmitter,
+  Output,
 } from '@angular/core';
 import {
   ControlValueAccessor,
@@ -37,8 +39,19 @@ export const VALIDATOR: any = {
   styleUrls: ['./input-control.component.scss'],
 })
 export class InputControlComponent implements OnInit {
-  @Input() labelName: string = 'labelName';
-  @Input() inputType: string = 'text';
+  @Input() labelName: string = '';
+  @Input() inputType!: string;
+  @Input() inputId!: string;
+
+  @Input() inputValue: any = '';
+
+  @Output() valueChange = new EventEmitter<string>();
+
+  constructor() {
+    // this.controlDir.valueAccessor = this;
+  }
+
+  ngOnInit() {}
   // @Input() name!: string;
   // @Input() type!: string;
   // @Input() placeholder!: string;
@@ -52,33 +65,4 @@ export class InputControlComponent implements OnInit {
 
   value: any;
   disabled!: boolean;
-
-  constructor() {
-    // this.controlDir.valueAccessor = this;
-  }
-
-  ngOnInit() {}
-
-  // writeValue(value: any) {
-  //   this.value = value;
-  // }
-
-  // registerOnChange(fn: any) {
-  //   this.onChange = fn;
-  // }
-
-  // registerOnTouched(fn: any) {
-  //   this.onTouched = fn;
-  // }
-
-  // setDisabledState(isDisabled = false) {
-  //   this.disabled = isDisabled;
-  // }
-
-  // validate(c: AbstractControl): ValidationErrors {
-  //   const validators: ValidatorFn[] = [];
-  //   return validators;
-  // }
-
-  // registerOnValidatorChange(fn: () => void) {}
 }
