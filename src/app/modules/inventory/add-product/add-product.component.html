@@ -1,7 +1,8 @@
 <div class="main-wrapper">
     <div class="formWrapper  d-flex flex-column  p-2 p-sm-4 overflow-hidden">
         <div class="d-flex justify-content-between row ">
-            <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color">Add Product</span></span>
+            <span class="fw-bold   fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color"  *ngIf="isAddMode">Add Product</span>
+            <span class="fontCommon color" *ngIf="!isAddMode">Edit Product</span></span>
         </div>
         <!--  form division start -->
         <form [formGroup]="Product_Form" class="overflow-auto h-100">
@@ -10,44 +11,46 @@
                     <div class=" col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
                         <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">Product Name</label>
                         <input class="form-control inputBorder text-muted" type="text" id="Name" placeholder="Name" aria-label="Name" formControlName="Name" [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }">
-                        <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                             <div *ngIf="f['Name'].errors['required']">Name is required</div>
                         </div>
                     </div>
                     <!-- departments -->
                     <div class=" col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3">
                         <label for="CategoryId" class="d-flex justify-content-start mb-2 fw-bold">Category</label>
-                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="CategoryId" formControlName="CategoryId" (change)="onItemSelected($event)">
+                        <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="CategoryId" formControlName="CategoryId" (change)="onItemSelected($event)" [ngClass]="{ 'is-invalid': submitted && f['CategoryId'].errors }">
                         <option selected>Choose Category</option>
-                         <option *ngFor="let category of categoryList; " [value]="category.Id">
+                         <option *ngFor="let category of categoryList;" [value]="category.Id">
                           {{category.Name}}
                           </option>
                        </select>
-                        <!-- <select (change)="showEntity($event.target.value) ">
-                        <option value="2 ">2</option>
-                        <option value="4 ">4</option>
-                        <option value="5 ">5</option>
-                      </select> -->
-
+                        <div *ngIf="submitted && f['CategoryId'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['CategoryId'].errors['required'] ">CategoryId is required</div>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="SubCategoryId " class="d-flex justify-content-start mb-2 fw-bold ">Sub Category</label>
-                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="SubCategoryId" formControlName="SubCategoryId">
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="SubCategoryId" formControlName="SubCategoryId" [ngClass]="{ 'is-invalid': submitted && f['SubCategoryId'].errors }">
                      <option selected> Choose Sub Category</option>
                       <option *ngFor="let subCategory of subCategorylist; " [value]=subCategory.Id >
                               {{ subCategory.Name }}
                        </option>
                       </select>
-
+                        <div *ngIf="submitted && f['SubCategoryId'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['SubCategoryId'].errors['required'] ">Subcategory is required</div>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="Brand " class="d-flex justify-content-start mb-2 fw-bold ">Brand</label>
-                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="BrandId " formControlName="BrandId">
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="BrandId " formControlName="BrandId" [ngClass]="{ 'is-invalid': submitted && f['BrandId'].errors }">
                           <option selected>Choose Brand</option>
                           <option *ngFor="let brand of brand; " [value]=brand.Id>
                           {{ brand.Name}}
                           </option>
                           </select>
+                        <div *ngIf="submitted && f['BrandId'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['BrandId'].errors['required'] ">Brand is required</div>
+                        </div>
                     </div>
                 </div>
                 <!-- demo dropdown -->
@@ -56,14 +59,14 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="Unit " class="d-flex justify-content-start mb-2 fw-bold ">Unit</label>
                         <input class="form-control inputBorder text-muted " type="number" id="Unit" placeholder="Unit " aria-label="Name " formControlName="Unit" [ngClass]="{ 'is-invalid': submitted && f[ 'Unit'].errors } ">
-                        <div *ngIf="submitted && f[ 'Unit'].errors " class="invalid-feedback ml-2 ms-1 ">
+                        <div *ngIf="submitted && f[ 'Unit'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                             <div *ngIf="f[ 'Unit'].errors[ 'required'] ">Unit is required</div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="Sku " class="d-flex justify-content-start mb-2 fw-bold ">SKU</label>
                         <input class="form-control inputBorder text-muted " type="number" id="SKU " placeholder="Sku " aria-label="default input example " formControlName="SKU" [ngClass]="{ 'is-invalid': submitted && f[ 'SKU'].errors } ">
-                        <div *ngIf="submitted && f[ 'SKU'].errors " class="invalid-feedback ml-2 ms-1 ">
+                        <div *ngIf="submitted && f[ 'SKU'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                             <div *ngIf="f[ 'SKU'].errors[ 'required'] ">SKU is required</div>
                         </div>
                     </div>
@@ -71,7 +74,7 @@
                         <label for="MinimumQty " class="d-flex justify-content-start mb-2 fw-bold ">Minimum Qunitity</label>
                         <input class="form-control inputBorder text-muted " type="number" id="MinimumQty" placeholder="Minimum Qunitity " aria-label="default input example " formControlName="MinimumQty" [ngClass]="{ 'is-invalid': submitted && f[
                             'MinimumQty'].errors } ">
-                        <div *ngIf="submitted && f[ 'MinimumQty'].errors " class="invalid-feedback ml-2 ms-1 ">
+                        <div *ngIf="submitted && f[ 'MinimumQty'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                             <div *ngIf="f[ 'MinimumQty'].errors[ 'required'] ">MinimumQty is required</div>
                         </div>
                     </div>
@@ -79,8 +82,8 @@
                         <label for="Quantity " class="d-flex justify-content-start mb-2 fw-bold ">Qunitity</label>
                         <input class="form-control inputBorder text-muted " type="number" id="Qunitity " placeholder="Qunitity " aria-label="default input example " formControlName="Quantity" [ngClass]="{ 'is-invalid': submitted && f[ 'Quantity'].errors
                             } ">
-                        <div *ngIf="submitted && f[ 'Quantity'].errors " class="invalid-feedback ml-2 ms-1 ">
-                            <div *ngIf="f[ 'Quantity'].errors[ 'required'] ">Quantity is required</div>
+                        <div *ngIf="submitted && f['Quantity'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['Quantity'].errors[ 'required'] ">Quantity is required</div>
                         </div>
                     </div>
                 </div>
@@ -90,7 +93,7 @@
                         <label for="Description " class=" form-label d-flex justify-content-start mb-2 fw-bold ">Description</label>
                         <textarea class="form-control inputBorder text-muted fontCommon " id="Description " rows="3 " placeholder="... " aria-label="default input example " formControlName="Description" [ngClass]="{ 'is-invalid': submitted && f[
                             'Description'].errors } "></textarea>
-                        <div *ngIf="submitted && f[ 'Description'].errors " class="invalid-feedback ml-2 ms-1 ">
+                        <div *ngIf="submitted && f[ 'Description'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                             <div *ngIf="f[ 'Description'].errors[ 'required'] ">Description is required</div>
                         </div>
                     </div>
@@ -100,32 +103,31 @@
                 <div class="row mt-4 ">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="tax " class="d-flex justify-content-start mb-2 fw-bold ">Tax</label>
-                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="tax" formControlName="Tax">
-                            <!-- <option value="customs-tax">Customs Tax</option>
-                            <option value="entralexcise-duty">Excise Duty</option>
-                            <option value="income-tax">Income Tax</option>
-                            <option value="service-tax">Service Tax</option> -->
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="tax" formControlName="Tax" [ngClass]="{ 'is-invalid': submitted && f['Tax'].errors }">
                             <option *ngFor="let dept of Tax; " [value]=dept.value>
                               {{ dept.label }}
                             </option>
                           </select>
+                        <div *ngIf="submitted && f['Tax'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['Tax'].errors['required'] ">Tax is required</div>
+                        </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="Discount " class="d-flex justify-content-start mb-2 fw-bold ">Discount Type</label>
-                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="Discount " formControlName="DiscountTypeId" [ngClass]="{ 'is-invalid': submitted && f[ 'DiscountTypeId'].errors } ">
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="Discount" formControlName="DiscountTypeId" [ngClass]="{ 'is-invalid': submitted && f['DiscountTypeId'].errors }">
                            <option *ngFor="let discount of discount; " [value]=discount.Id>
                              {{ discount.Name }}
                            </option>
                        </select>
-                        <div *ngIf="submitted && f[ 'DiscountTypeId'].errors " class="invalid-feedback ml-2 ms-1 ">
-                            <div *ngIf="f['DiscountTypeId'].errors[ 'required'] ">Discount is required</div>
+                        <div *ngIf="submitted && f['DiscountTypeId'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['DiscountTypeId'].errors['required'] ">DiscountType is required</div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="Price " class="d-flex justify-content-start mb-2 fw-bold ">Price</label>
                         <input class="form-control inputBorder text-muted " type="number" id="Price " placeholder="Price " aria-label="default input example " formControlName="Price" [ngClass]="{ 'is-invalid': submitted && f[ 'Price'].errors } ">
-                        <div *ngIf="submitted && f[ 'Price'].errors " class="invalid-feedback ml-2 ms-1 ">
-                            <div *ngIf="f[ 'Price'].errors[ 'required'] ">Price is required</div>
+                        <div *ngIf="submitted && f[ 'Price'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                            <div *ngIf="f['Price'].errors['required'] ">Price is required</div>
                         </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
@@ -135,7 +137,7 @@
                             <option value="yes">Yes</option>
                             <option value="no ">No</option>
                           </select>
-                        <div *ngIf="submitted && f['Status'].errors " class="invalid-feedback ml-2 ms-1 ">
+                        <div *ngIf="submitted && f['Status'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                             <div *ngIf="f['Status'].errors['required'] ">Status is required</div>
                         </div>
                     </div>

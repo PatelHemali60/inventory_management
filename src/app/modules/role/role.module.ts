@@ -7,20 +7,17 @@ import { AddRoleComponent } from './add-role/add-role.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ViewDetailComponent } from './view-detail/view-detail.component';
-
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
-  declarations: [
-    RoleComponent,
-    AddRoleComponent,
-    ViewDetailComponent
-  ],
+  declarations: [RoleComponent, AddRoleComponent, ViewDetailComponent],
   imports: [
     CommonModule,
     RoleRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
-  ]
+    RouterModule,
+    NgxPaginationModule,
+  ],
 })
-export class RoleModule { }
+export class RoleModule {}

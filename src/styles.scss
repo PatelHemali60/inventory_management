@@ -42,6 +42,14 @@ a {
     color: #7b58d0 !important;
 }
 
+//paginantion color
+.ngx-pagination .current {
+    padding: 0.1875rem 0.625rem;
+    background: #7b58d0 !important;
+    color: #fefefe;
+    cursor: default;
+}
+
 .bgCommon-color {
     background-color: #7b58d0;
 }
@@ -391,7 +399,7 @@ align-items: center;
 
 .cardWrapper {
     background: #f8f8f8;
-    height: 100vh;
+    height: 1900px;
     transition: all .5s ease;
 }
 

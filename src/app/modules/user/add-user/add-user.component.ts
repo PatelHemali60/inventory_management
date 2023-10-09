@@ -25,7 +25,7 @@ export class AddUserComponent {
   public Role: any;
   public EditUserData: any;
   private id: number;
-  private isAddMode: boolean;
+  public isAddMode: boolean;
   public editData: any;
   public submitted = false;
 
@@ -51,7 +51,6 @@ export class AddUserComponent {
           LastName: editData.LastName,
           EmailId: editData.EmailId,
           Password: editData.Password,
-          // IsActive: editData.IsActive,
           RoleId: parseInt(editData.RoleId),
           RoleName: editData.RoleName,
         };
@@ -90,26 +89,32 @@ export class AddUserComponent {
       LastName: [null, Validators.required],
       EmailId: [null, [Validators.required, Validators.email]],
       Password: [null, Validators.required],
-      IsActive: [false, Validators.required],
-      RoleId: [10, Validators.required],
-      RoleName: [null, Validators.required],
+      IsActive: [false],
+      RoleId: [null],
+      RoleName: [null],
     });
   }
 
   //on Form submit
+  //on Form submit
   public onSubmit(): void {
-    //flag for form valid
-    debugger;
     this.submitted = true;
-    if (this.isAddMode && this.UserForm.valid) {
-      this.addUSer();
-    } else {
-      this.updateUser();
+    if (this.UserForm.invalid) {
+      return;
+    }
+
+    if (this.UserForm.valid) {
+      this.submitted = true;
+
+      if (this.isAddMode) {
+        this.addUser();
+      } else {
+        this.updateUser();
+      }
     }
   }
 
-  //Post data to db
-  public addUSer(): void {
+  public addUser(): void {
     this.UserData = {
       FirstName: this.UserForm.value.FirstName,
       LastName: this.UserForm.value.LastName,
@@ -122,10 +127,21 @@ export class AddUserComponent {
     this.userService
       .AddUser(this.UserData)
       .then((res: any) => {
-        this.toastr.success('Add User sucessfully !!!');
-        this.router.navigate(['home/User']);
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.toastr.info(error.ErrorMessage);
+      });
   }
 
   //Put data to db
@@ -133,14 +149,25 @@ export class AddUserComponent {
     this.userService
       .updateUSer(this.UserForm.value)
       .then((res: any) => {
-        this.navigateToList();
-        this.toastr.success('USer Updated sucessfully !!!');
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error: any) => {});
+      .catch((error: any) => {
+        this.toastr.error(error.ErrorMessage);
+      });
   }
 
   public navigateToList(): void {
-    this.router.navigate(['home/User']);
+    this.router.navigate(['User']);
   }
 
   onCancel() {

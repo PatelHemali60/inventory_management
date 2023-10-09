@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export class DiscountComponent implements OnInit {
   public Discount!: any[];
   filteredProduct: any[] = [];
+  page: number = 1;
 
   constructor(
     private router: Router,
@@ -20,19 +21,17 @@ export class DiscountComponent implements OnInit {
     private service: DiscountService,
     private toastr: ToastrService
   ) {
-    this.getRoleList();
+    this.getDiscountTypeList();
     //get product name from db
   }
 
   ngOnInit(): void {}
 
   //get user list from db
-  public getRoleList(): void {
+  public getDiscountTypeList(): void {
     this.service.getDiscountType().subscribe({
       next: (data: any) => {
         this.Discount = data.Data;
-
-        this.toastr.success('List display sucessfully !!!');
       },
       error: (e) => console.error(e),
     });
@@ -40,25 +39,31 @@ export class DiscountComponent implements OnInit {
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    this.service.deleteDiscount(id).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Are you sure want to Delete this ?',
-          text: 'This process is irreversible.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'No',
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire('Removed!', 'Product removed successfully.', 'success');
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire('Cancelled', 'Product still in our database.)', 'error');
-          }
+    Swal.fire({
+      title: 'Are you sure want to Delete this Discount-Type ?',
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        // User clicked "Yes," proceed with deletion
+        this.service.deleteDiscount(id).subscribe({
+          next: () => {
+            Swal.fire(
+              'Removed!',
+              'DiscountType removed successfully.',
+              'success'
+            );
+            this.getDiscountTypeList();
+          },
+          error: (e: any) => console.error(e),
         });
-        this.getRoleList();
-      },
-      error: (e) => console.error(e),
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'DiscountType still in our database.', 'error');
+      }
     });
   }
 

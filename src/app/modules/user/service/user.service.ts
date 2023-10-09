@@ -35,7 +35,6 @@ export class UserService {
   deleteUser(id: number): Observable<number> {
     return this.http.delete<number>(`${this.apiLink}/User/DeleteUser/${id}`);
   }
-  // http://localhost:13884/api/User/GetUser/3
 
   GetUserbyId(id: number): Observable<any> {
     return this.http.get<number>(
@@ -43,22 +42,10 @@ export class UserService {
     );
   }
 
-  //update product detail
-  //update product detail
+  //update user data
   updateUSer(data: any): Promise<any> {
-    var headers = new HttpHeaders().set(
-      'Content-Type',
-      'application/json; charset=utf-8'
-    );
     return this.http
-      .post<any>(
-        `http://localhost:13884/api/User/UpdateUser
-      `,
-        data,
-        {
-          headers: headers,
-        }
-      )
+      .post<any>(`${this.apiLink}/User/UpdateUser`, data)
       .toPromise();
   }
 }

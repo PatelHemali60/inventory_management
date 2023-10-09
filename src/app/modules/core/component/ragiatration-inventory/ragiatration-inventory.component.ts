@@ -7,7 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth.service';
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-ragiatration-inventory',
   templateUrl: './ragiatration-inventory.component.html',
@@ -15,6 +15,8 @@ import { AuthService } from '../../service/auth.service';
 })
 export class RagiatrationInventoryComponent {
   public Roles: any[] = [];
+  public UserRoleId!: number;
+  public getUserRole: any;
   public errorMessage: any;
   public FirstName!: FormControl;
   public LastName!: FormControl;
@@ -24,22 +26,20 @@ export class RagiatrationInventoryComponent {
   public roles: string[] = [];
   public form!: FormGroup;
   public RagistrationForm!: FormGroup;
+  public RagistrationformValue: any;
   public submitted = false;
   public loading = false;
   private isAddMode: boolean;
   private id!: number;
 
   ngOnInit() {
-    setTimeout(() => {
-      this.googleAuthenticate();
-    }, 50);
     this.Roles = [];
 
     this.FirstName = new FormControl('', [Validators.required]);
     this.LastName = new FormControl('', [Validators.required]);
     this.EmailId = new FormControl('', [Validators.required]);
     this.Password = new FormControl('', [Validators.required]);
-    this.RoleId = new FormControl('16', [Validators.required]);
+    this.RoleId = new FormControl('');
 
     this.RagistrationForm = new FormGroup({
       FirstName: this.FirstName,
@@ -50,23 +50,12 @@ export class RagiatrationInventoryComponent {
     });
   }
 
-  // "Id": 0,
-  // "FirstName": "string",
-  // "LastName": "string",
-  // "EmailId": "string",
-  // "Password": "string",
-  // "RoleId": 0
-
-  // "Data": [
-  //   {
-  //     "Id": 1,
-  //     "Name": "Admin",
-  //     "Description": "Admin",
-  //     "IsActive": true
-  //   },
-
-  constructor(private authService: AuthService, private router: Router) {
-    this.getDepartmentList();
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private toastr: ToastrService
+  ) {
+    this.getallroleUser();
     this.isAddMode = !this.id;
   }
 
@@ -75,32 +64,53 @@ export class RagiatrationInventoryComponent {
     return this.RagistrationForm.controls;
   }
 
-  public onSubmit(): void {
-    // this.submitted = true;
-    if (this.isAddMode) {
-      this.createUser();
-    } else {
-      // this.updateUser();
-    }
-  }
-
   //get rold id list
-  private getDepartmentList(): void {
+  private getallroleUser(): void {
     this.authService.getDepartments().subscribe({
       next: (data) => {
-        this.Roles = data.Data;
+        let Reponse = data.Data;
+
+        if (Reponse.length > 0) {
+          //get id from user Name
+          const userObject = Reponse.find(
+            (item: any) => item.Name.toString().toLowerCase() == 'user'
+          );
+
+          this.UserRoleId = userObject?.Id;
+        }
+        // console.log(this.UserRoleId); // You can use this data
       },
       error: (e) => console.log(e),
     });
   }
 
-  //creat user
-  //Post data to db
-  public createUser(): void {
-    this.authService.createUser(this.RagistrationForm.value).subscribe({
-      next: () => {
-        alert('New User Creadted');
+  public onSubmit(): void {
+    this.submitted = true;
+    debugger;
+    if (this.RagistrationForm.invalid) {
+      return;
+    }
 
+    // this.submitted = true;
+    if (this.isAddMode && this.RagistrationForm.valid) {
+      this.createUser();
+    }
+  }
+
+  //creat new user
+  public createUser(): void {
+    this.RagistrationformValue = {
+      FirstName: this.RagistrationForm.value.FirstName,
+      LastName: this.RagistrationForm.value.LastName,
+      EmailId: this.RagistrationForm.value.EmailId,
+      Password: this.RagistrationForm.value.Password,
+      RoleId: this.UserRoleId,
+    };
+    // console.log(this.RagistrationformValue, 'form value');
+
+    this.authService.createUser(this.RagistrationformValue).subscribe({
+      next: (res) => {
+        this.toastr.success(res.SuccessMessage);
         this.navigateToList();
       },
       error: (e) => console.log(e),
@@ -111,6 +121,4 @@ export class RagiatrationInventoryComponent {
   public navigateToList(): void {
     this.router.navigate(['/login']);
   }
-
-  googleAuthenticate() {}
 }

@@ -33,7 +33,7 @@ export class AddProductComponent {
   public discount!: any[];
   public status!: any[];
   private id: number;
-  private isAddMode: boolean;
+  public isAddMode: boolean;
   public base64Output!: any;
   public base64Image!: string;
   public productData!: any;
@@ -154,11 +154,11 @@ export class AddProductComponent {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
-      CategoryId: [1, Validators.required],
+      CategoryId: [null, Validators.required],
       CategoryName: [null],
       SubCategoryId: [null, Validators.required],
       SubCategoryName: [null],
-      BrandId: [1, Validators.required],
+      BrandId: [null, Validators.required],
       BrandName: [null],
       Unit: [null, Validators.required],
       SKU: [null, Validators.required],
@@ -166,7 +166,7 @@ export class AddProductComponent {
       Quantity: [null, Validators.required],
       Description: [null, Validators.required],
       Tax: [null, Validators.required],
-      DiscountTypeId: [1, Validators.required],
+      DiscountTypeId: [null, Validators.required],
       DiscountTypeName: [null],
       Price: [null, Validators.required],
       Status: [null, Validators.required],
@@ -178,32 +178,6 @@ export class AddProductComponent {
       file: [null],
     });
   }
-
-  // {
-  //   "Id": 11,
-  //   "Name": "Men Striped Round Neck Cotton Blend Blue, Black T-Shirt",
-  //   "CategoryId": 3,
-  //   "CategoryName": "Fashion",
-  //   "SubCategoryId": 6,
-  //   "SubCategoryName": "Mens Top Wear",
-  //   "BrandId": 4,
-  //   "BrandName": "Zara",
-  //   "Unit": 10,
-  //   "SKU": 20,
-  //   "MinimumQty": 30,
-  //   "Quantity": 30,
-  //   "Description": "Bank OfferFlat ₹500 off on HDFC Bank.",
-  //   "Tax": "string",
-  //   "DiscountTypeId": 1,
-  //   "DiscountTypeName": "Discount 100%",
-  //   "Price": 500,
-  //   "Status": "string",
-  //   "ImageUrl": "https://rukminim2.flixcart.com/image/832/832/xif0q/t-shirt/r/v/k/m-ausk0165-ausk-original-imaghu9fbhcgf2za.jpeg?q=70",
-  //   "IsActive": true,
-  //   "StripePaymentLink": "https://buy.stripe.com/test_eVa6sjeYO27b3u07sQ",
-  //   "StripeProductId": "prod_OX6LjoDFfOUINV",
-  //   "StripePriceProductId": "price_1Nk29GSHl1utr3vFPoejv0l0"
-  // }
 
   //category list
   private getcategoryList(): void {
@@ -277,9 +251,17 @@ export class AddProductComponent {
     this.productService
       .AddProduct(formData)
       .then((res: any) => {
-        console.log(res, 'reponse data');
-        this.toastr.success('Add Product sucessfully !!!');
-        this.router.navigate(['/Inventory']);
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.router.navigate(['Inventory']);
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
       .catch((error: any) => {});
   }
@@ -312,8 +294,20 @@ export class AddProductComponent {
     this.productService
       .updateProduct(EditformData)
       .then((res: any) => {
-        this.toastr.success('Edit Product sucessfully !!!');
-        this.router.navigate(['/Inventory']);
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.router.navigate(['Inventory']);
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
+
+        // this.toastr.success('Edit Product sucessfully !!!');
+        // this.router.navigate(['/Inventory']);
       })
       .catch((error: any) => {});
   }

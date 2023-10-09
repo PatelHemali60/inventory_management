@@ -12,7 +12,13 @@ import Swal from 'sweetalert2';
 })
 export class BrandComponent {
   public category!: any[];
+  public TotalData!: number;
   filteredProduct: any[] = [];
+  pageOfItems!: Array<any>;
+  page: number = 1;
+
+  public itemsPerPage!: number;
+  public totalItems!: number;
 
   constructor(
     private router: Router,
@@ -31,44 +37,45 @@ export class BrandComponent {
     this.service.getBrand().subscribe({
       next: (data: any) => {
         this.category = data.Data;
-
-        this.toastr.success('List display sucessfully !!!');
+        this.totalItems = this.category.length;
+        console.log(this.TotalData, 'brand data');
       },
       error: (e: any) => console.error(e),
     });
   }
-  // {
-  //   "Id": 2,
-  //   "Name": "Home & Furniture",
-  //   "Description": "Home & Furniture",
-  //   "IsActive": true
-  // },
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    this.service.deleteBrand(id).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Are you sure want to Delete this ?',
-          text: 'This process is irreversible.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'No',
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire('Removed!', 'Product removed successfully.', 'success');
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire('Cancelled', 'Product still in our database.)', 'error');
-          }
+    Swal.fire({
+      title: 'Are you sure want to Delete this?',
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        // User clicked "Yes," proceed with deletion
+        this.service.deleteBrand(id).subscribe({
+          next: () => {
+            Swal.fire('Removed!', 'Brand removed successfully.', 'success');
+            this.getCategoryList();
+          },
+          error: (e: any) => console.error(e),
         });
-        this.getCategoryList();
-      },
-      error: (e) => console.error(e),
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'Brand still in our database.', 'error');
+      }
     });
   }
 
   public navigateToForm() {
     this.router.navigate(['/form']);
+  }
+
+  onChangePage(pageOfItems: Array<any>) {
+    // update current page of items
+    this.pageOfItems = pageOfItems;
   }
 }

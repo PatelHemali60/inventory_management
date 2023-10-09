@@ -23,10 +23,11 @@ export class AddRoleComponent {
   public RoleForm: FormGroup;
   public roleData!: any;
   private id: number;
-  private isAddMode: boolean;
+  public isAddMode: boolean;
   private RoleList: any;
   public editData: any;
   public submitted = false;
+  public loading = false;
 
   constructor(
     private fb: FormBuilder,
@@ -82,19 +83,27 @@ export class AddRoleComponent {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
-      Description: [null, Validators.required],
-      IsActive: [false, Validators.required],
+      Description: [null],
+      IsActive: [false],
     });
   }
 
   //on Form submit
   public onSubmit(): void {
-    //flag for form valid
     this.submitted = true;
-    if (this.isAddMode && this.RoleForm.valid) {
-      this.addRole();
-    } else {
-      this.updateRole();
+
+    if (this.RoleForm.invalid) {
+      return;
+    }
+
+    if (this.RoleForm.valid) {
+      this.submitted = true;
+
+      if (this.isAddMode) {
+        this.addRole();
+      } else {
+        this.updateRole();
+      }
     }
   }
 
@@ -102,15 +111,25 @@ export class AddRoleComponent {
   public addRole(): void {
     this.roleData = {
       Name: this.RoleForm.value.Name,
-      Description: this.RoleForm.value.Description,
     };
     this.roleService
       .AddRole(this.roleData)
       .then((res: any) => {
-        this.toastr.success('Add Role sucessfully !!!');
-        this.navigateToList();
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.toastr.info(error.ErrorMessage);
+      });
   }
 
   //Put data to db
@@ -118,14 +137,25 @@ export class AddRoleComponent {
     this.roleService
       .updateRole(this.RoleForm.value)
       .then((res: any) => {
-        this.navigateToList();
-        this.toastr.success('Role Updated sucessfully !!!');
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error: any) => {});
+      .catch((error: any) => {
+        this.toastr.error(error.ErrorMessage);
+      });
   }
 
   public navigateToList(): void {
-    this.router.navigate(['home/roleMaster']);
+    this.router.navigate(['roleMaster']);
   }
 
   //Rest to form controls
@@ -134,6 +164,6 @@ export class AddRoleComponent {
   }
 
   onCancel() {
-    this.location.back();
+    this.router.navigate(['roleMaster']);
   }
 }

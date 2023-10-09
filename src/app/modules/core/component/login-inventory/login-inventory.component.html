@@ -8,17 +8,26 @@
                     </p>
                 </div>
                 <form name="signin" class="form" [formGroup]="loginForm">
-                    <div class="input-control ">
+                    <div class="input-control d-flex flex-column mb-3">
                         <!-- <label for="pass" class="label mb-3 ">Password</label>
                       <input id="password" type="Password" class=" form-control input " data-type="password " formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f['Password'].errors } "> -->
                         <label for="EmailId" class="input-label" hidden>Email</label>
-                        <input type="email" name="EmailId" id="EmailId" class="input-field  form-control" formControlName="EmailId" placeholder="Email">
+                        <input type="email" name="EmailId" id="EmailId" class="input-field  form-control" formControlName="EmailId" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && f['EmailId'].errors }">
+
+                        <div *ngIf="submitted && f['EmailId'].errors" class="invalid-feedback ml-2 ms-2 d-flex justify-content-start">
+                            <div *ngIf="f['EmailId'].errors['required']">Email is required !!!</div>
+                        </div>
                     </div>
-                    <div class="input-control ">
+
+                    <div class="input-control d-flex flex-column mb-3">
                         <label for="password" class="input-label" hidden>Password</label>
-                        <input type="password" name="password" id="password" class="input-field form-control" formControlName="Password" placeholder="Password">
+                        <input type="password" name="password" id="password" class="input-field form-control" formControlName="Password" placeholder="Password" [ngClass]="{ 'is-invalid': submitted && f['Password'].errors }">
+                        <div *ngIf="submitted && f['Password'].errors" class="invalid-feedback ml-2 ms-2 d-flex justify-content-start">
+                            <div *ngIf="f['Password'].errors['required']">Password is required !!!</div>
+                        </div>
                     </div>
-                    <div class="input-control">
+
+                    <div class="input-control mt-4">
                         <a href="#" class="text text-links">Forgot Password</a>
                         <button type="submit" class="input-submit" (click)="onLogin()" value="Sign In">Sign In</button>
                     </div>

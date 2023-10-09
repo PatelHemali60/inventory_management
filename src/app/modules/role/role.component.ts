@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 export class RoleComponent {
   public Role!: Role[];
   filteredProduct: any[] = [];
+  page: number = 1;
 
   constructor(
     private router: Router,
@@ -31,35 +32,35 @@ export class RoleComponent {
     this.service.getProduct().subscribe({
       next: (data: any) => {
         this.Role = data.Data;
-
-        this.toastr.success('List display sucessfully !!!');
       },
       error: (e) => console.error(e),
     });
   }
 
   //Delete user from db and Update user list
-  public deleteProduct(id: number): void {
 
-    this.service.deleteRole(id).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Are you sure want to Delete this ?',
-          text: 'This process is irreversible.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'No',
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire('Removed!', 'Product removed successfully.', 'success');
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire('Cancelled', 'Product still in our database.)', 'error');
-          }
+  public deleteProduct(id: number): void {
+    Swal.fire({
+      title: 'Are you sure want to Delete this?',
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        // User clicked "Yes," proceed with deletion
+        this.service.deleteRole(id).subscribe({
+          next: () => {
+            Swal.fire('Removed!', 'Role removed successfully.', 'success');
+            this.getRoleList();
+          },
+          error: (e) => console.error(e),
         });
-        this.getRoleList();
-      },
-      error: (e) => console.error(e),
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'Role still in our database.', 'error');
+      }
     });
   }
 

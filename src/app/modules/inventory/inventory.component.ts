@@ -17,6 +17,7 @@ export class InventoryComponent {
   public brandName: any;
   public searchText: string = '';
   public ImageUrl: any;
+  page: number = 1;
 
   public data: any[] = this.Products;
   public excludeColumns: string[] = ['id'];
@@ -51,9 +52,9 @@ export class InventoryComponent {
     this.productService.getallProduct().subscribe({
       next: (data: any) => {
         this.Products = data.Data;
-        console.log(this.Products, 'products');
+        // console.log(this.Products, 'products');
         // this.ImageUrl = data.Data.ImageUrl;
-        console.log(this.ImageUrl, 'image');
+        //console.log(this.ImageUrl, 'image');
       },
       error: (e) => console.error(e),
     });
@@ -61,60 +62,33 @@ export class InventoryComponent {
 
   //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    this.productService.deleteProduct(id).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Are you sure want to Delete this ?',
-          text: 'This process is irreversible.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes',
-          cancelButtonText: 'No',
-        }).then((result) => {
-          if (result.value) {
+    Swal.fire({
+      title: 'Are you sure want to Delete this?',
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        // User clicked "Yes," proceed with deletion
+        this.productService.deleteProduct(id).subscribe({
+          next: () => {
             Swal.fire('Removed!', 'Product removed successfully.', 'success');
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire('Cancelled', 'Product still in our database.)', 'error');
-          }
+            this.GetallProductList();
+          },
+          error: (e: any) => console.error(e),
         });
-
-        this.GetallProductList();
-      },
-      error: (e) => console.error(e),
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'Product still in our database.', 'error');
+      }
     });
   }
 
-  //get category name form this list
-  // private CategoryNameList(): void {
-  //   this.productService.getCategory().subscribe({
-  //     next: (data: category[]) => {
-  //       this.categoryname = data;
-  //     },
-  //     error: (e) => console.error(e),
-  //   });
-  // }
-
-  // //get brand name
-  // private BrandNameList(): void {
-  //   this.productService.getBrand().subscribe({
-  //     next: (data: category[]) => {
-  //       this.brandName = data;
-  //     },
-  //     error: (e) => console.error(e),
-  //   });
-  // }
-
-  // //get user list from db
-  // public getProductList(): void {
-  //   this.productService.getProduct().subscribe({
-  //     next: (data) => (this.Products = data),
-  //     error: (e) => console.error(e),
-  //   });
-  // }
-
   //for filter data in search
   // handle change event of search input
-  // handle change event of search input
+
   public handleChange(event: any): void {
     this.searchText = event.target.value;
     this.filterData(event.target.value);

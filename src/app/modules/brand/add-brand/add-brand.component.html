@@ -1,25 +1,21 @@
 <div class="formWrapper  d-flex flex-column p-1 p-sm-4 overflow-hidden">
     <div class="d-flex justify-content-between row mt-3">
-        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon">Add Brand</span></span>
+        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color" *ngIf="isAddMode">Add Brand</span>
+        <span class="fontCommon color" *ngIf="!isAddMode">Edit Brand</span></span>
     </div>
     <!-- form division start -->
     <form [formGroup]="brandForm" novalidate class="overflow-hidden  bg-white mt-4 mx-auto p-5">
         <div class="p-5 mt-2">
             <div class="row text-center ">
                 <div class="col-12">
-                    <app-input-control inputType="text" labelName="Name"></app-input-control>
-                </div>
-                <div class="col-12 mt-4">
-                    <app-input-control inputType="password" labelName="password"></app-input-control>
+                    <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">Name</label>
+                    <input class="form-control inputBorder text-muted" type="text" id="Name" placeholder="Name" aria-label="Name" formControlName="Name" [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }">
+                    <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1">
+                        <div *ngIf="f['Name'].errors['required']">BrandName is required</div>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <app-input-control [labelName]="'Name'" [inputType]="'text'" [inputValue]="inputValue" (valueChange)="onDynamicInputValueChange($event)"></app-input-control>
-        <app-input-control [labelName]="'Description'" [inputType]="'text'" [inputValue]="inputValue" (valueChange)="onDynamicInputValueChange($event)"></app-input-control> -->
-        <!-- <app-input-control [labelName]="Name" [inputType]="'text'" [inputValue]="inputValue" (valueChange)="onDynamicInputValueChange($event)"></app-input-control> -->
-
-        <!-- Display the input value -->
-        <p>Input Value: {{ inputValue }}</p>
         <!-- button design -->
         <div class="row mt-2 mb-4 ">
             <div class="col-12 ">
@@ -32,6 +28,4 @@
             </div>
         </div>
     </form>
-
-
 </div>

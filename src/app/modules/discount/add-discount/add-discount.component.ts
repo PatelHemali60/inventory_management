@@ -29,8 +29,8 @@ export class AddDiscountComponent implements OnInit {
   public DiscountForm: FormGroup;
   public discountData!: any;
   private id: number;
-  private isAddMode: boolean;
-  private RoleList: any;
+  public isAddMode: boolean;
+  public RoleList: any;
   public editData: any;
   public submitted = false;
 
@@ -90,50 +90,78 @@ export class AddDiscountComponent implements OnInit {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
-      Description: [null, Validators.required],
-      IsActive: [false, Validators.required],
+      Description: [null],
+      IsActive: [false],
     });
   }
 
   //on Form submit
   public onSubmit(): void {
-    //flag for form valid
     this.submitted = true;
-    if (this.isAddMode && this.DiscountForm.valid) {
-      this.addRole();
-    } else {
-      this.updateRole();
+    if (this.DiscountForm.invalid) {
+      return;
+    }
+
+    if (this.DiscountForm.valid) {
+      this.submitted = true;
+
+      if (this.isAddMode) {
+        this.addDiscount();
+      } else {
+        this.updateBrand();
+      }
     }
   }
 
   //Post data to db
-  public addRole(): void {
+  public addDiscount(): void {
     this.discountData = {
       Name: this.DiscountForm.value.Name,
-      Description: this.DiscountForm.value.Description,
     };
     this.discountService
       .AddDiscount(this.discountData)
       .then((res: any) => {
-        this.toastr.success('Add Role sucessfully !!!');
-        this.navigateToList();
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error) => {});
+      .catch((error: any) => {
+        this.toastr.info(error.ErrorMessage);
+      });
   }
 
   //Put data to db
-  public updateRole(): void {
+  public updateBrand(): void {
     this.discountService
       .updateDiscount(this.DiscountForm.value)
       .then((res: any) => {
-        this.navigateToList();
-        this.toastr.success('Role Updated sucessfully !!!');
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error: any) => {});
+      .catch((error: any) => {
+        this.toastr.error(error.ErrorMessage);
+      });
   }
 
   public navigateToList(): void {
-    this.router.navigate(['home/discountMaster']);
+    this.router.navigate(['discountMaster']);
   }
 
   //Rest to form controls

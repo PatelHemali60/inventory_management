@@ -52,7 +52,6 @@ export class ProductService {
 
   //update product detail
   updateProduct(data: any): Promise<any> {
-    debugger;
     return this.http
       .post<any>(`${this.apiLink}/Product/UpdateProduct`, data)
       .toPromise();

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { InputControlComponent } from '../shared/component/input-control/input-control.component';
 
+import { NgxPaginationModule } from 'ngx-pagination';
 @NgModule({
   declarations: [BrandComponent, AddBrandComponent],
   imports: [
@@ -18,6 +19,7 @@ import { InputControlComponent } from '../shared/component/input-control/input-c
     FormsModule,
     RouterModule,
     SharedModule,
+    NgxPaginationModule,
   ],
 })
 export class BrandModule {}

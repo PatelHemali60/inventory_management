@@ -20,19 +20,9 @@ export class CategoryService {
   }
 
   //ragistration api
-  public AddCategory(Role: any): Promise<any> {
-    var headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      responseType: 'json',
-    });
+  public AddCategory(data: any): Promise<any> {
     return this.http
-      .post<any>(
-        `${this.apiLink}/Category/AddNewCategory`,
-        JSON.stringify(Role),
-        {
-          headers: headers,
-        }
-      )
+      .post<any>(`${this.apiLink}/Category/AddNewCategory`, data)
       .toPromise();
   }
 
@@ -44,14 +34,9 @@ export class CategoryService {
   }
 
   //update product detail
-  updateCategory(id: number, data: any): Observable<any> {
-    var headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      responseType: 'json',
-    });
-    return this.http.post<any>(
-      `${this.apiLink}/Category/UpdateCategory`,
-      JSON.stringify(data)
-    );
+  updateCategory(data: any): Promise<any> {
+    return this.http
+      .post<any>(`${this.apiLink}/Category/UpdateCategory`, data)
+      .toPromise();
   }
 }

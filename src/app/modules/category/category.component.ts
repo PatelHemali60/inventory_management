@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 export class CategoryComponent implements OnInit {
   public category!: any[];
   filteredProduct: any[] = [];
+  page: number = 1;
 
   constructor(
     private router: Router,
@@ -32,8 +33,6 @@ export class CategoryComponent implements OnInit {
     this.service.getCategory().subscribe({
       next: (data: any) => {
         this.category = data.Data;
-
-        this.toastr.success('List display sucessfully !!!');
       },
       error: (e) => console.error(e),
     });
@@ -44,7 +43,7 @@ export class CategoryComponent implements OnInit {
     this.service.deleteCategory(id).subscribe({
       next: () => {
         Swal.fire({
-          title: 'Are you sure want to Delete this ?',
+          title: 'Are you sure want to Delete this Category ?',
           text: 'This process is irreversible.',
           icon: 'warning',
           showCancelButton: true,
@@ -52,9 +51,9 @@ export class CategoryComponent implements OnInit {
           cancelButtonText: 'No',
         }).then((result) => {
           if (result.value) {
-            Swal.fire('Removed!', 'Product removed successfully.', 'success');
+            Swal.fire('Removed!', 'Category removed successfully.', 'success');
           } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire('Cancelled', 'Product still in our database.)', 'error');
+            Swal.fire('Cancelled', 'Category still in our database.', 'error');
           }
         });
         this.getCategoryList();

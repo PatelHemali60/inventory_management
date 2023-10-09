@@ -1,3 +1,4 @@
+import { BrandService } from './../../brand/service/brand.service';
 import { Component, EventEmitter, Output } from '@angular/core';
 import {
   AbstractControl,
@@ -21,7 +22,7 @@ export class AddSubCategoryComponent {
   public subCategoryForm: FormGroup;
   public subcategoryData!: any;
   private id: number;
-  private isAddMode: boolean;
+  public isAddMode: boolean;
   public categoryList: any;
   editData: any;
   public submitted = false;
@@ -62,8 +63,6 @@ export class AddSubCategoryComponent {
               this.subCategoryForm.patchValue({
                 Id: x.Id,
                 Name: x.Name,
-                Description: x.Description,
-                IsActive: false,
                 CategoryId: x.CategoryId,
                 CategoryName: x.CategoryName,
                 // Update other form controls as needed
@@ -76,20 +75,14 @@ export class AddSubCategoryComponent {
     });
   }
 
-  // "Id": 0,
-  // "Name": "string",
-  // "Description": "string",
-  // "IsActive": true,
-  // "CategoryId": 0,
-  // "CategoryName": "string"
   //Reactive Form
   private buildUsersForm(): FormGroup {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
-      Description: [null, Validators.required],
-      IsActive: [false, Validators.required],
-      CategoryId: [1, Validators.required],
+      Description: [null],
+      IsActive: [false],
+      CategoryId: [2, Validators.required],
       CategoryName: [null],
     });
   }
@@ -108,44 +101,80 @@ export class AddSubCategoryComponent {
   //on Form submit
   public onSubmit(): void {
     this.submitted = true;
-    if (this.isAddMode && this.subCategoryForm.valid) {
-      this.addRole();
-    } else {
-      this.updateUser();
+    if (this.subCategoryForm.invalid) {
+      return;
+    }
+
+    if (this.subCategoryForm.valid) {
+      this.submitted = true;
+
+      if (this.isAddMode) {
+        this.addSubcategory();
+      } else {
+        this.UpdateSubcategory();
+      }
     }
   }
+  // "Id": 0,
+  // "Name": "string",
+  // "Description": "string",
+  // "IsActive": true,
+  // "CategoryId": 0,
+  // "CategoryName": "string"
 
-  //Post data to db
-  public addRole(): void {
+  //subcategory
+  public addSubcategory(): void {
     this.subcategoryData = {
       Name: this.subCategoryForm.value.Name,
-      Description: this.subCategoryForm.value.Description,
+      // Description: this.subCategoryForm.value.Description,
       CategoryId: this.subCategoryForm.value.CategoryId,
     };
-
     this.subCategoryService
       .AddsubCategory(this.subcategoryData)
       .then((res: any) => {
-        this.navigateToList();
-        this.toastr.success('Add subCategory sucessfully !!!');
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error: any) => {});
+      .catch((error: any) => {
+        this.toastr.info(error.ErrorMessage);
+      });
   }
 
+  // //Put data to db
+
   //Put data to db
-  public updateUser(): void {
+  public UpdateSubcategory(): void {
     this.subCategoryService
       .updateSubCategory(this.id, this.subCategoryForm.value)
-      .subscribe({
-        next: () => {
+      .then((res: any) => {
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
           this.navigateToList();
-        },
-        error: (e: any) => console.log(e),
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
+      })
+      .catch((error: any) => {
+        this.toastr.error(error.ErrorMessage);
       });
   }
 
   public navigateToList(): void {
-    this.router.navigate(['home/subCategory']);
+    this.router.navigate(['subCategory']);
   }
 
   //Rest to form controls
@@ -154,6 +183,6 @@ export class AddSubCategoryComponent {
   }
 
   onCancel() {
-    this.router.navigate(['home/subCategory']);
+    this.router.navigate(['subCategory']);
   }
 }

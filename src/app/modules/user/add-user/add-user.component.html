@@ -1,6 +1,7 @@
 <div class="formWrapper  d-flex flex-column p-1 p-sm-4 overflow-hidden">
     <div class="d-flex justify-content-between row mt-3">
-        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color">Add User</span></span>
+        <span class="fw-bold fs-5 col-12  col-sm-12 col-md-10 col-lg-9 col-xl-9">inventory > <span class="fontCommon color" *ngIf="isAddMode">Add User</span>
+        <span class="fontCommon color" *ngIf="!isAddMode">Edit User</span></span>
     </div>
     <!-- form division start -->
     <form [formGroup]="UserForm" class="overflow-hidden  bg-white mt-4 mx-auto">
@@ -34,7 +35,7 @@
                 <!-- Password -->
                 <div class="col-6 mt-3">
                     <label for="Password" class="d-flex justify-content-start mb-2 fw-bold">Password</label>
-                    <input class="form-control inputBorder text-muted" type="password" id="Description" placeholder="Description" aria-label="default input example" formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f['Password'].errors }">
+                    <input class="form-control inputBorder text-muted" type="password" id="Description" placeholder="Password" aria-label="default input example" formControlName="Password" [ngClass]="{ 'is-invalid': submitted && f['Password'].errors }">
                     <div *ngIf="submitted && f['Password'].errors" class="invalid-feedback ml-2 ms-1">
                         <div *ngIf="f['Password'].errors['required']">Password is required</div>
                     </div>
@@ -47,6 +48,13 @@
                         {{ role.Name }}
                  </option>
                 </select>
+
+                    <div class="invalid-feedback" *ngIf="submitted && Role.errors?.required">
+                        Role is required !!!
+                    </div>
+                    <!-- <div class="invalid-feedback" *ngIf="submitted && RoleId.errors?.required">
+                        <sup>*</sup>Please enter your city name
+                    </div> -->
                 </div>
             </div>
         </div>

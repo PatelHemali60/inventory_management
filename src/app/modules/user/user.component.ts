@@ -13,7 +13,7 @@ export class UserComponent {
   public User!: any[];
   // filteredProduct: any[] = [];
   public searchText: string = '';
-
+  public page: number = 1;
   public excludeColumns: string[] = ['id'];
 
   // public currentPage: number;
@@ -48,36 +48,30 @@ export class UserComponent {
   }
 
   //Delete user from db and Update user list
-  public deleteUser(id: number): void {
-    this.userService.deleteUser(id).subscribe({
-      next: () => {
-        Swal.fire({
-          title: 'Are you sure?',
-          text: 'This process is irreversible.',
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Yes, go ahead.',
-          cancelButtonText: 'No, let me think',
-        }).then((result) => {
-          if (result.value) {
-            Swal.fire('Removed!', 'Item removed successfully.', 'success');
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            Swal.fire('Cancelled', 'Item is safe.)', 'error');
-          }
+
+  public deleteuser(id: number): void {
+    Swal.fire({
+      title: 'Are you sure want to Delete this?',
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        // User clicked "Yes," proceed with deletion
+        this.userService.deleteUser(id).subscribe({
+          next: () => {
+            Swal.fire('Removed!', 'User removed successfully.', 'success');
+            this.GetallUserList();
+          },
+          error: (e) => console.error(e),
         });
-        this.router.navigate(['home/User']);
-      },
-      error: (e) => console.error(e),
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'User still in our database.', 'error');
+      }
     });
   }
-
   // //get user list from db
-
-  //for filter data in search
-  // handle change event of search input
-  // handle change event of search input
-  // public handleChange(event: any): void {
-  //   this.searchText = event.target.value;
-  //   this.filterData(event.target.value);
-  // }
 }

@@ -25,14 +25,8 @@ export class RoleService {
 
   //ragistration api
   public AddRole(Role: any): Promise<any> {
-    var headers = new HttpHeaders().set(
-      'Content-Type',
-      'application/json; charset=utf-8'
-    );
     return this.http
-      .post<any>(`${this.apiLink}/Role/AddNewRole`, JSON.stringify(Role), {
-        headers: headers,
-      })
+      .post<any>(`${this.apiLink}/Role/AddNewRole`, Role)
       .toPromise();
   }
 
@@ -43,14 +37,8 @@ export class RoleService {
 
   //update product detail
   updateRole(data: any): Promise<any> {
-    var headers = new HttpHeaders().set(
-      'Content-Type',
-      'application/json; charset=utf-8'
-    );
     return this.http
-      .post<any>(`${this.apiLink}/Role/UpdateRole`, JSON.stringify(data), {
-        headers: headers,
-      })
+      .post<any>(`${this.apiLink}/Role/UpdateRole`, data)
       .toPromise();
   }
 }

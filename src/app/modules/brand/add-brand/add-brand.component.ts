@@ -20,9 +20,9 @@ export class AddBrandComponent {
   @Output() onSubmitData!: EventEmitter<Event>;
 
   public brandForm!: FormGroup;
-  public roleData!: any;
+  public BrandData!: any;
   private id: number;
-  private isAddMode: boolean;
+  public isAddMode: boolean;
   private categoryList: any;
   editData: any;
   public submitted = false;
@@ -30,7 +30,6 @@ export class AddBrandComponent {
   inputValue!: any; // Initialize with an empty string
 
   public onDynamicInputValueChange(value: string) {
-
     this.inputValue = value;
     console.log('Input value changed to:', value);
   }
@@ -67,12 +66,13 @@ export class AddBrandComponent {
         //condition for check the id if get id then patch value
         if (this.id) {
           dataCategary.map((x: any) => {
-            if ((x.Id = this.id)) {
+            if (x.Id == this.id) {
               this.editData = x;
               this.brandForm.patchValue({
-                Id: parseInt(this.editData.Id),
-                Name: this.editData.Name,
-                Description: this.editData.Description,
+                Id: x.Id,
+                Name: x.Name,
+
+                // Update other form controls as needed
               });
             }
           });
@@ -87,46 +87,74 @@ export class AddBrandComponent {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
-      Description: [null, Validators.required],
-      IsActive: [false, Validators.required],
+      Description: [null],
+      IsActive: [false],
     });
   }
 
-  //on Form submit
   //on Form submit
   public onSubmit(): void {
     this.submitted = true;
-    if (this.isAddMode && this.brandForm.valid) {
-      this.addRole();
-    } else {
-      this.updateUser();
+    if (this.brandForm.invalid) {
+      return;
+    }
+
+    if (this.brandForm.valid) {
+      this.submitted = true;
+
+      if (this.isAddMode) {
+        this.addBrand();
+      } else {
+        this.updateBrand();
+      }
     }
   }
-
   //Post data to db
-  public addRole(): void {
-    this.roleData = {
+  //Post data to db
+  public addBrand(): void {
+    this.BrandData = {
       Name: this.brandForm.value.Name,
-      Description: this.brandForm.value.Description,
     };
-
     this.brandService
-      .AddBrand(this.roleData)
+      .AddBrand(this.BrandData)
       .then((res: any) => {
-        this.toastr.success('Add Brand sucessfully !!!');
-        this.navigateToList();
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error: any) => {});
+      .catch((error) => {
+        this.toastr.info(error.ErrorMessage);
+      });
   }
 
   //Put data to db
-  public updateUser(): void {
-    this.brandService.updateBrand(this.brandForm.value).subscribe({
-      next: () => {
-        this.navigateToList();
-      },
-      error: (e: any) => console.log(e),
-    });
+  public updateBrand(): void {
+    this.brandService
+      .updateBrand(this.brandForm.value)
+      .then((res: any) => {
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
+      })
+      .catch((error: any) => {
+        this.toastr.error(error.ErrorMessage);
+      });
   }
 
   public navigateToList(): void {

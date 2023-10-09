@@ -15,7 +15,7 @@ export class SideNavComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    if (this.RoleId == 16) {
+    if (this.RoleId == 2) {
       this.Role = true;
     } else {
       this.Role = false;

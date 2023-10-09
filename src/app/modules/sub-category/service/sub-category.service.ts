@@ -24,20 +24,9 @@ export class SubCategoryService {
   }
 
   //ragistration api
-  public AddsubCategory(Role: any): Promise<any> {
-    var headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      responseType: 'json',
-    });
-
+  public AddsubCategory(data: any): Promise<any> {
     return this.http
-      .post<any>(
-        `${this.apiLink}/SubCategory/AddNewSubCategory`,
-        JSON.stringify(Role),
-        {
-          headers: headers,
-        }
-      )
+      .post<any>(`${this.apiLink}/SubCategory/AddNewSubCategory`, data)
       .toPromise();
   }
 
@@ -49,14 +38,16 @@ export class SubCategoryService {
   }
 
   //update product detail
-  updateSubCategory(id: number, data: any): Observable<any> {
-    var headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      responseType: 'json',
-    });
-    return this.http.post<any>(
-      `${this.apiLink}/SubCategory/UpdateSubCategory`,
-      JSON.stringify(data)
-    );
+  updateSubCategory(id: number, data: any): Promise<any> {
+    return this.http
+      .post<any>(`${this.apiLink}/SubCategory/UpdateSubCategory`, data)
+      .toPromise();
   }
 }
+
+//update product detail
+// updateBrand(data: any): Promise<any> {
+//   return this.http
+//     .post<any>(`${this.apiLink}/Brand/UpdateBrand`, data)
+//     .toPromise();
+// }

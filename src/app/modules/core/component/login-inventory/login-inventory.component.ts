@@ -57,6 +57,9 @@ export class LoginInventoryComponent implements OnInit {
 
   public onLogin(): void {
     this.submitted = true;
+    if (this.loginForm.invalid) {
+      return;
+    }
 
     let data = {
       EmailId: this.loginForm.value.EmailId,
@@ -65,12 +68,14 @@ export class LoginInventoryComponent implements OnInit {
     };
 
     this.authService.Login(data).subscribe((res: any) => {
+      //console.log(res, 'response login');
+
       // console.log(res.Data, 'reponse');
-      localStorage.setItem('userId', res.Data.Id);
+      // localStorage.setItem('userId', res.Data.Id);
       localStorage.setItem('roleID', res.Data.RoleId);
-      let roleId = 16;
+      let roleId = 2;
       let ID = res.Data.RoleId;
-      this.toastr.success('Add User sucessfully !!!');
+      this.toastr.success(res.SuccessMessage);
       localStorage.setItem('currentUser', ID);
       if (roleId == ID) {
         this.router.navigate(['/product']);
@@ -89,7 +94,4 @@ export class LoginInventoryComponent implements OnInit {
   loginWithGoogle(): void {
     // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
-  // logOut(): void {
-  //   this.socialAuthService.signOut();
-  // }
 }

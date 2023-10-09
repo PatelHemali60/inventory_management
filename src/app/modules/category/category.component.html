@@ -32,40 +32,31 @@
                 <table class="table pb-3 position-relative ">
                     <thead class="theadBg border-0">
                         <tr class="text-center">
-                            <th>
-                                <div class="form-group">
-                                    <input type="checkbox" id="html">
-                                    <label for="html"></label>
-                                </div>
-                            </th>
+                            <th scope="col fontCommon lineHeight">Id</th>
                             <th scope="col fontCommon lineHeight">Name</th>
-                            <th scope="col fontCommon lineHeight">Description</th>
                             <th scope="col fontCommon lineHeight">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-
-                        <tr *ngFor="let product of category let i = index" class="dottedBorder fontColor text-center ">
-                            <td scope="row">
-                                <div class="form-group">
-                                    <input type="checkbox" id="html ">
-                                    <label for="html"></label>
-                                </div>
-                            </td>
+                        <tr *ngFor="let product of category | paginate: { itemsPerPage: 3, currentPage: page } , let i = index" class="dottedBorder fontColor text-center ">
+                            <td>{{i}}</td>
                             <td class="">
                                 <span>{{product.Name}}</span>
                             </td>
-                            <td class=""> {{product.Description}}</td>
-                            <td class="d-flex iconSize ms-5 ">
-                                <span class="me-3 mt-0"><i class="fa fa-eye " aria-hidden="true "></i></span>
+                            <td class="d-flex iconSize  d-flex justify-content-center">
                                 <span class="me-3 mt-0"> <a routerLink="edit/{{product.Id}}"><i class="fa fa-edit " style="color: black;"></i></a></span>
                                 <span class="mt-0"> <a (click)="deleteProduct(product.Id)"><i class="fa fa-trash text-danger " aria-hidden="true "></i></a></span>
                             </td>
                         </tr>
-
                     </tbody>
+
                 </table>
-                <div class="d-flex justify-content-between m-2 ">
+                <div class="row mx-0">
+                    <div class="col-10 m-2 d-flex justify-content-center">
+                        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+                    </div>
+                </div>
+                <!-- <div class="d-flex justify-content-between m-2 ">
                     <div class="d-flex ">
                         <span class=" mt-2 ms-2 fontCommon ">Show Per Page :</span>
                         <span class="ms-1 ">
@@ -84,7 +75,7 @@
                     <small class="btnPaginantion bg-secondary text-white border "> 2</small>
                     <small class="btnPaginantion bgPurple ms-2 me-2 text-white border ">Next</small>
                     </span>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- paginantion design -->

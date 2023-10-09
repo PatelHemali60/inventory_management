@@ -131,13 +131,6 @@ export class ProductComponent implements OnInit {
       parent: this.injector,
     });
   }
-  // const componentFactory = this.componentFactoryResolver.resolveComponentFactory(ViewProductdetailComponent);
-  // const componentRef = componentFactory.create(this.injector);
-
-  // const componentInstance = componentRef.instance as ViewProductdetailComponent;
-  // componentInstance.itemData = item; // Assuming 'itemData' is an input property in ViewProductdetailComponent
-
-  // overlayRef.attach(componentRef);
 
   prevImageClick() {
     this.slider.prev();

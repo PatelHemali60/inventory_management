@@ -3,6 +3,7 @@ import { SubCategoryService } from './service/sub-category.service';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sub-category',
@@ -12,6 +13,8 @@ import { Router } from '@angular/router';
 export class SubCategoryComponent {
   public category!: any[];
   filteredProduct: any[] = [];
+
+  page: number = 1;
 
   constructor(
     private router: Router,
@@ -30,24 +33,38 @@ export class SubCategoryComponent {
     this.service.getsubCategory().subscribe({
       next: (data: any) => {
         this.category = data.Data;
-
-        // this.toastr.success('List display sucessfully !!!');
       },
       error: (e: any) => console.error(e),
     });
   }
-  // {
-  //   "Id": 2,
-  //   "Name": "Home & Furniture",
-  //   "Description": "Home & Furniture",
-  //   "IsActive": true
-  // },
 
-  //Delete user from db and Update user list
   public deleteProduct(id: number): void {
-    this.service.deletesubCategory(id).subscribe({
-      next: () => this.getCategoryList(),
-      error: (e: any) => console.error(e),
+    Swal.fire({
+      title: 'Are you sure want to Delete this?',
+      text: 'This process is irreversible.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No',
+    }).then((result) => {
+      if (result.value) {
+        // User clicked "Yes," proceed with deletion
+        this.service.deletesubCategory(id).subscribe({
+          next: () => {
+            Swal.fire(
+              'Removed!',
+              'Sub-category removed successfully.',
+              'success'
+            );
+            this.getCategoryList();
+            this.page = 1;
+          },
+          error: (e: any) => console.error(e),
+        });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // User clicked "No," show a message
+        Swal.fire('Cancelled', 'Sub-category still in our database.', 'error');
+      }
     });
   }
 

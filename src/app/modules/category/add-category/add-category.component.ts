@@ -21,7 +21,7 @@ export class AddCategoryComponent implements OnInit {
   public categoryForm: FormGroup;
   public roleData!: any;
   private id: number;
-  private isAddMode: boolean;
+  public isAddMode: boolean;
   private categoryList: any;
   editData: any;
   public submitted: any;
@@ -80,8 +80,8 @@ export class AddCategoryComponent implements OnInit {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
-      Description: [null, Validators.required],
-      IsActive: ['false', Validators.required],
+      Description: [null],
+      IsActive: ['false'],
     });
   }
 
@@ -89,43 +89,71 @@ export class AddCategoryComponent implements OnInit {
   //on Form submit
   public onSubmit(): void {
     this.submitted = true;
-    if (this.isAddMode && this.categoryForm.valid) {
-      this.addRole();
-    } else {
-      this.updateUser();
+
+    if (this.categoryForm.invalid) {
+      return;
+    }
+
+    if (this.categoryForm.valid) {
+      this.submitted = true;
+
+      if (this.isAddMode) {
+        this.addCategory();
+      } else {
+        this.updateCategory();
+      }
     }
   }
 
   //Post data to db
-  public addRole(): void {
+  public addCategory(): void {
     this.roleData = {
       Name: this.categoryForm.value.Name,
-      Description: this.categoryForm.value.Description,
     };
-
     this.categoryService
       .AddCategory(this.roleData)
       .then((res: any) => {
-        this.navigateToList();
-        this.toastr.success('Add Category sucessfully !!!');
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
+          this.navigateToList();
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
       })
-      .catch((error) => {});
+      .catch((error) => {
+        this.toastr.info(error.ErrorMessage);
+      });
   }
 
   //Put data to db
-  public updateUser(): void {
+  public updateCategory(): void {
     this.categoryService
-      .updateCategory(this.id, this.categoryForm.value)
-      .subscribe({
-        next: () => {
+      .updateCategory(this.categoryForm.value)
+      .then((res: any) => {
+        if (res.SuccessMessage) {
+          // It's a success, so display the success message
+          this.toastr.success(res.SuccessMessage);
           this.navigateToList();
-        },
-        error: (e: any) => console.log(e),
+        } else {
+          // It's an error, so display the error message
+          this.toastr.error(res.ErrorMessage);
+          if (!res.ErrorMessage) {
+            this.router.navigate(['form']);
+          }
+        }
+      })
+      .catch((error: any) => {
+        this.toastr.error(error.ErrorMessage);
       });
   }
 
   public navigateToList(): void {
-    this.router.navigate(['home/CategoryMaster']);
+    this.router.navigate(['CategoryMaster']);
   }
 
   //Rest to form controls
@@ -134,6 +162,6 @@ export class AddCategoryComponent implements OnInit {
   }
 
   onCancel() {
-    this.cancel.emit();
+    this.router.navigate(['CategoryMaster']);
   }
 }
