@@ -68,6 +68,7 @@ export class ViewProductdetailComponent implements OnInit {
   ngOnInit(): void {}
 
   public BuyNow() {
+    debugger;
     let RoleID = localStorage.getItem('roleID');
     if (RoleID == null) {
       this.LoggedinUser = true;
@@ -105,14 +106,6 @@ export class ViewProductdetailComponent implements OnInit {
     this.grandTotal = this.Price * this.Quntity;
   }
 
-  // {
-  //   "Id": 0,
-  //   "UserId": 0,
-  //   "ProductId": 0,
-  //   "Quantity": 0,
-  //   "IsActive": true
-  // }
-
   //add to cart
   public AddtoCart(): void {
     let RoleID = localStorage.getItem('roleID');
@@ -136,7 +129,7 @@ export class ViewProductdetailComponent implements OnInit {
         .AddtoCart(item)
         .then((res: any) => {
           this.router.navigate(['/AddtoCart']);
-          this.toaster.success('Add product to cart sucessfully !!!');
+          this.toaster.success(res.SuccessMessage);
         })
         .catch((error: any) => {});
     }

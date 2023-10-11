@@ -12,10 +12,18 @@ export class SideNavComponent implements OnInit {
   public sidebarOpen = false;
   public RoleId: any = localStorage.getItem('roleID');
 
+  public Admin: any;
+  public LoginUser_roleId: any = localStorage.getItem('Login_roleid');
+
+  public User_id: any = localStorage.getItem('User');
+
   constructor(private router: Router) {}
 
   ngOnInit(): void {
-    if (this.RoleId == 2) {
+    // console.log(this.User_id, 'userid');
+    // console.log(this.LoginUser_roleId, 'Roleid');
+
+    if (this.LoginUser_roleId == this.User_id) {
       this.Role = true;
     } else {
       this.Role = false;

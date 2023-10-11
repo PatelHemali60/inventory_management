@@ -25,6 +25,10 @@ export class LoginInventoryComponent implements OnInit {
   public loading = false;
   public IsThirdPartyLogin: any = true;
   public Role: any;
+
+  public Admin_id!: any;
+  public User_id!: any;
+
   @Output() onSigninSuccess = new EventEmitter();
   @Input() clientId!: string;
 
@@ -49,10 +53,32 @@ export class LoginInventoryComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.getallRoledetail();
+  }
   //Reactive Form
   get f(): { [key: string]: AbstractControl } {
     return this.loginForm.controls;
+  }
+
+  public getallRoledetail() {
+    this.authService.getAlluserRole().subscribe((res: any) => {
+      let response = res.Data;
+
+      response.forEach((ele: any) => {
+        if (ele.Name.toLowerCase() == 'admin') {
+          this.Admin_id = ele.Id;
+        } else if (ele.Name.toLowerCase() == 'user') {
+          this.User_id = ele.Id;
+        }
+      });
+
+      // console.log(this.Admin_id, 'Admin_id');
+      // console.log(this.User_id, 'User_id');
+
+      localStorage.setItem('Admin', this.Admin_id);
+      localStorage.setItem('User', this.User_id);
+    });
   }
 
   public onLogin(): void {
@@ -68,16 +94,19 @@ export class LoginInventoryComponent implements OnInit {
     };
 
     this.authService.Login(data).subscribe((res: any) => {
-      //console.log(res, 'response login');
+      // console.log('login user detail', res.Data);
 
-      // console.log(res.Data, 'reponse');
-      // localStorage.setItem('userId', res.Data.Id);
-      localStorage.setItem('roleID', res.Data.RoleId);
-      let roleId = 2;
-      let ID = res.Data.RoleId;
+      localStorage.setItem('Login_roleid', res.Data.RoleId);
+      localStorage.setItem('User_id', res.Data.Id);
+      // localStorage.setItem('roleID_User', res.Data.RoleId);
+
+      // console.log(res.Data.RoleId, 'login user roleid');
+
+      let roleId = this.User_id;
+      let Rolewise_id = res.Data.RoleId;
       this.toastr.success(res.SuccessMessage);
-      localStorage.setItem('currentUser', ID);
-      if (roleId == ID) {
+      localStorage.setItem('currentUser', Rolewise_id);
+      if (roleId == Rolewise_id) {
         this.router.navigate(['/product']);
       } else {
         this.router.navigate(['/dashboard']);
@@ -89,9 +118,5 @@ export class LoginInventoryComponent implements OnInit {
 
   public RouteRagistration() {
     this.router.navigate(['/ragistration']);
-  }
-
-  loginWithGoogle(): void {
-    // this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
   }
 }

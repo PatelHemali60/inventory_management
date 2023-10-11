@@ -9,6 +9,7 @@ import { BrandService } from '../service/brand.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { CategoryService } from '../../category/service/category.service';
 
 @Component({
   selector: 'app-add-brand',
@@ -23,7 +24,7 @@ export class AddBrandComponent {
   public BrandData!: any;
   private id: number;
   public isAddMode: boolean;
-  private categoryList: any;
+  public SubcategoryList: any;
   editData: any;
   public submitted = false;
 
@@ -40,7 +41,8 @@ export class AddBrandComponent {
     private router: Router,
     private route: ActivatedRoute,
     private toastr: ToastrService,
-    private location: Location
+    private location: Location,
+    private categoryService: CategoryService
   ) {
     this.brandForm = this.buildUsersForm();
 
@@ -52,11 +54,22 @@ export class AddBrandComponent {
   //On init get department list and ckeck if its addMode
   ngOnInit(): void {
     this.getbrandList();
+    this.getcategoryList();
   }
 
   //get form controlfrom Reactive Form
   get f(): { [key: string]: AbstractControl } {
     return this.brandForm.controls;
+  }
+
+  //category list
+  public getcategoryList(): void {
+    this.brandService.getsubCategory().subscribe({
+      next: (data: any) => {
+        this.SubcategoryList = data.Data;
+      },
+      error: (e: any) => console.log(e),
+    });
   }
 
   public getbrandList(): void {
@@ -71,7 +84,7 @@ export class AddBrandComponent {
               this.brandForm.patchValue({
                 Id: x.Id,
                 Name: x.Name,
-
+                SubCategoryId: x.SubCategoryId,
                 // Update other form controls as needed
               });
             }
@@ -82,12 +95,21 @@ export class AddBrandComponent {
     });
   }
 
+  // {
+  //   "Id": 0,
+  //   "Name": "string",
+  //   "Description": "string",
+  //   "SubCategoryId": 0,
+  //   "IsActive": true
+  // }
+
   //Reactive Form
   private buildUsersForm(): FormGroup {
     return this.fb.group({
       Id: [null],
       Name: [null, Validators.required],
       Description: [null],
+      SubCategoryId: [6, Validators.required],
       IsActive: [false],
     });
   }
@@ -114,7 +136,9 @@ export class AddBrandComponent {
   public addBrand(): void {
     this.BrandData = {
       Name: this.brandForm.value.Name,
+      SubCategoryId: this.brandForm.value.SubCategoryId,
     };
+    console.log(this.BrandData, 'brand with category');
     this.brandService
       .AddBrand(this.BrandData)
       .then((res: any) => {

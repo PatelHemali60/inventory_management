@@ -40,6 +40,8 @@ export class AddProductComponent {
   public EditProduct!: any;
   public submitted = false;
   public selectedFile!: File;
+  public brand_list!: any;
+  public subCategory_value: any;
 
   constructor(
     private fb: FormBuilder,
@@ -73,6 +75,8 @@ export class AddProductComponent {
     if (!this.isAddMode) {
       this.productService.GetProductbyId(this.id).subscribe((ele: any) => {
         const editData = ele.Data;
+
+        // console.log(editData, 'patch value in edit form');
         //logic for set subcategory value
         if (this.id > 0) {
           let category_Id = editData.CategoryId;
@@ -89,41 +93,26 @@ export class AddProductComponent {
           });
         }
 
-        // const editFormData = new FormData();
-        // // Append the form fields to the FormData
-        // editFormData.append('Name', this.Product_Form.value.Name.toString());
-        // editFormData.append('CategoryId', this.Product_Form.value.CategoryId);
-        // editFormData.append(
-        //   'SubCategoryId',
-        //   this.Product_Form.value.SubCategoryId
-        // );
-        // editFormData.append('BrandId', this.Product_Form.value.BrandId);
-        // editFormData.append('Unit', this.Product_Form.value.Unit);
-        // editFormData.append('SKU', this.Product_Form.value.SKU);
-        // editFormData.append('MinimumQty', this.Product_Form.value.MinimumQty);
-        // editFormData.append('Quantity', this.Product_Form.value.Quantity);
-        // editFormData.append(
-        //   'Description',
-        //   this.Product_Form.value.Description.toString()
-        // );
-        // editFormData.append('Tax', this.Product_Form.value.Tax.toString());
-        // editFormData.append(
-        //   'DiscountTypeId',
-        //   this.Product_Form.value.DiscountTypeId
-        // );
-        // editFormData.append('Price', this.Product_Form.value.Price);
-        // editFormData.append(
-        //   'Status',
-        //   this.Product_Form.value.Status.toString()
-        // );
-        // editFormData.append('file', this.selectedFile);
+        //logic for set brand value based on subcategory
+        if (this.id !== null) {
+          let Subcategory_id = editData.SubCategoryId;
+          console.log(Subcategory_id, 'subcategory');
+          this.productService.getbrandBySubcategory(Subcategory_id).subscribe({
+            next: (data: any) => {
+              //fetch data form category id for subcategory
+              this.brand_list = data.Data;
+              let brand_value = editData.BrandId;
+              //map where i get all id form caterogy
+              this.Product_Form.controls['BrandId'].setValue(brand_value);
+            },
+          });
+        }
 
         // edit patched data in form
         this.EditProduct = {
           Id: editData.Id,
           Name: editData.Name,
           CategoryId: parseInt(editData.CategoryId),
-          BrandId: parseInt(editData.BrandId),
           Unit: parseInt(editData.Unit),
           SKU: parseInt(editData.SKU),
           MinimumQty: parseInt(editData.MinimumQty),
@@ -134,9 +123,9 @@ export class AddProductComponent {
           Price: editData.Price,
           Status: editData.Status,
           ImageUrl: this.base64Image,
-          StripePaymentLink: 'https://buy.stripe.com/test_eVa6sjeYO27b3u07sQ',
-          StripeProductId: 'prod_OX6LjoDFfOUINV',
-          StripePriceProductId: 'price_1Nk29GSHl1utr3vFPoejv0l0',
+          StripePaymentLink: editData.StripePaymentLink,
+          StripeProductId: editData.StripeProductId,
+          StripePriceProductId: editData.StripePriceProductId,
         };
 
         this.Product_Form.patchValue(this.EditProduct);
@@ -200,17 +189,20 @@ export class AddProductComponent {
     });
   }
 
+  public onItemSelectedSubCategory(ele: any) {
+    const subCategory_Id = ele.target.value;
+    this.productService.getbrandBySubcategory(subCategory_Id).subscribe({
+      next: (data: any) => {
+        this.brand_list = data.Data;
+      },
+      error: (e: any) => console.log(e),
+    });
+  }
+
   //subcategory list
 
   //get brand
-  private getbrandList(): void {
-    this.brandService.getBrand().subscribe({
-      next: (data: any) => {
-        this.brand = data.Data;
-      },
-      error: (e) => console.log(e),
-    });
-  }
+  private getbrandList(): void {}
 
   //get discount type
   private getdiscountList(): void {
@@ -291,6 +283,19 @@ export class AddProductComponent {
     EditformData.append('Price', this.Product_Form.value.Price);
     EditformData.append('Status', this.Product_Form.value.Status.toString());
     EditformData.append('file', this.selectedFile);
+    EditformData.append(
+      'StripePaymentLink',
+      this.Product_Form.value.StripePaymentLink
+    );
+    EditformData.append(
+      'StripeProductId',
+      this.Product_Form.value.StripeProductId
+    );
+    EditformData.append(
+      'StripePriceProductId',
+      this.Product_Form.value.StripePriceProductId
+    );
+    // EditformData.append('StripePaymentLink');
     this.productService
       .updateProduct(EditformData)
       .then((res: any) => {
@@ -305,9 +310,6 @@ export class AddProductComponent {
             this.router.navigate(['form']);
           }
         }
-
-        // this.toastr.success('Edit Product sucessfully !!!');
-        // this.router.navigate(['/Inventory']);
       })
       .catch((error: any) => {});
   }

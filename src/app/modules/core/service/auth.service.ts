@@ -19,7 +19,6 @@ export class AuthService {
   }
   //ragistration api
   public createUser(user: any): Observable<any> {
-    debugger;
     return this.http.post<any>(`${this.apiLink}/User/AddNewUser`, user);
   }
 

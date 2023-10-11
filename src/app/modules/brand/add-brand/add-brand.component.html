@@ -5,18 +5,31 @@
     </div>
     <!-- form division start -->
     <form [formGroup]="brandForm" novalidate class="overflow-hidden  bg-white mt-4 mx-auto p-5">
-        <div class="p-5 mt-2">
+        <div class="p-3 mt-2">
             <div class="row text-center ">
                 <div class="col-12">
-                    <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">Name</label>
+                    <label for="Name" class="d-flex justify-content-start mb-2 fw-bold">Brand Name</label>
                     <input class="form-control inputBorder text-muted" type="text" id="Name" placeholder="Name" aria-label="Name" formControlName="Name" [ngClass]="{ 'is-invalid': submitted && f['Name'].errors }">
-                    <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1">
+                    <div *ngIf="submitted && f['Name'].errors" class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
                         <div *ngIf="f['Name'].errors['required']">BrandName is required</div>
+                    </div>
+                </div>
+                <!-- category drop-down -->
+                <div class="col-12 mt-4">
+                    <label for="SubCategoryId" class="d-flex justify-content-start mb-2 fw-bold">Sub Category</label>
+                    <select class=" inputBorder text-muted form-control" aria-label="Default select example" id="SubCategoryId" formControlName="SubCategoryId" [ngClass]="{ 'is-invalid': submitted && f['SubCategoryId'].errors }">
+                    <option *ngFor="let category of SubcategoryList;" [value]="category.Id">
+                    {{category.Name}}
+                    </option>
+                    </select>
+                    <div *ngIf="submitted && f['SubCategoryId'].errors " class="invalid-feedback ml-2 ms-1 d-flex justify-content-start">
+                        <div *ngIf="f['SubCategoryId'].errors['required'] ">CategoryId is required</div>
                     </div>
                 </div>
             </div>
         </div>
         <!-- button design -->
+
         <div class="row mt-2 mb-4 ">
             <div class="col-12 ">
                 <div class="d-flex justify-content-center ">

@@ -37,7 +37,11 @@ export class RagiatrationInventoryComponent {
 
     this.FirstName = new FormControl('', [Validators.required]);
     this.LastName = new FormControl('', [Validators.required]);
-    this.EmailId = new FormControl('', [Validators.required]);
+    this.EmailId = new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$'),
+    ]);
     this.Password = new FormControl('', [Validators.required]);
     this.RoleId = new FormControl('');
 
@@ -71,14 +75,13 @@ export class RagiatrationInventoryComponent {
         let Reponse = data.Data;
 
         if (Reponse.length > 0) {
-          //get id from user Name
-          const userObject = Reponse.find(
-            (item: any) => item.Name.toString().toLowerCase() == 'user'
+          const user = Reponse.find(
+            (ele: any) => ele.Name.toString().toLowercase() == 'user'
           );
-
-          this.UserRoleId = userObject?.Id;
+          this.UserRoleId = user.Id;
+          return user ? user.id : undefined;
+          //get id from user Name
         }
-        // console.log(this.UserRoleId); // You can use this data
       },
       error: (e) => console.log(e),
     });
@@ -86,7 +89,7 @@ export class RagiatrationInventoryComponent {
 
   public onSubmit(): void {
     this.submitted = true;
-    debugger;
+
     if (this.RagistrationForm.invalid) {
       return;
     }
@@ -106,7 +109,7 @@ export class RagiatrationInventoryComponent {
       Password: this.RagistrationForm.value.Password,
       RoleId: this.UserRoleId,
     };
-    // console.log(this.RagistrationformValue, 'form value');
+    console.log(this.RagistrationformValue, 'form value');
 
     this.authService.createUser(this.RagistrationformValue).subscribe({
       next: (res) => {

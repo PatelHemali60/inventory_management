@@ -96,7 +96,7 @@ export class ProductComponent implements OnInit {
       setTimeout(() => {
         overlayRef.detach();
         overlayRef.dispose();
-      }, 4000);
+      }, 5000);
     } else {
       setTimeout(() => {
         overlayRef.detach();

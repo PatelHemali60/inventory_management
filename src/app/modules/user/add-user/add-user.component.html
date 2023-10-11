@@ -30,7 +30,7 @@
                     <div *ngIf="submitted && f['EmailId'].errors" class="invalid-feedback ml-2 ms-1">
                         <div *ngIf="f['EmailId'].errors['required']">Email is required</div>
                     </div>
-                    <!-- <div *ngIf="f['EmailId'].errors['Email']">Email must be a valid email address</div> -->
+
                 </div>
                 <!-- Password -->
                 <div class="col-6 mt-3">
@@ -48,13 +48,9 @@
                         {{ role.Name }}
                  </option>
                 </select>
-
                     <div class="invalid-feedback" *ngIf="submitted && Role.errors?.required">
                         Role is required !!!
                     </div>
-                    <!-- <div class="invalid-feedback" *ngIf="submitted && RoleId.errors?.required">
-                        <sup>*</sup>Please enter your city name
-                    </div> -->
                 </div>
             </div>
         </div>

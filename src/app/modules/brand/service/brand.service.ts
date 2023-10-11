@@ -27,7 +27,7 @@ export class BrandService {
   }
 
   //delete product
-  deleteBrand(id: number): Observable<number> {
+  public deleteBrand(id: number): Observable<number> {
     return this.http.delete<number>(`${this.apiLink}/Brand/DeleteBrand/${id}`);
   }
 
@@ -35,9 +35,15 @@ export class BrandService {
   //update product detail
 
   //update product detail
-  updateBrand(data: any): Promise<any> {
+  public updateBrand(data: any): Promise<any> {
     return this.http
       .post<any>(`${this.apiLink}/Brand/UpdateBrand`, data)
       .toPromise();
+  }
+
+  //get category
+  //get role
+  public getsubCategory(): Observable<any> {
+    return this.http.get<any>(`${this.apiLink}/SubCategory/GetAllSubCategory`);
   }
 }

@@ -34,7 +34,7 @@
                     <thead class="theadBg border-0">
                         <tr class="text-center">
                             <th scope="col fontCommon lineHeight">Id</th>
-                            <th scope="col fontCommon lineHeight">Name</th>
+                            <th scope="col fontCommon lineHeight">Brand Name</th>
                             <th scope="col fontCommon lineHeight">Action</th>
                         </tr>
                     </thead>
@@ -46,9 +46,9 @@
                             <td class="">
                                 <span>{{product.Name}}</span>
                             </td>
+
                             <!-- <td class=""> {{product.Description}}</td> -->
-                            <td class="d-flex iconSize  justify-content-center">
-                                <!-- <span class="me-3 mt-0"><i class="fa fa-eye " aria-hidden="true "></i></span> -->
+                            <td class="d-flex iconSize  d-flex justify-content-center">
                                 <span class="me-3 mt-0"> <a routerLink="edit/{{product.Id}}"><i class="fa fa-edit " style="color: black;"></i></a></span>
                                 <span class="mt-0"> <a (click)="deleteProduct(product.Id)"><i class="fa fa-trash text-danger " aria-hidden="true "></i></a></span>
                             </td>

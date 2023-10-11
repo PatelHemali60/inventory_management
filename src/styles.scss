@@ -38,6 +38,11 @@ a {
     /* color: #676f81; */
 }
 
+.main-wrapper {
+    position: relative;
+    height: 100%;
+}
+
 .commonColor {
     color: #7b58d0 !important;
 }
@@ -664,7 +669,7 @@ width: 100% !important; */
     height: 100%;
     background-color: #ffffff;
     color: #7B58D0;
-    overflow-y: auto;
+    // overflow-y: auto;
     transition: all .5s;
     -webkit-transition: all .5s;
 }

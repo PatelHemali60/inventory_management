@@ -30,6 +30,7 @@
                         <input type="EmailId" name="EmailId" id="EmailId" class="input-field  form-control" formControlName="EmailId" placeholder="EmailId" [ngClass]="{ 'is-invalid': submitted && f['EmailId'].errors }">
                         <div *ngIf="submitted && f['EmailId'].errors" class="invalid-feedback ml-2 ms-2 d-flex justify-content-start">
                             <div *ngIf="f['EmailId'].errors['required']">Email is required !!!</div>
+                            <div *ngIf="f['EmailId'].errors['email']">Email must be a valid email address !!!</div>
                         </div>
                     </div>
                     <div class="input-control d-flex flex-column mb-3">

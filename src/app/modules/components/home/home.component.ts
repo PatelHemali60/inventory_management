@@ -12,8 +12,8 @@ export class HomeComponent implements OnInit {
   public ID: any;
 
   constructor() {
-    this.ID = localStorage.getItem('roleID');
-    //console.log(this.ID, 'id');
+    this.ID = localStorage.getItem('Login_roleid');
+
     if (this.ID == null) {
       this.shouldShowSidebar = true;
     } else {

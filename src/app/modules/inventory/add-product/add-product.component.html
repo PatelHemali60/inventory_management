@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 ">
                         <label for="SubCategoryId " class="d-flex justify-content-start mb-2 fw-bold ">Sub Category</label>
-                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="SubCategoryId" formControlName="SubCategoryId" [ngClass]="{ 'is-invalid': submitted && f['SubCategoryId'].errors }">
+                        <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="SubCategoryId" (change)="onItemSelectedSubCategory($event)" formControlName="SubCategoryId" [ngClass]="{ 'is-invalid': submitted && f['SubCategoryId'].errors }">
                      <option selected> Choose Sub Category</option>
                       <option *ngFor="let subCategory of subCategorylist; " [value]=subCategory.Id >
                               {{ subCategory.Name }}
@@ -44,7 +44,7 @@
                         <label for="Brand " class="d-flex justify-content-start mb-2 fw-bold ">Brand</label>
                         <select class=" inputBorder text-muted form-control " aria-label="Default select example " id="BrandId " formControlName="BrandId" [ngClass]="{ 'is-invalid': submitted && f['BrandId'].errors }">
                           <option selected>Choose Brand</option>
-                          <option *ngFor="let brand of brand; " [value]=brand.Id>
+                          <option *ngFor="let brand of brand_list; " [value]=brand.Id>
                           {{ brand.Name}}
                           </option>
                           </select>

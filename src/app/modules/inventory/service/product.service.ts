@@ -56,4 +56,12 @@ export class ProductService {
       .post<any>(`${this.apiLink}/Product/UpdateProduct`, data)
       .toPromise();
   }
+
+  // http://localhost:13884/api/Brand/GetAllBrandBySubCategoryId/14
+
+  getbrandBySubcategory(id: number) {
+    return this.http.get<any>(
+      `${this.apiLink}/Brand/GetAllBrandBySubCategoryId/${id}`
+    );
+  }
 }
