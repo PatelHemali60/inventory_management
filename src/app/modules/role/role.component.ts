@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class RoleComponent {
   public Role!: Role[];
+  public Role_list!: Role[];
   filteredProduct: any[] = [];
   page: number = 1;
 
@@ -32,6 +33,7 @@ export class RoleComponent {
     this.service.getProduct().subscribe({
       next: (data: any) => {
         this.Role = data.Data;
+        // this.Role_list = this.Role.sort((a, b) => b.Id - a.Id);
       },
       error: (e) => console.error(e),
     });

@@ -40,10 +40,10 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of category  | paginate: { itemsPerPage: 3, currentPage: page }, let i = index" class="dottedBorder fontColor text-center ">
+                        <tr *ngFor="let product of Sub_categorylist  | paginate: { itemsPerPage: 3, currentPage: page }, let i = index" class="dottedBorder fontColor text-center ">
                             <td>{{i}}</td>
                             <td>{{product.CategoryName}}</td>
-                            <td class="">
+                            <td>
                                 <span>{{product.Name}}</span>
                             </td>
                             <td class="d-flex iconSize d-flex justify-content-center">

@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class DiscountComponent implements OnInit {
   public Discount!: any[];
+  public discount_list!: any[];
   filteredProduct: any[] = [];
   page: number = 1;
 
@@ -32,6 +33,7 @@ export class DiscountComponent implements OnInit {
     this.service.getDiscountType().subscribe({
       next: (data: any) => {
         this.Discount = data.Data;
+        this.discount_list = this.Discount.sort((a, b) => b.Id - a.Id);
       },
       error: (e) => console.error(e),
     });

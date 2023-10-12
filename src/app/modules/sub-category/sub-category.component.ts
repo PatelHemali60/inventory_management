@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 })
 export class SubCategoryComponent {
   public category!: any[];
+  public Sub_categorylist!: any[];
   filteredProduct: any[] = [];
 
   page: number = 1;
@@ -33,6 +34,7 @@ export class SubCategoryComponent {
     this.service.getsubCategory().subscribe({
       next: (data: any) => {
         this.category = data.Data;
+        this.Sub_categorylist = this.category.sort((a, b) => b.Id - a.Id);
       },
       error: (e: any) => console.error(e),
     });

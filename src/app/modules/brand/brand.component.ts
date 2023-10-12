@@ -11,7 +11,8 @@ import Swal from 'sweetalert2';
   styleUrls: ['./brand.component.scss'],
 })
 export class BrandComponent {
-  public category!: any[];
+  public Brand!: any[];
+  public brand_list!: any[];
   public TotalData!: number;
   filteredProduct: any[] = [];
   pageOfItems!: Array<any>;
@@ -36,9 +37,11 @@ export class BrandComponent {
   public getCategoryList(): void {
     this.service.getBrand().subscribe({
       next: (data: any) => {
-        this.category = data.Data;
-        this.totalItems = this.category.length;
-        console.log(this.TotalData, 'brand data');
+        this.Brand = data.Data;
+        // console.log(this.Brand, 'brand list');
+        this.brand_list = this.Brand.sort((a, b) => b.Id - a.Id);
+
+        this.totalItems = this.Brand.length;
       },
       error: (e: any) => console.error(e),
     });

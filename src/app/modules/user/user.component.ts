@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 })
 export class UserComponent {
   public User!: any[];
+  public User_list!: any[];
   // filteredProduct: any[] = [];
   public searchText: string = '';
   public page: number = 1;
@@ -42,6 +43,7 @@ export class UserComponent {
     this.userService.getallUser().subscribe({
       next: (data: any) => {
         this.User = data.Data;
+        this.User_list = this.User.sort((a, b) => b.Id - a.Id);
       },
       error: (e) => console.error(e),
     });

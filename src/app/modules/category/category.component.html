@@ -38,7 +38,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of category | paginate: { itemsPerPage: 3, currentPage: page } , let i = index" class="dottedBorder fontColor text-center ">
+                        <tr *ngFor="let product of Category_list | paginate: { itemsPerPage: 3, currentPage: page } , let i = index" class="dottedBorder fontColor text-center ">
                             <td>{{i}}</td>
                             <td class="">
                                 <span>{{product.Name}}</span>

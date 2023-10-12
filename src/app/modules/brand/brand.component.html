@@ -29,23 +29,25 @@
         </div>
         <div class="mt-3 pb-2 table-responsive-cms overflow-auto tableHeight">
 
-            <div class="pagination-with-table" *ngIf="category">
+            <div class="pagination-with-table" *ngIf="Brand">
                 <table class="table pb-3 position-relative ">
                     <thead class="theadBg border-0">
                         <tr class="text-center">
                             <th scope="col fontCommon lineHeight">Id</th>
                             <th scope="col fontCommon lineHeight">Brand Name</th>
+                            <th scope="col fontCommon lineHeight">SubCategoryName</th>
                             <th scope="col fontCommon lineHeight">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let product of category   | paginate: { itemsPerPage: 3, currentPage: page }, let i = index" class="dottedBorder fontColor text-center ">
+                        <tr *ngFor="let product of brand_list   | paginate: { itemsPerPage: 3, currentPage: page }, let i = index" class="dottedBorder fontColor text-center ">
                             <td class="">
                                 <span>{{i}}</span>
                             </td>
                             <td class="">
                                 <span>{{product.Name}}</span>
                             </td>
+                            <td><span>{{product.SubCategoryName}}</span></td>
 
                             <!-- <td class=""> {{product.Description}}</td> -->
                             <td class="d-flex iconSize  d-flex justify-content-center">

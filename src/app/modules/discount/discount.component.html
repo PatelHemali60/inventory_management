@@ -42,7 +42,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let discount of Discount | paginate: { itemsPerPage: 3, currentPage: page } ,let i = index" class="dottedBorder fontColor text-center ">
+                        <tr *ngFor="let discount of discount_list | paginate: { itemsPerPage: 3, currentPage: page } ,let i = index" class="dottedBorder fontColor text-center ">
                             <td>{{i}}</td>
                             <td class="">
                                 <span>{{discount.Name}}</span>

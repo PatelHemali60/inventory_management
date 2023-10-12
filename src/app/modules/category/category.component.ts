@@ -13,6 +13,7 @@ import Swal from 'sweetalert2';
 })
 export class CategoryComponent implements OnInit {
   public category!: any[];
+  public Category_list!: any[];
   filteredProduct: any[] = [];
   page: number = 1;
 
@@ -33,6 +34,7 @@ export class CategoryComponent implements OnInit {
     this.service.getCategory().subscribe({
       next: (data: any) => {
         this.category = data.Data;
+        this.Category_list = this.category.sort((a, b) => b.Id - a.Id);
       },
       error: (e) => console.error(e),
     });

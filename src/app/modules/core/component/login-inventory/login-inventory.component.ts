@@ -81,6 +81,39 @@ export class LoginInventoryComponent implements OnInit {
     });
   }
 
+  // public onLogin(): void {
+  //   this.submitted = true;
+  //   if (this.loginForm.invalid) {
+  //     return;
+  //   }
+
+  //   let data = {
+  //     EmailId: this.loginForm.value.EmailId,
+  //     Password: this.loginForm.value.Password,
+  //     IsThirdPartyLogin: false,
+  //   };
+
+  //   this.authService.Login(data).subscribe((res: any) => {
+  //     console.log('login user detail', res.Data);
+
+  //     localStorage.setItem('Login_roleid', res.Data.RoleId);
+  //     localStorage.setItem('User_id', res.Data!.Id);
+  //     // localStorage.setItem('roleID_User', res.Data.RoleId);
+
+  //     // console.log(res.Data.RoleId, 'login user roleid');
+
+  //     let roleId = this.User_id;
+  //     let Rolewise_id = res.Data.RoleId;
+  //     this.toastr.success(res.SuccessMessage);
+  //     localStorage.setItem('currentUser', Rolewise_id);
+  //     if (roleId == Rolewise_id) {
+  //       this.router.navigate(['/product']);
+  //     } else {
+  //       this.router.navigate(['/dashboard']);
+  //     }
+  //   });
+  // }
+
   public onLogin(): void {
     this.submitted = true;
     if (this.loginForm.invalid) {
@@ -94,7 +127,7 @@ export class LoginInventoryComponent implements OnInit {
     };
 
     this.authService.Login(data).subscribe((res: any) => {
-      // console.log('login user detail', res.Data);
+      console.log('login user detail', res.Data);
 
       localStorage.setItem('Login_roleid', res.Data.RoleId);
       localStorage.setItem('User_id', res.Data.Id);

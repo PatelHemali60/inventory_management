@@ -40,10 +40,10 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let product of Role | paginate: { itemsPerPage: 3, currentPage: page } ,let i = index" class="dottedBorder fontColor text-center ">
-                            <td class="">
+                            <td>
                                 <span>{{i}}</span>
                             </td>
-                            <td class="">
+                            <td>
                                 <span>{{product.Name}}</span>
                             </td>
                             <!-- <td class=""> {{product.Description}}</td> -->
