@@ -58,6 +58,7 @@ export class ViewProductdetailComponent implements OnInit {
     this.ProductImage = this.sanitizer.bypassSecurityTrustResourceUrl(
       item.ImageUrl
     );
+
     this.Price = item.Price;
     // console.log(this.Price, 'price');
     localStorage.setItem('priceofproduct', item.Price);
@@ -68,8 +69,10 @@ export class ViewProductdetailComponent implements OnInit {
   ngOnInit(): void {}
 
   public BuyNow() {
-    debugger;
-    let RoleID = localStorage.getItem('roleID');
+    const ProductDetail = JSON.stringify(this.item);
+    localStorage.setItem('product', ProductDetail);
+    let RoleID = localStorage.getItem('User_id');
+
     if (RoleID == null) {
       this.LoggedinUser = true;
       // location.reload();
@@ -82,7 +85,10 @@ export class ViewProductdetailComponent implements OnInit {
   }
 
   @Input()
-  get Quntity() {
+  get Quntity(): any {
+    // console.log(this.counterValue, 'quntity');
+    let Qunity: any = this.counterValue;
+    localStorage.setItem('Product_quantity', Qunity);
     return this.counterValue;
   }
 
@@ -100,16 +106,17 @@ export class ViewProductdetailComponent implements OnInit {
     this.logCounterValue();
   }
 
-  logCounterValue() {
+  public logCounterValue() {
     // console.log('Counter value:', this.Quntity);
     this.Price = localStorage.getItem('priceofproduct');
     this.grandTotal = this.Price * this.Quntity;
+    localStorage.setItem('Total_Amount', this.grandTotal);
   }
 
   //add to cart
   public AddtoCart(): void {
-    let RoleID = localStorage.getItem('roleID');
-    let UserID = localStorage.getItem('userId');
+    let UserID = localStorage.getItem('User_id');
+    // let RoleID = localStorage.getItem('userId');
     const ProductId = localStorage.getItem('Product_id');
     let item: any = {
       UserId: Number(UserID),
@@ -119,9 +126,8 @@ export class ViewProductdetailComponent implements OnInit {
     };
     // console.log('add to cart', item);
 
-    if (RoleID == null) {
+    if (UserID == null) {
       this.LoggedinUser = true;
-      // location.reload();`
       this.router.navigate(['/login']);
     } else {
       this.LoggedinUser = false;
@@ -134,6 +140,4 @@ export class ViewProductdetailComponent implements OnInit {
         .catch((error: any) => {});
     }
   }
-
-  //  // Function to calculate the price based on quantity
 }

@@ -11,7 +11,11 @@ import { Router } from '@angular/router';
 export class AddtoCartComponent implements OnInit {
   public UserId!: number;
   public CartProduct!: any;
-
+  public Product: any;
+  public Price!: any;
+  public grandTotal: any;
+  //counter value of increment and decrement
+  public counterValue = 1;
   constructor(
     private toastr: ToastrService,
     private addtocartService: AddCartService,
@@ -22,21 +26,72 @@ export class AddtoCartComponent implements OnInit {
   }
 
   public getAllProductfromcart() {
-    let userId = localStorage.getItem('userId');
+    let User_Id = localStorage.getItem('User_id');
 
     this.addtocartService
-      .getAllProductformcart(Number(userId))
+      .getAllProductformcartByUser_id(Number(User_Id))
       .then((res: any) => {
         this.CartProduct = res.Data;
-        console.log(res.Data, 'res of product in cart');
-        this.toastr.success(res.SuccessMessage);
+        // this.toastr.success(res.SuccessMessage);
       })
       .catch((error: any) => {});
   }
 
   public RemoveProductfromCart(CartId: number) {
     this.addtocartService.RemovefromCart(CartId).subscribe((res: any) => {
-      this.toastr.info('remove Product from cart !!!');
+      this.toastr.info('Product Remove from Cart !!!');
+      this.router.navigate(['AddtoCart']);
     });
+    this.reloadPage();
+  }
+
+  public reloadPage(): void {
+    // Use JavaScript to reload the page
+    window.location.reload();
+  }
+
+  public getTotalItemCount(): number {
+    if (this.CartProduct) {
+      return this.CartProduct.reduce(
+        (total: any, product: any) => total + product.Quantity,
+        0
+      );
+    } else {
+      // Return a default value or handle the case when CartProduct is undefined.
+      return 0;
+    }
+  }
+
+  public calculateTotalPrice(): number {
+    return this.CartProduct.reduce(
+      (total: any, product: any) =>
+        total + product.Quantity * product.ProductPrice,
+      0
+    );
+  }
+
+  public increment(index: number): void {
+    if (this.CartProduct[index].Quantity < 10) {
+      let incrementQuntity = this.CartProduct[index].Quantity++;
+      // console.log(incrementQuntity, 'increment quntity');
+
+      // this.addtocartService
+      //   .AddtoCart(item)
+      //   .then((res: any) => {
+      //     this.router.navigate(['/AddtoCart']);
+      //     this.toastr.success(res.SuccessMessage);
+      //   })
+      //   .catch((error: any) => {});
+    }
+  }
+
+  public decrement(index: number): void {
+    if (this.CartProduct[index].Quantity > 1) {
+      this.CartProduct[index].Quantity--;
+    }
+  }
+
+  public removeAll(): void {
+    this.CartProduct = [];
   }
 }

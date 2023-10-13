@@ -17,7 +17,7 @@
                                         <label for="UserId " class="d-flex justify-content-start mb-2 fw-bold ">UserId</label>
                                         <input class="form-control inputBorder text-muted " type="text" id="UserId" placeholder="User Name " aria-label="Name " formControlName="UserId" [ngClass]="{ 'is-invalid': submitted && f['UserId'].errors } ">
                                         <div *ngIf="submitted && f['UserId'].errors " class="invalid-feedback ml-2 ms-1 ">
-                                            <div *ngIf="f['UserId'].errors[ 'required'] ">UserId is required</div>
+                                            <div *ngIf="f['UserId'].errors['required'] ">UserId is required</div>
                                         </div>
                                     </div>
                                     <!-- <app-input-control inputType="text" labelName="UserName"></app-input-control> -->
@@ -40,7 +40,8 @@
                                 <div class="p-1 row">
                                     <div class="col-12 col-sm-9">
                                         <label for="DeliverToMobile " class="d-flex justify-content-start mb-2 fw-bold ">DeliverToMobile</label>
-                                        <input class="form-control inputBorder text-muted " type="text" id="DeliverToMobile" placeholder="DeliverToMobile " aria-label="Name " formControlName="DeliverToMobile" [ngClass]="{ 'is-invalid': submitted && f['DeliverToMobile'].errors } ">
+                                        <input class="form-control inputBorder text-muted " type="text" id="DeliverToMobile" placeholder="DeliverToMobile " aria-label="Name " formControlName="DeliverToMobile" [ngClass]="{ 'is-invalid': submitted && f['DeliverToMobile'].errors } " maxlength="10"
+                                            minlength="10">
                                         <div *ngIf="submitted && f['DeliverToMobile'].errors " class="invalid-feedback ml-2 ms-1 ">
                                             <div *ngIf="f['DeliverToMobile'].errors[ 'required'] ">DeliverToName is required</div>
                                         </div>
@@ -80,7 +81,7 @@
                                 <div class="p-2 d-flex ">
                                     <div class="col-5">
                                         <label for="PinCode" class="d-flex justify-content-start mb-2 fw-bold ">PinCode</label>
-                                        <input class="form-control inputBorder text-muted " type="number" id="State" placeholder="State " aria-label="PinCode" formControlName="PinCode" [ngClass]="{ 'is-invalid': submitted && f['PinCode'].errors } ">
+                                        <input class="form-control inputBorder text-muted " type="number" id="State" placeholder="Pincode" aria-label="PinCode" formControlName="PinCode" [ngClass]="{ 'is-invalid': submitted && f['PinCode'].errors } ">
                                         <div *ngIf="submitted && f['PinCode'].errors " class="invalid-feedback ml-2 ms-1 ">
                                             <div *ngIf="f['PinCode'].errors['required'] ">PinCode is required</div>
                                         </div>
@@ -101,9 +102,9 @@
                             <div class="ac-content">
                                 <div class="p-4 d-flex">
                                     <span class="form-check">
-                                        <input class="form-check-input" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="COD" checked>
+                                        <input class="form-check-input" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="COD" >
                                         <label class="form-check-label fw-bold fontCommon" for="exampleRadios1">
-                                      COD ( CashOn Delivery)
+                                      COD (CashOn Delivery)
                                     </label>
                                     </span>
                                     <span class="form-check">
@@ -113,7 +114,7 @@
                                   </label>
                                   </span>
                                     <span class="form-check">
-                                    <input class="form-check-input ms-3" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="CardPayment" checked>
+                                    <input class="form-check-input ms-3" type="radio" name="PaymentMode" formControlName="PaymentMode" id="exampleRadios1" value="CardPayment" >
                                     <label class="form-check-label fw-bold fontCommon ms-2" for="exampleRadios1">
                                  Card Payment
                                 </label>

@@ -124,6 +124,7 @@ export class AddUserComponent {
       RoleId: parseInt(this.UserForm.value.RoleId),
       RoleName: this.UserForm.value.RoleName,
     };
+
     this.userService
       .AddUser(this.UserData)
       .then((res: any) => {

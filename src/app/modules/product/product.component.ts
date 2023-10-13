@@ -89,7 +89,8 @@ export class ProductComponent implements OnInit {
     //   overlayRef.dispose();
     // });
 
-    let RoleID = localStorage.getItem('roleID');
+    let RoleID = localStorage.getItem('User_id');
+
     if (RoleID !== null) {
       // RoleID is not null, open the CDK overlay here
       const detachTimeout = 3000; // Detach after 5 seconds (adjust as needed)
@@ -101,9 +102,9 @@ export class ProductComponent implements OnInit {
       setTimeout(() => {
         overlayRef.detach();
         overlayRef.dispose();
+        this.router.navigate(['/login']);
       }, 0);
       // RoleID is null, redirect to the login page
-      this.router.navigate(['/login']);
     }
 
     // if (RoleID !== null) {

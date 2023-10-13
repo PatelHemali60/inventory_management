@@ -6,13 +6,20 @@
     <div class="text-start d-flex flex-column mt-2">
         <span class="fs-5 text-break fw-bold Product_name">{{Product.Name}}</span>
         <span class="font-product text-muted mt-2 product_Description">{{Product.Description}}</span>
-        <div class="d-flex ">
-            <span class="fw-bold"><i class="fa fa-rupee"></i>{{Product.Price}}
+        <div class="d-flex flex-column">
+            <p> <label for="price" class="fw-bold">Product Price:</label>
+                <span class="ms-2 text-muted"><i class="fa fa-rupee"></i>{{Product.Price}}
                 <ng-content></ng-content>
+                <i class="fa fa-rupee ms-1 text-danger"></i><del class="text-danger">1800</del>
             </span>
-            <span class="ms-3 text-muted"><i class="fa fa-rupee"></i> <del>1200</del>
-            </span>
-            <span class="ms-3 productDiscount-color  fw-bold">50% off</span>
+            </p>
+            <!-- <span class="ms-3 text-muted">
+            </span> -->
+            <p>
+                <label for="price" class="fw-bold">Discount :</label>
+                <span class="ms-1 productDiscount-color  fw-bold">50% off</span>
+            </p>
+
         </div>
 
     </div>
