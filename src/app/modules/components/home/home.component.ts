@@ -6,18 +6,22 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  public shouldShowSidebar: boolean = false;
+  public shouldShowSidebar: boolean;
 
   public sidebarOpen = false;
   public ID: any;
+  public Google_id: any;
 
   constructor() {
-    this.ID = localStorage.getItem('Login_roleid');
+    this.shouldShowSidebar = true;
 
-    if (this.ID == null) {
-      this.shouldShowSidebar = true;
-    } else {
+    this.ID = localStorage.getItem('Login_roleid');
+    this.Google_id = localStorage.getItem('Google_login');
+
+    if (this.ID !== null || this.Google_id !== null) {
       this.shouldShowSidebar = false;
+    } else {
+      this.shouldShowSidebar = true;
     }
   }
 

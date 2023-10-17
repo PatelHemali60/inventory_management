@@ -7,6 +7,11 @@
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <!-- <meta http-equiv="Content-Security-Policy" content="some data"> -->
+
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://apis.google.com; ..."> -->
+    <!-- link for google singin -->
+    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' https://apis.google.com; ..."> -->
     <!-- link for css -->
 
 
@@ -28,13 +33,40 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.3/Chart.bundle.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <!-- <meta name="google-signin-client_id" content="922947611289-vbj28uc7j6imjiaouud2s4qh3hquuifo.apps.googleusercontent.com"> -->
+    <script>
+        function decodeJWTToken(token) {
+            return JSON.parse(atob(token.split(".")[1]));
+        }
+
+        function handleCredentialResponse(response) {
+            // alert(response);
+            // to decode the credential response.
+            const responsePayload = decodeJWTToken(response.credential);
+            // sessionStorage.setItem("loggedInUser", JSON.stringify(responsePayload));
+            localStorage.setItem("Google_login", JSON.stringify(responsePayload))
+            window.location.href = "/ragistration";
+        }
+
+        function handleSignout() {
+            google.accounts.id.disableAutoSelect();
+        }
+    </script>
+    <!-- <script src="https://accounts.google.com/gsi/client?hl=fr" async></script> -->
 
 </head>
 
 <body>
+
     <app-root></app-root>
+
     <!-- script for -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-</body>
+    <script src="https://accounts.google.com/gsi/client" async></script>
+
+    <!-- <div class="g_id_signin" data-type="standard" data-size="large" data-theme="outline" data-text="sign_in_with" data-shape="rectangular" data-logo_alignment="left">
+    </div> -->
+    <!-- </body> -->
 
 </html>

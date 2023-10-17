@@ -56,7 +56,7 @@ export class PlaceOrderComponent implements OnInit {
     //parse json_object to use as a object
     this.product = JSON.parse(this.ProductDetail);
 
-    console.log(this.product, 'productdetail');
+    // console.log(this.product, 'productdetail');
     //set product_name to the
     this.orderForm.get('ProductName')?.setValue(this.product.Name);
     //set value of product_id

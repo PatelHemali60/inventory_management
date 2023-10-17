@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginInventoryComponent } from './modules/core/component/login-inventory/login-inventory.component';
 import { RagiatrationInventoryComponent } from './modules/core/component/ragiatration-inventory/ragiatration-inventory.component';
 import { HomeComponent } from './modules/components/home/home.component';
+import { authGuard } from './modules/core/service/auth.guard';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
           import('./modules/product/product.module').then(
             (m) => m.ProductModule
           ),
+        canActivate: [authGuard],
       },
       {
         path: 'roleMaster',

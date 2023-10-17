@@ -32,9 +32,13 @@ export class RagiatrationInventoryComponent {
   private isAddMode: boolean;
   private id!: number;
 
+  public Google_Login: any = localStorage.getItem('Google_login');
+
   ngOnInit() {
     this.Roles = [];
 
+    // console.log(this.Google_Login, 'google login data')
+    //form ragistration
     this.FirstName = new FormControl('', [Validators.required]);
     this.LastName = new FormControl('', [Validators.required]);
     this.EmailId = new FormControl('', [
@@ -52,6 +56,17 @@ export class RagiatrationInventoryComponent {
       Password: this.Password,
       RoleId: this.RoleId,
     });
+    //set value inside form after login with google
+    this.Google_Login = JSON.parse(this.Google_Login);
+
+    //set first name
+    let f_name = this.Google_Login.given_name;
+    this.RagistrationForm.get('FirstName')?.setValue(f_name);
+    //set lastname
+    let L_name = this.Google_Login.family_name;
+    this.RagistrationForm.get('LastName')?.setValue(L_name);
+    let email = this.Google_Login.email;
+    this.RagistrationForm.get('EmailId')?.setValue(email);
   }
 
   constructor(
