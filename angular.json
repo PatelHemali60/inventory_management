@@ -79,7 +79,7 @@
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
                         "browserTarget": "inventory:build",
-                        "proxyConfig": "./src/proxy.conf.json"
+                        "proxyConfig": "src/proxy.conf.json"
                     }
                 },
                 "test": {

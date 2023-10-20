@@ -14,7 +14,7 @@ export class AuthService {
   }
 
   //get role
-  public getDepartments(): Observable<any> {
+  public getUser_Id(): Observable<any> {
     return this.http.get<any>(`${this.apiLink}/Role/GetAllRole`);
   }
   //ragistration api
@@ -29,5 +29,9 @@ export class AuthService {
 
   public getAlluserRole(): Observable<any> {
     return this.http.get<any>(`${this.apiLink}/Role/GetAllRole`);
+  }
+
+  public getallUser(): Observable<any> {
+    return this.http.get<any>(`${this.apiLink}/User/GetAllUser`);
   }
 }

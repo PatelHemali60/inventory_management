@@ -31,6 +31,9 @@
                         <div *ngIf="submitted && f['EmailId'].errors" class="invalid-feedback ml-2 ms-2 d-flex justify-content-start">
                             <div *ngIf="f['EmailId'].errors['required']">Email is required !!!</div>
                             <div *ngIf="f['EmailId'].errors['email']">Email must be a valid email address !!!</div>
+                            <div *ngIf="emailAvailability" class="text-danger">
+                                This email is already in use.
+                            </div>
                         </div>
                     </div>
                     <div class="input-control d-flex flex-column mb-3">

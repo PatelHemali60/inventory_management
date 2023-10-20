@@ -14,6 +14,7 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent,
+    // canActivate: [authGuard],
     children: [
       {
         path: 'dashboard',
@@ -21,6 +22,7 @@ const routes: Routes = [
           import('./modules/dashbaord/dashbaord.module').then(
             (m) => m.DashbaordModule
           ),
+        canActivate: [authGuard],
       },
       {
         path: 'product',
@@ -28,12 +30,12 @@ const routes: Routes = [
           import('./modules/product/product.module').then(
             (m) => m.ProductModule
           ),
-        canActivate: [authGuard],
       },
       {
         path: 'roleMaster',
         loadChildren: () =>
           import('./modules/role/role.module').then((m) => m.RoleModule),
+        canActivate: [authGuard],
       },
       {
         path: 'CategoryMaster',
@@ -41,6 +43,7 @@ const routes: Routes = [
           import('./modules/category/category.module').then(
             (m) => m.CategoryModule
           ),
+        canActivate: [authGuard],
       },
       {
         path: 'subCategory',
@@ -48,11 +51,13 @@ const routes: Routes = [
           import('./modules/sub-category/sub-category.module').then(
             (m) => m.SubCategoryModule
           ),
+        canActivate: [authGuard],
       },
       {
         path: 'BrandMaster',
         loadChildren: () =>
           import('./modules/brand/brand.module').then((m) => m.BrandModule),
+        canActivate: [authGuard],
       },
       {
         path: 'discountMaster',
@@ -60,11 +65,13 @@ const routes: Routes = [
           import('./modules/discount/discount.module').then(
             (m) => m.DiscountModule
           ),
+        canActivate: [authGuard],
       },
       {
         path: 'User',
         loadChildren: () =>
           import('./modules/user/user.module').then((m) => m.UserModule),
+        canActivate: [authGuard],
       },
       {
         path: 'Inventory',
@@ -72,11 +79,13 @@ const routes: Routes = [
           import('./modules/inventory/inventory.module').then(
             (m) => m.InventoryModule
           ),
+        canActivate: [authGuard],
       },
       {
         path: 'order',
         loadChildren: () =>
           import('./modules/order/order.module').then((m) => m.OrderModule),
+        canActivate: [authGuard],
       },
       {
         path: 'AddtoCart',
@@ -84,6 +93,7 @@ const routes: Routes = [
           import('./modules/addto-cart/addto-cart.module').then(
             (m) => m.AddtoCartModule
           ),
+        canActivate: [authGuard],
       },
     ],
   },

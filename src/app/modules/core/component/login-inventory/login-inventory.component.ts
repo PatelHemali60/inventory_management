@@ -48,6 +48,7 @@ export class LoginInventoryComponent implements OnInit {
     //   this.googleAuthenticate();
     // }, 50);
     // this.googleAuthService.initialize();
+
     this.EmailId = new FormControl('', [Validators.required]);
     this.Password = new FormControl('', [Validators.required]);
     this.IsThirdPartyLogin = new FormControl('false');

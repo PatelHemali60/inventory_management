@@ -7,6 +7,7 @@ import { SideNavComponent } from './component/side-nav/side-nav.component';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent } from './component/header/header.component';
 import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
+import { authGuard } from './service/auth.guard';
 @NgModule({
   declarations: [
     LoginInventoryComponent,
@@ -24,6 +25,7 @@ import { GoogleSigninButtonModule } from '@abacritt/angularx-social-login';
   ],
 
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+
   exports: [SideNavComponent, HeaderComponent, LoginInventoryComponent],
 })
 export class CoreModule {}
